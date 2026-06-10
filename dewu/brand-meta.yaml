@@ -1,0 +1,11 @@
+brand_name: Dewu
+display_name: 得物
+triggers:
+  - 得物
+  - Dewu
+  - POIZON
+placeholder_user: ianzhao
+signature: "✦ @ianzhao"
+version: 1.0.12
+ds_pack: ds-pack
+prd_pack: prd-pack

@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>{BRAND.name} · 心愿便利贴 · 功能流程链路</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111418;
+    --ink-2:#2b2f36;
+    --muted:#8a8f98;
+    --line:#1a1d22;
+    --line-2:#c9ccd1;
+    --line-3:#e5e6e9;
+    --paper:#fafaf7;
+    --paper-2:#f3f2ed;
+    --cork:#d7bb8a;
+    --cork-2:#c6a775;
+
+    /* {BRAND.name} brand */
+    --accent:var(--accent);
+    --accent-press:#029999;
+    --accent-soft:#D9F4F4;
+    --dewu-red:var(--semantic-danger);
+    --ok:#20C520;
+    --warn:#FC9D00;
+
+    /* 便利贴 6 色（低饱和，中保真线框） */
+    --n-mint:#cfe8d4;
+    --n-lemon:#fbecb0;
+    --n-sakura:#f9d6dc;
+    --n-sky:#cfe0f4;
+    --n-lavender:#ddd5ee;
+    --n-sun:#fbd7a8;
+
+    --ios-sys: "PingFang SC", "PingFang HK", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --hand: "Caveat", "PingFang SC", cursive;
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; background:#f6f5f1; color:var(--ink); font-family: var(--ios-sys); -webkit-font-smoothing:antialiased; }
+
+  /* ====== Canvas chrome ====== */
+  .canvas{
+    position:relative;
+    padding: 56px 72px 160px;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 1px 1px, #d9d7d0 1px, transparent 0) 0 0 / 28px 28px,
+      linear-gradient(#f6f5f1,#f6f5f1);
+  }
+  .canvas-header{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap: 32px; margin-bottom: 48px; max-width: 1600px;
+  }
+  .canvas-title{
+    font-size: 28px; font-weight: 600; letter-spacing: -0.01em;
+    margin:0 0 8px;
+  }
+  .canvas-title b{ color: var(--accent-press); font-weight: 600; }
+  .canvas-meta{
+    font-family: var(--mono); font-size: 11px; color:var(--muted);
+    line-height: 1.7;
+  }
+  .canvas-meta span{ margin-right: 14px; }
+  .canvas-meta b{ color: var(--ink); font-weight: 500; }
+
+  .tag{
+    display:inline-block; padding: 3px 8px; border:1px solid var(--line);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em;
+    text-transform: uppercase; border-radius: 2px; background:#fff;
+    margin-bottom: 10px;
+  }
+  .tag.aqua{ border-color: var(--accent); color: var(--accent-press); background: var(--accent-soft); }
+
+  /* ====== Legend / Specs ====== */
+  .specs{
+    display:grid; grid-template-columns: repeat(4, minmax(0,1fr));
+    gap:18px; margin-bottom: 56px; max-width: 1200px;
+  }
+  .spec{
+    border:1px solid var(--line); background:#fff; padding: 14px 16px;
+  }
+  .spec h4{ margin:0 0 10px; font-size:11px; font-family: var(--mono); letter-spacing:.06em; text-transform: uppercase; }
+  .spec .swatch-row{ display:flex; gap:6px; flex-wrap:wrap; }
+  .swatch{ width:22px; height:22px; border:1px solid var(--line); }
+  .spec p{ margin:0; font-size:11px; color:var(--muted); line-height:1.5; }
+  .spec .kv{ display:flex; justify-content:space-between; font-family: var(--mono); font-size: 11px; color:var(--ink-2); padding: 3px 0; border-bottom: 1px dashed var(--line-3); }
+  .spec .kv:last-child{ border:none; }
+  .spec .kv b{ color: var(--accent-press); font-weight: 500; }
+
+  /* ====== Flow rails ====== */
+  .flow{
+    display:flex; flex-direction:column; gap: 80px;
+    position:relative; max-width: max-content;
+  }
+  .rail{ position:relative; }
+  .rail-head{
+    display:flex; align-items:center; gap:14px; margin-bottom: 22px;
+  }
+  .rail-num{
+    font-family: var(--mono); font-size: 11px; color:#fff; background:var(--ink);
+    padding: 3px 8px; letter-spacing: .08em;
+  }
+  .rail-title{ font-size: 16px; font-weight: 600; margin:0; }
+  .rail-desc{ font-size: 12px; color:var(--muted); margin:0; font-family: var(--mono); }
+  .rail-track{
+    display:flex; align-items:flex-start; gap: 56px;
+  }
+
+  /* ====== Phone frame (iOS, scaled) ====== */
+  .phone{
+    width: 318px;
+    flex-shrink:0;
+    position:relative;
+  }
+  .phone-shell{
+    width: 318px; height: 688px;
+    border: 1.5px solid var(--line);
+    border-radius: 44px;
+    background: #fff;
+    padding: 10px;
+    position:relative;
+    box-shadow: 0 1px 0 rgba(0,0,0,.04);
+  }
+  .phone-shell::before{
+    content:"";
+    position:absolute; top:14px; left:50%; transform: translateX(-50%);
+    width:92px; height:24px; background: var(--ink); border-radius: 14px;
+  }
+  .phone-screen{
+    width:100%; height:100%;
+    border-radius: 34px;
+    border:1px solid var(--line-3);
+    overflow:hidden;
+    background:#fff;
+    position:relative;
+    display:flex; flex-direction:column;
+  }
+  .status-bar{
+    height: 44px; padding: 0 22px;
+    display:flex; align-items:flex-end; justify-content:space-between;
+    padding-bottom: 6px;
+    font-size: 12px; font-weight: 600; color: var(--ink);
+  }
+  .status-bar .icons{ display:flex; gap:4px; align-items:center; }
+  .status-bar .icons i{ display:inline-block; width:14px; height:9px; border:1px solid var(--ink); border-radius:2px; position:relative; }
+  .status-bar .icons i::after{ content:""; position:absolute; right:-3px; top:2px; width:1.5px; height:3px; background:var(--ink); border-radius:1px; }
+  .status-bar .signal{
+    display:inline-block; width: 16px; height:10px;
+    background:
+      linear-gradient(var(--ink),var(--ink)) 0 100%/3px 3px,
+      linear-gradient(var(--ink),var(--ink)) 4px 100%/3px 5px,
+      linear-gradient(var(--ink),var(--ink)) 8px 100%/3px 7px,
+      linear-gradient(var(--ink),var(--ink)) 12px 100%/3px 9px;
+    background-repeat:no-repeat;
+  }
+
+  .nav{
+    height: 44px; display:flex; align-items:center; justify-content:space-between;
+    padding: 0 16px; border-bottom: 1px solid var(--line-3);
+    font-size: 14px; font-weight: 600;
+  }
+  .nav .back{ font-size:18px; color:var(--ink); }
+  .nav .rt{ font-size: 13px; color: var(--accent-press); font-weight: 500; }
+  .nav .rt.ghost{ color:var(--muted); }
+
+  .tabbar{
+    height: 54px; border-top: 1px solid var(--line-3);
+    display:grid; grid-template-columns: repeat(5,1fr);
+    padding-bottom: 18px; background:#fff;
+  }
+  .tabbar .tab{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; font-size:9px; color:var(--muted); }
+  .tabbar .tab .dot{ width:18px; height:18px; border:1px solid var(--line-2); border-radius: 4px; }
+  .tabbar .tab.active{ color:var(--ink); }
+  .tabbar .tab.active .dot{ background:var(--ink); border-color:var(--ink); }
+
+  .screen-body{ flex:1; overflow:hidden; position:relative; background:#fff; }
+
+  /* ====== Annotation label below phone ====== */
+  .phone-label{
+    margin-top: 14px;
+    display:flex; flex-direction: column; gap: 6px;
+    max-width: 318px;
+  }
+  .phone-label .id{ font-family: var(--mono); font-size: 10px; color:var(--muted); letter-spacing: .08em; }
+  .phone-label .name{ font-size: 14px; font-weight: 600; }
+  .phone-label ul{ margin:4px 0 0; padding-left: 14px; font-size: 11px; color:var(--ink-2); line-height: 1.6; }
+  .phone-label ul li{ margin-bottom: 2px; }
+  .phone-label ul li b{ background: var(--accent-soft); color:var(--accent-press); padding:1px 4px; font-weight:500; border-radius:2px; }
+
+  /* ====== Arrow between phones ====== */
+  .arrow{
+    align-self: center;
+    margin-top: 300px;
+    flex-shrink:0;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    color:var(--muted); font-family: var(--mono); font-size: 10px;
+  }
+  .arrow svg{ display:block; }
+  .arrow .lbl{ max-width: 100px; text-align:center; line-height: 1.3; }
+
+  /* Turning arrow between rails */
+  .rail-connector{
+    height: 60px; position: relative;
+  }
+  .rail-connector::before{
+    content:""; position:absolute; left: 159px; top: -6px;
+    width: 2px; height: 48px; background: var(--line-2);
+  }
+  .rail-connector::after{
+    content:""; position:absolute; left: 153px; top: 42px;
+    border: 6px solid transparent; border-top-color: var(--line-2);
+  }
+
+  /* ====== Generic wireframe atoms ====== */
+  .ph-img{
+    background:
+      repeating-linear-gradient(135deg, #efefef 0 6px, #f7f7f7 6px 12px);
+    border:1px solid var(--line-3);
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--mono); font-size: 9px; color: var(--muted);
+    text-align:center;
+  }
+  .chip{
+    display:inline-flex; align-items:center; gap:4px;
+    height:22px; padding: 0 8px; border:1px solid var(--line-2);
+    border-radius: 11px; font-size: 11px; color:var(--ink-2); background:#fff;
+  }
+  .chip.solid{ background: var(--ink); color:#fff; border-color:var(--ink); }
+  .chip.aqua{ background: var(--accent); color:#fff; border-color:var(--accent); }
+  .btn{
+    height: 38px; border:1px solid var(--ink); border-radius: 19px;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 13px; font-weight:600; background:#fff;
+  }
+  .btn.primary{ background:var(--ink); color:#fff; }
+  .btn.accent{ background:var(--accent); color:#fff; border-color: var(--accent); }
+
+  .hot{
+    outline: 1.5px dashed var(--accent);
+    outline-offset: 2px;
+    position: relative;
+  }
+  .hot::after{
+    content: attr(data-hot);
+    position:absolute; top:-10px; right:-6px;
+    background: var(--accent); color:#fff;
+    font-family: var(--mono); font-size: 9px; padding: 1px 5px;
+    border-radius: 2px; letter-spacing: 0.05em; white-space:nowrap;
+    transform: translateY(-50%);
+  }
+
+  /* ====== Specific screen atoms ====== */
+  .list-row{
+    display:flex; gap:10px; padding: 10px 14px;
+    border-bottom: 1px solid var(--line-3); align-items:flex-start;
+  }
+  .list-row .thumb{ width: 72px; height: 72px; flex-shrink:0; }
+  .list-row .meta{ flex:1; min-width:0; }
+  .list-row .meta .line{ height:8px; background: var(--line-3); margin-bottom: 6px; border-radius: 2px; }
+  .list-row .meta .line.short{ width: 70%; }
+  .list-row .meta .price{ font-size: 13px; font-weight: 700; margin-top:6px; color: var(--dewu-red); }
+  .heart{
+    width: 26px; height: 26px; border-radius: 50%; border:1px solid var(--line-2);
+    display:flex; align-items:center; justify-content:center; font-size: 12px;
+    background:#fff; flex-shrink:0; color: var(--dewu-red);
+  }
+  .glow{ position:relative; }
+  .glow::before{
+    content:"";
+    position:absolute; inset:-4px;
+    border-radius: 4px;
+    background: radial-gradient(closest-side, rgba(1,194,195,.35), transparent 70%);
+    z-index:0; pointer-events:none;
+  }
+  .glow > *{ position:relative; z-index:1; }
+
+  .tip-badge{
+    position:absolute; background:#fff; border:1px solid var(--line);
+    padding: 3px 6px; font-size: 10px; color: var(--ink-2);
+    border-radius: 10px; white-space:nowrap;
+    box-shadow: 0 2px 0 rgba(0,0,0,.05);
+  }
+
+  /* Action sheet popup */
+  .sheet{
+    position:absolute; left: 10px; right: 10px; bottom: 10px;
+    background:#fff; border:1px solid var(--line-3); border-radius: 12px;
+    padding: 6px; box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    font-size: 14px;
+  }
+  .sheet .item{
+    padding: 12px 12px; display:flex; align-items:center; justify-content:space-between;
+    border-bottom: 1px solid var(--line-3);
+  }
+  .sheet .item:last-child{ border:none; }
+  .sheet .item.primary{ color: var(--accent-press); font-weight: 600; }
+
+  /* Sticky note */
+  .note{
+    position:relative;
+    padding: 10px 10px 12px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.08);
+    font-size: 11px; line-height: 1.4;
+    color: var(--ink-2);
+  }
+  .note .note-img{
+    width:100%; aspect-ratio: 1/1; margin-bottom: 6px;
+    background: repeating-linear-gradient(135deg, #00000010 0 4px, transparent 4px 8px);
+    border:1px solid #00000018;
+  }
+  .note .note-txt{ font-family: var(--hand); font-size: 14px; color: var(--ink); line-height:1.2; min-height: 28px; }
+  .note .note-foot{ display:flex; justify-content:space-between; margin-top: 6px; font-family: var(--mono); font-size: 9px; color: var(--ink-2); opacity:.7;}
+  .note .pin{
+    position:absolute; top:-5px; left:50%; transform:translateX(-50%);
+    width:10px; height:10px; border-radius: 50%;
+    background: var(--dewu-red); box-shadow: 0 1px 1px rgba(0,0,0,.2) inset, 0 1px 1px rgba(0,0,0,.15);
+  }
+  .note.mint{ background: var(--n-mint); }
+  .note.lemon{ background: var(--n-lemon); }
+  .note.sakura{ background: var(--n-sakura); }
+  .note.sky{ background: var(--n-sky); }
+  .note.lavender{ background: var(--n-lavender); }
+  .note.sun{ background: var(--n-sun); }
+
+  /* Cork board */
+  .cork-bg{
+    background-color: var(--cork);
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(120,80,40,.18) 1.2px, transparent 1.6px),
+      radial-gradient(circle at 70% 60%, rgba(120,80,40,.15) 1px, transparent 1.4px),
+      radial-gradient(circle at 40% 80%, rgba(120,80,40,.2) 1.4px, transparent 1.8px),
+      radial-gradient(circle at 85% 20%, rgba(120,80,40,.12) 1px, transparent 1.4px);
+    background-size: 14px 14px, 19px 19px, 23px 23px, 17px 17px;
+  }
+
+  /* Feed card */
+  .feed-card{
+    border:1px solid var(--line-3); border-radius: 10px; margin: 10px; padding: 10px;
+    background:#fff;
+  }
+  .feed-card .head{ display:flex; align-items:center; gap:6px; font-size: 11px; }
+  .avatar{ width:22px; height:22px; border-radius:50%; background: var(--line-3); border:1px solid var(--line-2); }
+
+  /* Stamp */
+  .stamp{
+    border: 1.5px dashed var(--ink);
+    border-radius: 50%;
+    width: 64px; height: 64px;
+    display:flex; align-items:center; justify-content:center;
+    text-align: center; font-size: 10px; font-weight: 700; color: var(--ink);
+    line-height: 1.1; padding: 4px;
+    transform: rotate(-6deg);
+    background: rgba(255,255,255,.6);
+  }
+  .stamp.red{ color: var(--dewu-red); border-color: var(--dewu-red); }
+  .stamp.aqua{ color: var(--accent-press); border-color: var(--accent-press); }
+
+  .polaroid{
+    background:#fff; padding: 8px 8px 24px; box-shadow: 0 2px 3px rgba(0,0,0,.12);
+    transform: rotate(-2deg);
+    position: relative;
+  }
+  .polaroid .cap{ font-family: var(--hand); font-size: 14px; text-align:center; margin-top:4px; }
+  .faded{ opacity:.45; filter: grayscale(.6); }
+</style>
+</head>
+<body>
+
+<div class="canvas">
+  <header class="canvas-header">
+    <div>
+      <span class="tag">Wireframe · Mid-fidelity</span>
+      <span class="tag aqua">{BRAND.name} {BRAND.name}</span>
+      <h1 class="canvas-title">心愿<b>便利贴</b> · 功能流程链路</h1>
+      <div class="canvas-meta">
+        <span><b>Platform</b> iOS · iPhone 14 Pro 390×844</span>
+        <span><b>Spec</b> HIG + {BRAND.name} DS</span>
+        <span><b>Flow</b> 12 screens · 5 rails</span>
+        <span><b>Owner</b> 心愿便利贴 · 社区组</span>
+      </div>
+    </div>
+    <div class="canvas-meta" style="text-align:right">
+      <div><b>KPI</b> 收藏回流 +15% · 日均创建 ≥ 8w · 互动率 ≥ 40%</div>
+      <div><b>Version</b> v0.1 · 2026.04 · pending review</div>
+      <div><b>Primary</b> var(--accent) accent · <b>Price</b> var(--semantic-danger) {BRAND.name}红</div>
+    </div>
+  </header>
+
+  <!-- Design specs -->
+  <section class="specs">
+    <div class="spec">
+      <h4>便利贴 · 6 色</h4>
+      <div class="swatch-row">
+        <div class="swatch" style="background:var(--n-mint)"></div>
+        <div class="swatch" style="background:var(--n-lemon)"></div>
+        <div class="swatch" style="background:var(--n-sakura)"></div>
+        <div class="swatch" style="background:var(--n-sky)"></div>
+        <div class="swatch" style="background:var(--n-lavender)"></div>
+        <div class="swatch" style="background:var(--n-sun)"></div>
+      </div>
+      <p style="margin-top:10px">薄荷绿 / 柠檬黄 / 樱花粉 / 天空蓝 / 薰衣草紫 / 暖阳橙<br/>随机 −4° ~ +4° 倾斜</p>
+    </div>
+    <div class="spec">
+      <h4>排版</h4>
+      <div class="kv"><span>Headline</span><span>PingFang SC 18/22</span></div>
+      <div class="kv"><span>Body</span><span>PingFang SC 13/14</span></div>
+      <div class="kv"><span>心愿文案</span><span>Caveat 手写</span></div>
+      <div class="kv"><span>标注</span><span>JetBrains Mono 10/11</span></div>
+    </div>
+    <div class="spec">
+      <h4>iOS + {BRAND.name} DS</h4>
+      <div class="kv"><span>Nav Bar</span><span>44pt</span></div>
+      <div class="kv"><span>Tab Bar</span><span>54pt + 34 home</span></div>
+      <div class="kv"><span>最小点击区</span><span>44×44</span></div>
+      <div class="kv"><span>圆角</span><span><b>2</b> 控件 / 8 卡片 / 999 圆形</span></div>
+    </div>
+    <div class="spec">
+      <h4>标注图例</h4>
+      <div class="kv"><span style="display:flex;align-items:center;gap:6px"><i style="display:inline-block;width:14px;height:10px;border:1.5px dashed var(--accent)"></i>关键交互点</span></div>
+      <div class="kv"><span style="display:flex;align-items:center;gap:6px"><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,rgba(1,194,195,.6),transparent 70%)"></i>系统微光 / 浮现</span></div>
+      <div class="kv"><span style="display:flex;align-items:center;gap:6px"><i style="display:inline-block;width:14px;height:1px;background:var(--line-2)"></i>用户流转方向</span></div>
+    </div>
+  </section>
+
+  <!-- FLOW RAILS -->
+  <div class="flow" id="flow">
+    <div class="rail">
+      <div class="rail-head">
+        <span class="rail-num">RAIL 01</span>
+        <h3 class="rail-title">入口触发</h3>
+        <p class="rail-desc">Collection list · heart menu · glow hint</p>
+      </div>
+      <div class="rail-track" id="track-1"></div>
+    </div>
+    <div class="rail-connector"></div>
+
+    <div class="rail">
+      <div class="rail-head">
+        <span class="rail-num">RAIL 02</span>
+        <h3 class="rail-title">创建心愿</h3>
+        <p class="rail-desc">Pick → Write → Style → Publish</p>
+      </div>
+      <div class="rail-track" id="track-2"></div>
+    </div>
+    <div class="rail-connector"></div>
+
+    <div class="rail">
+      <div class="rail-head">
+        <span class="rail-num">RAIL 03</span>
+        <h3 class="rail-title">许愿池 · 浏览</h3>
+        <p class="rail-desc">Friends tab · Mine tab · cork board</p>
+      </div>
+      <div class="rail-track" id="track-3"></div>
+    </div>
+    <div class="rail-connector"></div>
+
+    <div class="rail">
+      <div class="rail-head">
+        <span class="rail-num">RAIL 04</span>
+        <h3 class="rail-title">互动</h3>
+        <p class="rail-desc">Like · Stamp · Gift</p>
+      </div>
+      <div class="rail-track" id="track-4"></div>
+    </div>
+    <div class="rail-connector"></div>
+
+    <div class="rail">
+      <div class="rail-head">
+        <span class="rail-num">RAIL 05</span>
+        <h3 class="rail-title">分发 &amp; 状态</h3>
+        <p class="rail-desc">Feed discovery · Fulfilled · Expired</p>
+      </div>
+      <div class="rail-track" id="track-5"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const StatusBar = () => `
+  <div class="status-bar">
+    <span>9:41</span>
+    <span class="icons">
+      <span class="signal"></span>
+      <span style="font-family:var(--mono); font-size:10px; margin:0 2px">5G</span>
+      <i></i>
+    </span>
+  </div>`;
+
+const Nav = ({ title = '', left = '', right = '', rightClass = '' }) => `
+  <div class="nav">
+    <span class="back">${left}</span>
+    <span>${title}</span>
+    <span class="rt ${rightClass}">${right}</span>
+  </div>`;
+
+const TabBar = (active = 0) => {
+  const items = ['首页', '分类', '发现', '消息', '我'];
+  return `<div class="tabbar">${items.map((t, i) => `
+    <div class="tab ${i === active ? 'active' : ''}"><div class="dot"></div>${t}</div>`).join('')}</div>`;
+};
+
+const screen1 = () => `
+  ${StatusBar()}
+  ${Nav({ title: '我的收藏 · 128', left: '‹', right: '管理' })}
+  <div style="padding: 10px 14px 6px; display:flex; gap:6px; overflow:hidden; border-bottom:1px solid var(--line-3);">
+    <span class="chip solid">全部</span>
+    <span class="chip">鞋靴</span>
+    <span class="chip">潮玩</span>
+    <span class="chip">配饰</span>
+    <span class="chip">服饰</span>
+  </div>
+  <div style="flex:1; overflow:hidden">
+    <div class="list-row">
+      <div class="thumb ph-img">商品图</div>
+      <div class="meta"><div class="line"></div><div class="line short"></div>
+        <div style="font-family:var(--mono); font-size:10px; color:var(--muted); margin-top:4px">收藏 2 天</div>
+        <div class="price">¥ 1,299</div>
+      </div>
+      <div class="heart">♥</div>
+    </div>
+    <div class="list-row">
+      <div class="glow"><div class="thumb ph-img">商品图</div></div>
+      <div class="meta"><div class="line"></div><div class="line short"></div>
+        <div style="font-family:var(--mono); font-size:10px; color:var(--accent-press); margin-top:4px">✦ 收藏 14 天 · 再不吃灰就要包浆了</div>
+        <div class="price">¥ 899</div>
+      </div>
+      <div class="heart hot" data-hot="tap → 展开菜单">♥</div>
+    </div>
+    <div class="list-row">
+      <div class="thumb ph-img">商品图</div>
+      <div class="meta"><div class="line"></div><div class="line short"></div>
+        <div style="font-family:var(--mono); font-size:10px; color:var(--muted); margin-top:4px">收藏 32 天</div>
+        <div class="price">¥ 2,680</div>
+      </div>
+      <div class="heart">♥</div>
+    </div>
+    <div class="list-row">
+      <div class="thumb ph-img">商品图</div>
+      <div class="meta"><div class="line"></div><div class="line short"></div>
+        <div style="font-family:var(--mono); font-size:10px; color:var(--muted); margin-top:4px">收藏 5 天</div>
+        <div class="price">¥ 458</div>
+      </div>
+      <div class="heart">♥</div>
+    </div>
+  </div>
+  ${TabBar(4)}
+`;
+
+const screen2 = () => `
+  ${StatusBar()}
+  ${Nav({ title: '我的收藏 · 128', left: '‹', right: '管理' })}
+  <div style="padding: 10px 14px 6px; display:flex; gap:6px; border-bottom:1px solid var(--line-3); opacity:.65;">
+    <span class="chip solid">全部</span><span class="chip">鞋靴</span><span class="chip">潮玩</span><span class="chip">配饰</span>
+  </div>
+  <div style="flex:1; overflow:hidden; position:relative; background: rgba(0,0,0,.25);">
+    <div style="opacity:.35; pointer-events:none">
+      <div class="list-row"><div class="thumb ph-img">商品图</div><div class="meta"><div class="line"></div><div class="line short"></div><div class="price">¥ 899</div></div><div class="heart">♥</div></div>
+      <div class="list-row"><div class="thumb ph-img">商品图</div><div class="meta"><div class="line"></div><div class="line short"></div><div class="price">¥ 2,680</div></div><div class="heart">♥</div></div>
+    </div>
+    <div class="sheet hot" data-hot="Action Sheet">
+      <div class="item primary"><span>✦ 许个愿吧</span><span style="font-family:var(--mono); font-size:10px; color:var(--muted)">new</span></div>
+      <div class="item"><span>加入想要清单</span><span>›</span></div>
+      <div class="item"><span>分享给朋友</span><span>›</span></div>
+      <div class="item"><span>降价提醒</span><span>›</span></div>
+      <div class="item" style="color:var(--dewu-red)"><span>取消收藏</span><span></span></div>
+    </div>
+  </div>
+`;
+
+const screen3 = () => `
+  ${StatusBar()}
+  ${Nav({ title: '选一件来许愿', left: '‹', right: '取消', rightClass: 'ghost' })}
+  <div style="padding: 12px 14px 8px; font-size:12px; color:var(--muted); border-bottom:1px solid var(--line-3);">
+    已选 <b style="color:var(--ink)">1</b> / 1 件 · 从你的收藏中挑选
+  </div>
+  <div style="flex:1; overflow:hidden; display:grid; grid-template-columns: repeat(3, 1fr); gap:6px; padding:8px;">
+    ${[14,47,3,120,9,31,5,2,88].map((d,i) => {
+      const sel = i === 1;
+      return `<div style="position:relative; ${sel ? 'outline: 2px solid var(--accent); outline-offset:-2px' : ''}">
+        <div class="ph-img" style="aspect-ratio: 1/1;">商品 ${i+1}</div>
+        <div style="position:absolute; top:4px; right:4px; width:18px; height:18px; border-radius:50%; border:1.5px solid ${sel?'var(--accent)':'#fff'}; background:${sel?'var(--accent)':'rgba(0,0,0,.25)'}; color:#fff; display:flex; align-items:center; justify-content:center; font-size:10px;">${sel?'✓':''}</div>
+        <div style="position:absolute; bottom:4px; left:4px; background:rgba(0,0,0,.6); color:#fff; font-family:var(--mono); font-size:9px; padding:1px 4px; border-radius:2px;">${d}天</div>
+      </div>`;
+    }).join('')}
+  </div>
+  <div style="padding: 10px 14px 14px; border-top:1px solid var(--line-3); background:#fff;">
+    <div class="btn accent hot" data-hot="下一步 → 写心愿">下一步</div>
+  </div>
+`;
+
+const screen4 = () => `
+  ${StatusBar()}
+  ${Nav({ title: '写点什么', left: '‹', right: '下一步' })}
+  <div style="padding: 14px; border-bottom:1px solid var(--line-3); display:flex; gap:10px; align-items:center;">
+    <div class="ph-img" style="width:54px; height:54px; flex-shrink:0">商品</div>
+    <div>
+      <div style="font-size:13px; font-weight:600; margin-bottom:4px">Air Zoom 跑鞋 黑/白</div>
+      <div style="font-family:var(--mono); font-size:10px; color:var(--muted)">收藏 47 天 · <span style="color:var(--dewu-red); font-weight:600;">¥ 899</span></div>
+    </div>
+  </div>
+  <div style="padding: 14px;">
+    <textarea class="hot" data-hot="自由编辑 · 60 字" style="width:100%; height:90px; border:1px solid var(--line-2); border-radius:8px; padding:10px; font-family:var(--hand); font-size:17px; resize:none; outline:none;">收藏47天了，再不买它比我先老</textarea>
+    <div style="display:flex; justify-content:space-between; font-family:var(--mono); font-size:10px; color:var(--muted); margin-top:4px;">
+      <span>✦ AI 默认模板直击灵魂</span><span>14 / 60</span>
+    </div>
+  </div>
+  <div style="padding: 0 14px 8px; font-size:11px; color:var(--muted); font-family:var(--mono); letter-spacing:.05em;">灵魂模板</div>
+  <div style="flex:1; overflow:hidden; padding: 0 14px;">
+    ${['收藏47天了，再不买它比我先老','谁懂啊，工资没它涨得快','不是买不起，是它不值得我此刻花钱（其实是买不起','留给有缘人（最好是送我的那种有缘人','这是我最贵的赛博盆栽，精心养护47天','月薪三千的心，月供三千的梦'].map(t=>`
+      <div style="padding: 10px 0; border-bottom: 1px dashed var(--line-3); font-size:12px; color:var(--ink-2); display:flex; justify-content:space-between; gap:8px;">
+        <span style="flex:1">${t}</span><span style="font-family:var(--mono); font-size:10px; color:var(--accent-press)">用</span>
+      </div>`).join('')}
+  </div>
+`;
+
+const screen5 = () => {
+  const colors = [['薄荷绿','mint',0],['柠檬黄','lemon',1],['樱花粉','sakura',0],['天空蓝','sky',0],['薰衣草紫','lavender',0],['暖阳橙','sun',0]];
+  return `
+  ${StatusBar()}
+  ${Nav({ title: '选个便利贴', left: '‹', right: '发布' })}
+  <div style="flex:1; background: #f1efe8; display:flex; flex-direction: column; align-items:center; padding-top: 36px;">
+    <div class="note lemon hot" data-hot="预览" style="width: 170px; transform: rotate(-3deg);">
+      <div class="pin"></div>
+      <div class="note-img" style="aspect-ratio:1/1"></div>
+      <div class="note-txt">收藏47天了，再不买它比我先老</div>
+      <div class="note-foot"><span>47 days</span><span>¥ 899</span></div>
+    </div>
+    <div style="margin-top: 36px; display:flex; gap:10px;">
+      ${colors.map(([name,c,sel])=>`<div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <div style="width:28px; height:28px; border-radius:50%; background: var(--n-${c}); border: ${sel?'2px solid var(--ink)':'1px solid var(--line-3)'};"></div>
+        <div style="font-size:9px; color:var(--muted); font-family:var(--mono)">${name}</div>
+      </div>`).join('')}
+    </div>
+    <div style="margin-top: 20px; font-family:var(--mono); font-size:10px; color:var(--muted); text-align:center; line-height:1.6;">
+      随机 −4° ~ +4° 倾斜<br/>模拟真实便利贴手感
+    </div>
+  </div>
+  <div style="padding: 10px 14px 14px; border-top:1px solid var(--line-3); background:#fff;">
+    <div class="btn accent hot" data-hot="发布 → 贴上墙">发布心愿</div>
+  </div>`;
+};
+
+const screen6 = () => `
+  ${StatusBar()}
+  <div style="flex:1; position:relative;" class="cork-bg">
+    <div style="position:absolute; top:40px; left:50%; transform: translateX(-50%); font-family:var(--mono); font-size:11px; color: #5a3d17; background: rgba(255,255,255,.55); padding: 4px 10px; border-radius: 10px;">啪嗒 · 已贴上墙</div>
+    <svg style="position:absolute; top:110px; left:50%; transform:translateX(-50%);" width="180" height="30" viewBox="0 0 180 30" fill="none">
+      <path d="M10 20 C 40 5, 140 5, 170 20" stroke="#5a3d17" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>
+    </svg>
+    <div style="position:absolute; top:140px; left:50%; transform:translate(-50%, 0) rotate(-2deg);">
+      <div class="note lemon" style="width: 200px;">
+        <div class="pin"></div>
+        <div class="note-img" style="aspect-ratio:1/1"></div>
+        <div class="note-txt">收藏47天了，再不买它比我先老</div>
+        <div class="note-foot"><span>47 days</span><span>¥ 899</span></div>
+      </div>
+    </div>
+    <div style="position:absolute; bottom: 120px; left:0; right:0; text-align:center; color:#3a2806;">
+      <div style="font-size:15px; font-weight:700;">心愿发布成功</div>
+      <div style="font-family:var(--mono); font-size:11px; margin-top:4px;">默认有效期 30 天 · 好友可见</div>
+    </div>
+    <div style="position:absolute; bottom: 40px; left:20px; right:20px; display:flex; gap:10px;">
+      <div class="btn" style="flex:1; background:#fff">分享</div>
+      <div class="btn accent hot" data-hot="去许愿池" style="flex:1">去许愿池</div>
+    </div>
+  </div>
+`;
+
+const _poolNotes = (items) => items.map(n => `
+  <div style="position:absolute; top:${n.t}px; ${n.l!==undefined?`left:${n.l}px`:`right:${n.r}px`}; transform:rotate(${n.rot}deg); width:${n.w}px">
+    <div class="note ${n.c}${n.hot?' hot':''}" ${n.hot?`data-hot="${n.hot}"`:''}>
+      <div class="pin"></div>
+      <div class="note-img" style="aspect-ratio:1/1; height:${n.h}px;"></div>
+      <div class="note-txt" style="font-size:12px;">${n.txt}</div>
+      <div class="note-foot"><span>${n.d}</span><span>${n.p}</span></div>
+    </div>
+  </div>`).join('');
+
+const screen7 = () => `
+  ${StatusBar()}
+  <div class="nav" style="border-bottom:none;"><span class="back">‹</span><span>许愿池</span><span class="rt">⋯</span></div>
+  <div style="padding: 0 14px; display:flex; gap:18px; font-size:14px; font-weight:600; border-bottom: 1px solid var(--line-3);">
+    <span style="padding: 8px 0; border-bottom: 2px solid var(--ink);">好友 · 23</span>
+    <span style="padding: 8px 0; color:var(--muted); font-weight:500;">我的 · 6</span>
+    <span style="margin-left:auto; padding: 8px 0; color:var(--accent-press); font-size:12px;">+ 许愿</span>
+  </div>
+  <div style="flex:1; position:relative; overflow:hidden;" class="cork-bg">
+    ${_poolNotes([
+      {t:18,l:14,rot:-4,w:128,c:'sakura',h:84,txt:'谁懂啊，工资没它涨得快',d:'14d',p:'¥328'},
+      {t:28,r:12,rot:3,w:128,c:'sky',h:84,txt:'留给有缘人（最好是送我的那种',d:'47d',p:'¥899',hot:'tap → 详情 & 互动'},
+      {t:230,l:22,rot:2,w:130,c:'mint',h:84,txt:'月薪三千的心，月供三千的梦',d:'30d',p:'¥2680'},
+      {t:258,r:20,rot:-3,w:124,c:'lavender',h:80,txt:'这是我最贵的赛博盆栽',d:'100d',p:'¥1299'},
+      {t:470,l:90,rot:1,w:140,c:'sun',h:86,txt:'不值得我此刻花钱（其实买不起',d:'9d',p:'¥458'},
+    ])}
+  </div>
+`;
+
+const screen8 = () => `
+  ${StatusBar()}
+  <div class="nav" style="border-bottom:none;"><span class="back">‹</span><span>许愿池</span><span class="rt">⋯</span></div>
+  <div style="padding: 0 14px; display:flex; gap:18px; font-size:14px; font-weight:600; border-bottom: 1px solid var(--line-3);">
+    <span style="padding: 8px 0; color:var(--muted); font-weight:500;">好友 · 23</span>
+    <span style="padding: 8px 0; border-bottom: 2px solid var(--ink);">我的 · 6</span>
+    <span style="margin-left:auto; padding: 8px 0; color:var(--accent-press); font-size:12px;">+ 许愿</span>
+  </div>
+  <div style="padding: 10px 14px; display:flex; gap:6px; border-bottom: 1px solid var(--line-3);">
+    <span class="chip solid">全部 6</span><span class="chip">许愿中 4</span><span class="chip">已达成 1</span><span class="chip">已过期 1</span>
+  </div>
+  <div style="flex:1; position:relative; overflow:hidden;" class="cork-bg">
+    <div style="position:absolute; top:18px; left:14px; transform:rotate(-3deg); width:128px">
+      <div class="note lemon"><div class="pin"></div><div class="note-img" style="aspect-ratio:1/1; height:84px;"></div><div class="note-txt" style="font-size:12px;">再不买它比我先老</div><div class="note-foot"><span>47d</span><span>¥899</span></div></div>
+    </div>
+    <div style="position:absolute; top:28px; right:12px; transform:rotate(2deg); width:128px">
+      <div class="hot" data-hot="已达成 · 拍立得">
+        <div class="polaroid" style="transform:none; padding: 6px 6px 20px; background:#fff">
+          <div class="note-img" style="aspect-ratio:1/1; height:80px; border:none;"></div>
+          <div style="font-family:var(--hand); font-size:13px; text-align:center; margin-top:4px;">终于拔草了</div>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute; top:230px; left:22px; transform:rotate(-2deg); width:128px" class="faded">
+      <div class="note sakura"><div class="pin"></div><div class="note-img" style="aspect-ratio:1/1; height:80px;"></div><div class="note-txt" style="font-size:11px;">这个愿望已经累了…</div><div class="note-foot"><span>过期</span><span>¥328</span></div></div>
+    </div>
+    <div style="position:absolute; top:258px; right:20px; transform:rotate(4deg); width:124px">
+      <div class="note sky"><div class="pin"></div><div class="note-img" style="aspect-ratio:1/1; height:80px;"></div><div class="note-txt" style="font-size:12px;">留给有缘人</div><div class="note-foot"><span>12d</span><span>¥1299</span></div></div>
+    </div>
+    <div style="position:absolute; top:460px; left:16px; transform:rotate(1deg); width:130px">
+      <div class="note sun"><div class="pin"></div><div class="note-img" style="aspect-ratio:1/1; height:82px;"></div><div class="note-txt" style="font-size:12px;">月薪三千的心，月供三千的梦</div><div class="note-foot"><span>3d</span><span>¥2680</span></div></div>
+    </div>
+    <div style="position:absolute; top:478px; right:20px; transform:rotate(-3deg); width:124px">
+      <div class="note lavender"><div class="pin"></div><div class="note-img" style="aspect-ratio:1/1; height:78px;"></div><div class="note-txt" style="font-size:12px;">谁懂啊，工资没它涨得快</div><div class="note-foot"><span>20d</span><span>¥458</span></div></div>
+    </div>
+  </div>
+`;
+
+const screen9 = () => `
+  ${StatusBar()}
+  ${Nav({ title: '心愿详情', left: '‹', right: '⋯' })}
+  <div style="flex:1; overflow:hidden; background:#f6f4ec;">
+    <div style="padding: 26px 20px 10px; display:flex; justify-content:center;">
+      <div style="position:relative;">
+        <div class="note sky" style="width: 200px; transform: rotate(-2deg);">
+          <div class="pin"></div>
+          <div class="note-img" style="aspect-ratio:1/1"></div>
+          <div class="note-txt">留给有缘人（最好是送我的那种</div>
+          <div class="note-foot"><span>47 days</span><span>¥ 899</span></div>
+        </div>
+        <div style="position:absolute; bottom:-6px; right:-6px; width:22px; height:22px; background:#fff; transform: rotate(45deg); border: 1px solid rgba(0,0,0,.1); box-shadow: -1px -1px 2px rgba(0,0,0,.06);"></div>
+        <div class="tip-badge" style="right:-80px; bottom:0;">居然有人理你的愿望 ↓</div>
+      </div>
+    </div>
+    <div style="padding: 10px 20px; display:flex; align-items:center; gap:8px;">
+      <div class="avatar"></div>
+      <div style="flex:1;"><div style="font-size:12px; font-weight:600;">打工人小 A</div><div style="font-family:var(--mono); font-size:10px; color:var(--muted)">2h · 47d wish</div></div>
+      <span class="chip aqua">+ 关注</span>
+    </div>
+    <div style="padding: 6px 20px; display:flex; gap:6px; flex-wrap:wrap;">
+      <div class="stamp" style="width:46px; height:46px; font-size:8px; transform: rotate(-8deg);">已阅<br/>下次一定</div>
+      <div class="stamp red" style="width:46px; height:46px; font-size:8px; transform: rotate(5deg);">同款<br/>穷鬼<br/>抱一下</div>
+      <div class="stamp aqua" style="width:46px; height:46px; font-size:8px; transform: rotate(-3deg);">加油<br/>打工人</div>
+    </div>
+    <div style="padding: 12px 20px 6px; font-family:var(--mono); font-size:10px; color:var(--muted);">已有 128 人围观 · 23 人互动</div>
+  </div>
+  <div style="border-top:1px solid var(--line-3); padding: 8px 12px 14px; display:flex; gap:8px; background:#fff; align-items:center;">
+    <div class="chip hot" data-hot="赞 · 抖一下" style="height:36px; border-radius:18px; padding: 0 12px;">👍 128</div>
+    <div class="chip hot" data-hot="盖章 → 面板" style="height:36px; border-radius:18px; padding: 0 12px;">盖章</div>
+    <div class="btn accent hot" data-hot="送出 · 撒花" style="flex:1; height:36px;">送出 ¥899</div>
+  </div>
+`;
+
+const screen10 = () => {
+  const stamps = ['已阅，下次一定','加油，打工人','我看刑，但我不行','同款穷鬼，抱一下','比你更想要这个','建议直接闭眼入','我选择精神支持','你值得更好的（但你值得这个'];
+  return `
+  ${StatusBar()}
+  <div style="flex:1; background: rgba(0,0,0,.25); position:relative;">
+    <div style="position:absolute; inset:0; background: #f6f4ec; opacity:.4;"></div>
+    <div style="position:absolute; bottom:0; left:0; right:0; background:#fff; border-radius: 16px 16px 0 0; padding: 14px 14px 24px; max-height: 78%; display:flex; flex-direction:column;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
+        <div style="font-size:15px; font-weight:600;">选一枚灵魂印章</div>
+        <span style="color:var(--muted); font-size:12px;">取消</span>
+      </div>
+      <div style="font-family:var(--mono); font-size:10px; color:var(--muted); margin-bottom: 14px;">盖下去就撤不回，慎重</div>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px 10px; flex:1; overflow:hidden;">
+        ${stamps.map((t,i)=>`<div style="display:flex; flex-direction:column; align-items:center; gap:6px; ${i===3?'outline: 2px solid var(--accent); outline-offset:6px;':''}">
+          <div class="stamp ${i%2?'red':''}" style="transform: rotate(${i%2?4:-5}deg);">${t.replace(/，/g,'<br/>').replace('（','<br/>(')}</div>
+        </div>`).join('')}
+      </div>
+      <div class="btn accent hot" data-hot="砰！盖上去" style="margin-top: 14px;">盖章</div>
+    </div>
+  </div>`;
+};
+
+const screen11 = () => `
+  ${StatusBar()}
+  <div class="nav">
+    <span class="back">搜索</span>
+    <span style="display:flex; gap:14px; font-size:13px;"><span style="color:var(--muted)">关注</span><span>推荐</span><span style="color:var(--muted)">心愿</span></span>
+    <span class="rt">＋</span>
+  </div>
+  <div style="flex:1; overflow:hidden; background:#f5f4f0; padding: 4px 0;">
+    <div class="feed-card">
+      <div class="head"><div class="avatar"></div><span style="font-weight:600">穿搭博主 Lin</span><span style="color:var(--muted); margin-left:auto; font-family:var(--mono); font-size:10px;">3h</span></div>
+      <div class="ph-img" style="aspect-ratio: 4/3; margin-top: 8px;">OOTD 穿搭图</div>
+      <div style="display:flex; gap:14px; font-size:11px; color:var(--muted); margin-top:6px;"><span>♥ 1.2k</span><span>💬 48</span><span>☆ 收藏</span></div>
+    </div>
+    <div class="feed-card hot" data-hot="好友心愿 · 信息流混排" style="background: var(--n-lemon); border-color: transparent; position:relative;">
+      <div style="position:absolute; top: -4px; left: 14px; font-family:var(--mono); font-size:9px; background:var(--ink); color:#fff; padding: 2px 6px; border-radius: 2px;">好友心愿</div>
+      <div class="head" style="margin-top:6px;"><div class="avatar"></div><span style="font-weight:600">打工人小 A</span><span style="margin-left:auto; font-family:var(--mono); font-size:10px;">47d wish</span></div>
+      <div style="display:flex; gap:10px; margin-top: 8px;">
+        <div class="ph-img" style="width:76px; height:76px; background: rgba(0,0,0,.04);">商品图</div>
+        <div style="flex:1;">
+          <div style="font-family:var(--hand); font-size:16px; line-height:1.2; color: var(--ink);">留给有缘人（最好是送我的那种有缘人</div>
+          <div style="font-family:var(--mono); font-size:10px; color:var(--ink-2); margin-top:6px;">Air Zoom 跑鞋 · <span style="color:var(--dewu-red); font-weight:600;">¥ 899</span></div>
+        </div>
+      </div>
+      <div style="display:flex; gap:6px; margin-top: 10px;">
+        <span class="chip" style="border-color:var(--ink); background:transparent;">👍 128</span>
+        <span class="chip" style="border-color:var(--ink); background:transparent;">盖章</span>
+        <span class="chip aqua" style="margin-left:auto;">送给 TA</span>
+      </div>
+    </div>
+    <div class="feed-card">
+      <div class="head"><div class="avatar"></div><span style="font-weight:600">潮玩收藏家</span><span style="color:var(--muted); margin-left:auto; font-family:var(--mono); font-size:10px;">5h</span></div>
+      <div class="ph-img" style="aspect-ratio: 4/3; margin-top: 8px;">潮玩开箱</div>
+    </div>
+  </div>
+  ${TabBar(2)}
+`;
+
+const screen12 = () => `
+  ${StatusBar()}
+  ${Nav({ title: '拔草纪念卡', left: '‹', right: '保存' })}
+  <div style="flex:1; background: #f6f4ec; padding: 20px; overflow:hidden; display:flex; flex-direction:column; align-items:center;">
+    <div class="polaroid" style="width: 230px; transform: rotate(-1.5deg); padding: 10px 10px 28px; position:relative;">
+      <div class="ph-img" style="aspect-ratio: 1/1;">商品图 + 用户 selfie</div>
+      <div style="font-family:var(--hand); font-size:20px; text-align:center; margin-top:8px; line-height:1.2;">我做到了</div>
+      <div style="font-family:var(--hand); font-size:13px; text-align:center; color:var(--ink-2);">(虽然花的是自己的钱)</div>
+      <div style="display:flex; justify-content:space-between; font-family:var(--mono); font-size:9px; color:var(--muted); margin-top: 8px;"><span>WISH · 47d</span><span>2026.04.20</span></div>
+      <div class="stamp red" style="position:absolute; top: 14px; right: -6px; width:60px; height:60px; font-size:9px; transform: rotate(12deg); background: rgba(255,255,255,.85);">终于<br/>拔草了</div>
+    </div>
+    <div style="margin-top: 22px; font-family:var(--mono); font-size:10px; color:var(--muted); text-align:center;">有人看不下去了，替你清空了购物车 ❤</div>
+    <div style="margin-top: auto; width:100%; display:grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+      ${['微信','朋友圈','{BRAND.name}动态','保存'].map(n=>`<div style="text-align:center; font-size:10px; color:var(--ink-2);"><div style="width:40px; height:40px; border-radius:50%; background:#fff; border:1px solid var(--line-2); margin: 0 auto 4px;"></div>${n}</div>`).join('')}
+    </div>
+  </div>
+`;
+
+window.SCREENS = [
+  { id:'S01', rail:1, name:'收藏夹', render:screen1, notes:['收藏 ≥ <b>7 天</b>商品浮现微光','右上 <b>❤️</b> 为展开触点','iOS segmented chip 筛选'] },
+  { id:'S02', rail:1, name:'❤️ 展开菜单', render:screen2, notes:['iOS Action Sheet','<b>"许个愿吧"</b>置顶 + new 角标','不干扰原「取消收藏」'] },
+  { id:'S03', rail:2, name:'选收藏商品', render:screen3, notes:['九宫格缩略预览','角标显示<b>收藏天数</b>','单选 · 下一步可点'] },
+  { id:'S04', rail:2, name:'写心愿', render:screen4, notes:['默认 <b>AI 模板</b>带入','上限 60 字 · 实时计数','点模板即替换，可继续编辑'] },
+  { id:'S05', rail:2, name:'选便利贴样式', render:screen5, notes:['6 色底：薄荷 / 柠檬 / 樱花 / 天空 / 薰衣草 / 暖阳','实时预览 · 随机微倾斜','底部 <b>CTA accent</b>'] },
+  { id:'S06', rail:2, name:'发布成功', render:screen6, notes:['<b>啪嗒</b>动画：位移 + 微震','成功页复用软木板底','二级 CTA → 许愿池'] },
+  { id:'S07', rail:3, name:'许愿池 · 好友', render:screen7, notes:['默认 Tab = 好友','便利贴<b>错落贴墙</b>','长按可快速互动'] },
+  { id:'S08', rail:3, name:'许愿池 · 我的', render:screen8, notes:['状态分组 chip 筛选','已达成变<b>拍立得</b>','过期淡化灰度'] },
+  { id:'S09', rail:4, name:'便利贴详情', render:screen9, notes:['顶部便利贴<b>翘角彩蛋</b>','已盖印章累加展示','底部：赞 / 盖章 / <b>送出</b>'] },
+  { id:'S10', rail:4, name:'灵魂印章面板', render:screen10, notes:['iOS half-sheet','最多 8 枚 · 后台可增删改','选中 → <b>砰</b>盖到便利贴'] },
+  { id:'S11', rail:5, name:'发现页 · 心愿卡', render:screen11, notes:['与 OOTD 卡<b>同层混排</b>','便利贴色底区分身份','右上 <b>送给 TA</b> 快捷入口'] },
+  { id:'S12', rail:5, name:'拔草纪念卡', render:screen12, notes:['拍立得风 · 日期 + 收藏天数','系统文案 "有人看不下去了…"','4 通道分享 · 可保存相册'] },
+];
+
+window.ARROWS = {
+  1:['点击 ❤️','选 "许个愿吧"'],
+  2:['→ 确认商品','→ 写文案','→ 选色发布','→ 去许愿池'],
+  3:['切换 Tab'],
+  4:['tap 便利贴','点击 "盖章"'],
+  5:['心愿达成']
+};
+</script>
+<script>
+(function () {
+  const tracks = {1:document.getElementById('track-1'),2:document.getElementById('track-2'),3:document.getElementById('track-3'),4:document.getElementById('track-4'),5:document.getElementById('track-5')};
+  const grouped = {};
+  window.SCREENS.forEach(s => { (grouped[s.rail] = grouped[s.rail] || []).push(s); });
+  const arrowSVG = () => `<svg width="60" height="14" viewBox="0 0 60 14" fill="none">
+    <path d="M0 7 H52" stroke="#111418" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <path d="M46 1 L58 7 L46 13" stroke="#111418" stroke-width="1.2" fill="none" stroke-linejoin="round"/></svg>`;
+  function makePhone(screen, idx, total) {
+    const wrap = document.createElement('div');
+    wrap.className = 'phone';
+    wrap.innerHTML = `
+      <div class="phone-shell"><div class="phone-screen">${screen.render()}</div></div>
+      <div class="phone-label">
+        <div class="id">${screen.id} · RAIL 0${screen.rail} · ${idx + 1}/${total}</div>
+        <div class="name">${screen.name}</div>
+        <ul>${screen.notes.map(n=>`<li>${n}</li>`).join('')}</ul>
+      </div>`;
+    return wrap;
+  }
+  function makeArrow(label) {
+    const a = document.createElement('div');
+    a.className = 'arrow';
+    a.innerHTML = `${arrowSVG()}<div class="lbl">${label||''}</div>`;
+    return a;
+  }
+  Object.keys(grouped).forEach(rail => {
+    const list = grouped[rail];
+    const track = tracks[rail];
+    const arrowLabels = window.ARROWS[rail] || [];
+    list.forEach((s, i) => {
+      track.appendChild(makePhone(s, i, list.length));
+      if (i < list.length - 1) track.appendChild(makeArrow(arrowLabels[i] || '→'));
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>示例活动 · 示例联赛 预测示例业务 · 平面交互稿 v7.6</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --accent:var(--accent);--accent-bright:#00FEFF;--accent-press:#029999;--accent-soft:#D9F4F4;
+  --dewu-red:var(--semantic-danger);--dewu-red-light:#FFA9A9;--auth-green:#00C853;--vip-gold:#C9A84C;
+  --n00:#FFFFFF;--n-bg:#F5F5F9;--n20:#F1F1F5;--n40:#E6E6EB;--n-stroke-strong:#2B2C3C;--n80:#AAAABB;--n100:#7F7F8E;--n140:var(--n140);
+  --paper:#f6f5f1;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--ui:"PingFang SC","PingFang HK",-apple-system,"Noto Sans SC",sans-serif;
+  --ease-ios:cubic-bezier(.32,.72,0,1);--ease-ios-sheet:cubic-bezier(.34,.98,.52,1);--ease-ios-emph:cubic-bezier(0.20,0.90,0.10,1);--ease-ios-tap:cubic-bezier(0.25,0.46,0.20,1);--dur-xs:180ms;--dur-s:240ms;--dur-m:400ms;--dur-l:520ms;
+}
+*{box-sizing:border-box;margin:0;padding:0}html,body{font-family:var(--ui);background:var(--n140);color:var(--n140);-webkit-font-smoothing:antialiased}
+.canvas{position:relative;min-height:100vh;padding:56px 44px 88px;background:
+  linear-gradient(135deg,rgba(1,194,195,.12),transparent 28%),
+  radial-gradient(circle at 1px 1px,rgba(255,255,255,.12) 1px,transparent 0) 0 0/28px 28px,
+  var(--n140);overflow:hidden}
+.canvas:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(0,254,255,.08),transparent);height:1px;top:118px;pointer-events:none}
+.signature{position:absolute;top:24px;left:32px;z-index:20;font:11px/1 var(--mono);letter-spacing:.08em;color:rgba(255,255,255,.45);pointer-events:none}.signature::first-letter{color:var(--accent-bright);margin-right:2px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin:0 0 34px 0;max-width:1480px}
+.tag{display:inline-flex;align-items:center;height:20px;padding:0 8px;border:1px solid rgba(255,255,255,.16);border-radius:2px;background:rgba(255,255,255,.06);font:10px/1 var(--mono);letter-spacing:.04em;color:rgba(255,255,255,.64);margin-right:4px}.tag.aqua{background:rgba(1,194,195,.16);border-color:var(--accent);color:var(--accent-bright)}
+h1{font-size:30px;font-weight:600;letter-spacing:-.01em;margin:10px 0 6px;color:var(--n00)}h1 b{color:var(--accent-bright)}
+.meta{font:11px/1.7 var(--mono);color:rgba(255,255,255,.54)}.meta b{color:var(--n00);font-weight:500}
+.rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:1220px;margin-bottom:44px}.rule{background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:14px}.rule h3{font:600 12px/1.2 var(--mono);letter-spacing:.04em;margin-bottom:8px}.rule p,.rule li{font-size:11px;line-height:1.55;color:var(--n100)}.rule ul{padding-left:14px}.sw{display:flex;gap:6px}.sw i{width:22px;height:22px;border:1px solid var(--n40);display:block}
+.rail{margin-bottom:56px}.rail-title{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}.rail-title span{font:11px/1 var(--mono);letter-spacing:.08em;background:var(--accent);color:var(--n00);padding:4px 8px}.rail-title h2{font-size:17px;font-weight:600;color:var(--n00)}.rail-title p{font:11px/1 var(--mono);color:rgba(255,255,255,.48)}
+.track{display:flex;align-items:flex-start;gap:26px;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding-bottom:8px}.arrow{align-self:center;margin-top:294px;font:9px/1.35 var(--mono);color:rgba(255,255,255,.58);text-align:center;width:72px;flex:0 0 72px;position:relative}.arrow:before{content:"";display:block;border-top:1.5px dashed rgba(0,254,255,.55);margin:0 0 6px}.arrow:after{content:"";position:absolute;top:-4px;right:0;border:5px solid transparent;border-left-color:var(--accent-bright)}
+.phone-wrap{width:320px;flex:0 0 320px}.phone-shell{width:320px;height:694px;background:linear-gradient(180deg,#2B2C3C,var(--n140));border:1.5px solid rgba(255,255,255,.22);border-radius:44px;padding:7px;position:relative;box-shadow:0 28px 56px rgba(0,0,0,.38),0 0 0 1px rgba(0,254,255,.08)}.phone-shell:before{content:"";position:absolute;top:12px;left:50%;width:92px;height:24px;transform:translateX(-50%);border-radius:999px;background:var(--n140);z-index:5}.phone-shell:after{content:"";position:absolute;inset:7px;border-radius:36px;border:1px solid rgba(0,254,255,.16);pointer-events:none;z-index:6}.phone-screen{height:100%;border:1px solid rgba(255,255,255,.16);border-radius:36px;overflow:hidden;background:var(--n-bg);display:flex;flex-direction:column;position:relative}
+.status{height:36px;padding:0 18px 4px;display:flex;align-items:flex-end;justify-content:space-between;background:rgba(255,255,255,.86);font-size:11px;font-weight:600;color:var(--n140)}
+.nav{height:42px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;background:var(--n00);border-bottom:1px solid var(--n20)}.nav .back{font-size:22px;line-height:1;cursor:default}.nav .title{font-size:16px;font-weight:500}.nav .right{font-size:12px;color:var(--n100)}
+.top-tabs{height:43px;padding:0 10px;display:flex;align-items:flex-end;gap:18px;background:var(--n00);border-bottom:1px solid var(--n20);overflow:hidden}.top-tabs span{height:32px;font-size:15px;color:var(--n140);position:relative;white-space:nowrap}.top-tabs span.active{font-size:18px;font-weight:600}.top-tabs span.active:after{content:"";position:absolute;left:50%;bottom:0;width:22px;height:2px;background:var(--accent);transform:translateX(-50%)}
+.tabbar{height:52px;background:var(--n00);border-top:1px solid var(--n20);display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:8px}.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;font-weight:300;color:var(--n100)}.tab svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}.tab.active{color:var(--n140);font-weight:400}.tab.active svg{stroke:var(--n140)}
+.body{flex:1;min-height:0;overflow-y:auto;background:var(--n-bg)}.pad{padding:10px}.section-head{height:28px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500}.more{font-size:11px;color:var(--n100)}.chiprow{display:flex;gap:5px;padding:6px 10px;background:var(--n00);border-bottom:1px solid var(--n20);overflow:hidden;flex-wrap:wrap}.chip{height:24px;padding:0 10px;border:1px solid var(--n40);border-radius:2px;display:inline-flex;align-items:center;font-size:11px;color:var(--n100);white-space:nowrap;background:var(--n00)}.chip.active{background:var(--n140);border-color:var(--n140);color:var(--n00)}.chip.aqua{background:var(--accent-soft);border-color:var(--accent-soft);color:var(--accent-press)}
+.btn{height:32px;padding:0 12px;border:1px solid var(--n140);border-radius:2px;background:var(--n00);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;white-space:nowrap}.btn.accent{background:var(--accent);border-color:var(--accent);color:var(--n00);box-shadow:0 2px 4px rgba(0,0,0,.05)}.btn.primary{background:var(--n140);color:var(--n00)}.btn.outline{background:var(--n00);color:var(--n140);border-color:var(--n40)}.btn.sm{height:25px;padding:0 9px;font-size:10px}.btn.block{width:100%;justify-content:center}
+.num{font-family:"DIN Alternate","Helvetica Neue","Oswald","PingFang HK",sans-serif;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}.num-hero{font-family:"DIN Alternate","DIN Condensed","Helvetica Neue","Oswald","PingFang HK",sans-serif;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hero{margin:10px;border-radius:10px;background:linear-gradient(135deg,var(--n140),#2B2C3C);color:var(--n00);padding:12px;position:relative;overflow:hidden;min-height:136px;border:1px solid rgba(0,254,255,.22)}.hero:before{content:"";position:absolute;right:-28px;top:-18px;width:150px;height:150px;border:1px solid rgba(0,254,255,.26);border-radius:50%}.hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-bright),transparent)}.hero .eyebrow{display:flex;justify-content:space-between;font:10px/1 var(--mono);letter-spacing:.04em;color:var(--n80);position:relative}.hero h2{font-size:24px;line-height:1.2;font-weight:600;margin:14px 0 8px;position:relative}.coinbar{display:flex;gap:10px;align-items:flex-end;position:relative}.coinbar .coins{font-size:28px;color:var(--accent-bright);text-shadow:0 0 18px rgba(0,254,255,.36)}.coinbar .btn{margin-left:auto}
+.market{background:var(--n00);border-radius:8px;margin-bottom:5px;padding:8px 8px 6px;border:1px solid rgba(1,194,195,.05)}.market.hot,.market:hover{border-color:rgba(1,194,195,.35)}.market-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.market .match{font-size:10px;color:var(--n100)}.market .q{font-size:12px;font-weight:500;line-height:1.35;margin:2px 0 6px}.versus{display:grid;grid-template-columns:1fr 22px 1fr;gap:0;align-items:stretch}.side{border-radius:4px;background:var(--n-bg);padding:5px 4px;text-align:center}.side.yes{background:var(--accent-soft)}.side b{display:block;font-size:9px;color:var(--n100);font-weight:400}.side .odd{font-size:15px;color:var(--accent-press)}.side.no .odd{color:var(--n140)}.side .mini-bar{height:2px;border-radius:999px;background:var(--n40);margin-top:3px}.side .mini-bar .fill{height:100%;border-radius:999px}.side.yes .mini-bar .fill{background:var(--accent)}.side.no .mini-bar .fill{background:var(--n80)}.vs{display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--n80);letter-spacing:.02em}.disc{margin-top:5px;display:flex;align-items:center;gap:4px;border-top:1px solid var(--n20);padding-top:5px;font-size:9px;color:var(--n100)}.ava{width:14px;height:14px;border-radius:999px;background:var(--n40);border:1px solid var(--n20);flex-shrink:0}.disc b{font-weight:500;color:var(--n140)}
+.market-heat{margin-top:5px;display:grid;grid-template-columns:1fr 1fr;gap:5px;font:9px/1.2 var(--mono);color:var(--n100)}.market-heat span{height:20px;display:flex;align-items:center;justify-content:center;border-radius:2px;background:var(--n-bg);border:1px solid var(--n20)}.market-heat b{color:var(--accent-press);font-weight:600}
+.feed-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}.feed{background:var(--n00);border-radius:8px;overflow:hidden;position:relative}.img{position:relative;min-height:94px;background:var(--n20);overflow:hidden}.img.court{background:linear-gradient(135deg,#D4A574,#C4956A)}.img.court:before{content:"";position:absolute;inset:10px;border:1.5px solid rgba(255,255,255,.5);border-radius:4px}.img.court:after{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1.5px solid rgba(255,255,255,.4)}.img.shoe{background:linear-gradient(180deg,#E8E8EC,#D0D0D8)}.img.shoe:before{content:"";position:absolute;left:20px;right:16px;bottom:22px;height:32px;background:var(--n00);border:1px solid var(--n40);border-radius:20px 10px 12px 16px;transform:skewX(-12deg);box-shadow:0 4px 8px rgba(0,0,0,.08)}.img.jersey{background:linear-gradient(180deg,#2B2C3C,#1A1B28)}.img.jersey:before{content:"23";position:absolute;left:34px;top:14px;width:54px;height:58px;background:linear-gradient(180deg,var(--vip-gold),#C9A84C);border-radius:7px 7px 4px 4px;display:flex;align-items:center;justify-content:center;font:700 24px/1 var(--mono);color:#1A1B28;box-shadow:0 2px 8px rgba(0,0,0,.3)}.img.ball{background:radial-gradient(circle at 40% 35%,#FF6B6B,#C0392B)}.img.ball:before{content:"";position:absolute;left:50%;top:50%;width:62px;height:62px;border-radius:50%;border:2.5px solid rgba(255,255,255,.7);transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.3),transparent 60%)}.img.ball:after{content:"";position:absolute;left:50%;top:50%;width:58px;height:2px;background:rgba(255,255,255,.6);transform:translate(-50%,-50%);box-shadow:0 8px 0 rgba(255,255,255,.5),0 -8px 0 rgba(255,255,255,.5)}.img.trophy{background:linear-gradient(180deg,#1A1B28,#2B2C3C)}.img.trophy:before{content:"";position:absolute;left:50%;top:50%;width:54px;height:42px;transform:translate(-50%,-50%);border-radius:0 0 12px 12px;background:linear-gradient(180deg,var(--vip-gold),var(--vip-gold));box-shadow:0 20px 0 -14px rgba(201,168,76,.65)}.img.dunk{background:linear-gradient(135deg,#0D1B2A,#1B2838)}.img.dunk:before{content:"";position:absolute;left:50%;top:40%;width:70px;height:70px;border:2px solid rgba(255,255,255,.3);border-radius:50%;transform:translate(-50%,-50%)}.img.dunk:after{content:"";position:absolute;left:50%;bottom:14px;width:60px;height:10px;background:rgba(255,255,255,.25);border-radius:50%;transform:translateX(-50%)}.feed-body{padding:7px}.feed .user{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:500;margin-bottom:3px}.feed .text{font-size:10px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.feed .rxn{font-size:9px;margin-top:5px;display:flex;gap:8px;color:var(--n100)}
+.leader-entry{margin:7px 0 8px;background:linear-gradient(135deg,var(--n140),#2B2C3C);border:1px solid rgba(0,254,255,.28);border-radius:10px;color:var(--n00);padding:10px;position:relative;overflow:hidden}.leader-entry:after{content:"";position:absolute;right:-24px;top:-36px;width:104px;height:104px;border:1px solid rgba(0,254,255,.24);border-radius:999px}.leader-entry .k{font:9px/1 var(--mono);letter-spacing:.06em;color:var(--accent-bright);margin-bottom:6px}.leader-entry h3{font-size:15px;font-weight:600;line-height:1.3;margin-bottom:6px}.leader-entry .row{display:grid;grid-template-columns:1fr 1fr;gap:5px;position:relative}.leader-entry .metric{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:6px}.leader-entry .metric b{display:block;font-size:16px;color:var(--accent-bright)}.rank-tip{margin:6px 10px;background:var(--accent-soft);border:1px solid rgba(1,194,195,.2);border-radius:6px;padding:7px 8px;font-size:10px;line-height:1.4;color:var(--accent-press)}.rank-sticky{position:absolute;left:0;right:0;bottom:0;margin:0;background:rgba(20,21,26,.96);color:var(--n00);border-top:1px solid rgba(0,254,255,.28);padding:9px 10px 12px;display:flex;align-items:center;gap:8px;z-index:20}.rank-sticky .pill{height:24px;border-radius:2px;background:rgba(1,194,195,.18);border:1px solid rgba(1,194,195,.36);color:var(--accent-bright);font:10px/1 var(--mono);display:flex;align-items:center;padding:0 7px}.rank-sticky .cta{margin-left:auto;height:28px;border:0;border-radius:2px;background:var(--accent);color:var(--n00);padding:0 10px;font-size:11px;font-weight:500}
+.detail-bet{background:var(--n00);margin:8px 10px;border-radius:10px;padding:10px;border:1px solid var(--n20)}.trend{height:54px;border-radius:6px;background:var(--n-bg);position:relative;overflow:hidden;margin-top:6px}.seg{display:flex;gap:5px;padding:0 10px 10px}.seg .chip{height:28px;padding:0 12px}.comment{background:var(--n00);border-radius:8px;padding:10px;margin:0 10px 6px}.comment .head2{display:flex;align-items:center;gap:6px;font-size:10px}.comment .badge-tag{font-size:8px;padding:1px 5px;border-radius:2px;font-weight:500}.comment .badge-tag.support{background:var(--accent-soft);color:var(--accent-press)}.comment .badge-tag.oppose{background:var(--dewu-red-light);color:var(--dewu-red)}.comment p{font-size:11px;line-height:1.45;margin-top:5px}.comment .line{font-size:9px;color:var(--n100);margin-top:5px;display:flex;gap:12px}.sheet-overlay{position:absolute;bottom:0;left:0;right:0;background:rgba(20,21,26,.45);z-index:10;display:flex;flex-direction:column;justify-content:flex-end;border-radius:0 0 36px 36px}.sheet-overlay .sheet-panel{background:var(--n00);border-radius:18px 18px 0 0;padding:16px 14px 22px}.field{height:40px;border:1px solid var(--n40);border-radius:4px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;margin:8px 0;background:var(--n-bg)}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.stat{background:var(--n-bg);border-radius:6px;padding:7px;text-align:center}.stat .v{font-size:16px;color:var(--accent-press)}
+.result{background:var(--n00);border-radius:12px;padding:18px 12px;text-align:center}.result.win{border:1px solid var(--accent-soft)}.result.lose{border:1px solid var(--n20);opacity:.85}.stamp{width:62px;height:62px;margin:0 auto 8px;border:1.5px dashed var(--accent-press);border-radius:999px;color:var(--accent-press);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;transform:rotate(-8deg)}.stamp.lose{border-color:var(--n80);color:var(--n80)}.rank-row{display:flex;align-items:center;gap:8px;background:var(--n00);border-radius:8px;margin:0 10px 5px;padding:8px}.rank-no{width:26px;text-align:center;font:13px var(--mono);color:var(--vip-gold);font-weight:600}.row-meta{font-size:10px;color:var(--n100)}.item{background:var(--n00);border-radius:10px;margin:10px;padding:10px}.item-img{height:150px;background:var(--n20);border-radius:8px;position:relative;overflow:hidden}.item-img.sneaker{background:linear-gradient(180deg,#F5F0EB,#E8E0D5)}.item-img.sneaker:before{content:"";position:absolute;left:42px;right:34px;bottom:32px;height:48px;background:linear-gradient(180deg,var(--n00),#F0F0F0);border-radius:28px 12px 14px 20px;transform:skewX(-12deg);box-shadow:0 6px 16px rgba(0,0,0,.1)}.item-img.jersey{background:linear-gradient(180deg,#4A154B,#2D0A2E)}.item-img.jersey:before{content:"LA 23";position:absolute;left:78px;top:28px;width:96px;height:88px;background:linear-gradient(180deg,var(--vip-gold),#B8960F);border-radius:10px 10px 4px 4px;display:flex;align-items:center;justify-content:center;font:700 24px/1 var(--mono);color:#2D0A2E;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.store-hero{margin:10px;border-radius:10px;background:linear-gradient(135deg,var(--n140),#2B2C3C);color:var(--n00);padding:12px;position:relative;overflow:hidden;border:1px solid rgba(0,254,255,.24)}.store-hero:before{content:"";position:absolute;right:-20px;top:-24px;width:118px;height:118px;border:1px solid rgba(0,254,255,.28);border-radius:50%}.store-hero .k{font:10px/1 var(--mono);letter-spacing:.06em;color:var(--accent-bright)}.store-hero h3{font-size:20px;line-height:1.2;font-weight:600;margin:9px 0 6px}.store-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:0 10px 10px}.store-tabs .chip{height:30px;justify-content:center}.sub-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:0 10px 8px}.sub-tabs .chip{justify-content:center}.auction-list{padding:0 10px 10px;display:grid;gap:7px}.auction-card{background:var(--n00);border-radius:10px;overflow:hidden;border:1px solid var(--n20);display:grid;grid-template-columns:92px 1fr;min-height:108px}.auction-img{position:relative;background:linear-gradient(180deg,#F5F0EB,#E8E0D5);overflow:hidden}.auction-img:before{content:"";position:absolute;left:20px;right:12px;bottom:24px;height:34px;background:linear-gradient(180deg,var(--n00),#F0F0F0);border-radius:22px 10px 12px 16px;transform:skewX(-12deg);box-shadow:0 6px 14px rgba(0,0,0,.12)}.auction-img.jersey{background:linear-gradient(180deg,#2B2C3C,var(--n140))}.auction-img.jersey:before{content:"23";left:25px;top:25px;width:44px;height:48px;background:linear-gradient(180deg,var(--vip-gold),#C9A84C);border-radius:7px 7px 4px 4px;display:flex;align-items:center;justify-content:center;font:700 19px/1 var(--mono);color:var(--n140);transform:none}.auction-info{padding:9px}.auction-info b{font-size:12px;font-weight:500;line-height:1.3;display:block}.auction-info .price{font-size:22px;color:var(--accent-press);margin:5px 0 2px}.auction-info .timer{font:9px/1.4 var(--mono);color:var(--dewu-red)}.exchange-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 10px 10px}.ex-card{background:var(--n00);border-radius:8px;overflow:hidden;border:1px solid var(--n20)}.ex-card .ex-img{height:100px;position:relative;overflow:hidden}.ex-card .ex-img.warmup{background:linear-gradient(180deg,#E8F0F8,#D0DCE8)}.ex-card .ex-img.warmup:before{content:"";position:absolute;left:50%;top:50%;width:48px;height:48px;border:2px solid var(--n00);border-radius:6px;transform:translate(-50%,-50%) rotate(15deg);box-shadow:0 2px 6px rgba(0,0,0,.1)}.ex-card .ex-img.stickers{background:linear-gradient(135deg,#FFE0E0,#FFD0D0,#FFE8C0,#E0FFE0)}.ex-card .ex-img.stickers:before{content:"示例联赛";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:700 18px/1 var(--mono);color:var(--n140);text-shadow:0 1px 2px rgba(0,0,0,.1)}.ex-card .ex-img.coupon{background:linear-gradient(135deg,var(--accent-soft),#C8F0F0)}.ex-card .ex-img.coupon:before{content:"¥50";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:700 22px/1 var(--mono);color:var(--accent-press)}.ex-card .ex-body{padding:7px}.ex-card .ex-body b{font-size:11px;font-weight:500}.ex-card .ex-body .ex-meta{font-size:9px;color:var(--n100);margin-top:2px;display:flex;justify-content:space-between}.ex-card .ex-body .ex-meta .stock{color:var(--dewu-red)}.ex-card .ex-body .ex-meta .sold{color:var(--n80)}.task-sheet{position:absolute;left:0;right:0;bottom:0;z-index:12;background:rgba(20,21,26,.48);padding-top:64px}.task-panel{background:var(--n00);border-radius:18px 18px 0 0;padding:14px 12px 18px;box-shadow:0 -8px 22px rgba(20,21,26,.18)}.task-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:var(--n-bg);border:1px solid var(--n20);border-radius:8px;padding:8px;margin-bottom:6px}.task-row b{font-size:12px;font-weight:500}.task-row p{font-size:9px;line-height:1.35;color:var(--n100);margin-top:2px}.signin-axis{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin:7px 0}.signin-axis span{height:28px;border-radius:4px;background:var(--accent-soft);color:var(--accent-press);font:8px/1 var(--mono);display:flex;align-items:center;justify-content:center}.asset-row{background:var(--n00);border-radius:8px;margin:0 10px 6px;padding:9px;display:grid;grid-template-columns:1fr auto;gap:8px;border:1px solid var(--n20)}.asset-row .delta{font-size:18px}.asset-row.plus .delta{color:var(--accent-press)}.asset-row.minus .delta{color:var(--dewu-red)}.prize-card{background:var(--n00);border:1px solid var(--n20);border-radius:10px;margin:0 10px 7px;overflow:hidden;display:grid;grid-template-columns:86px 1fr}.prize-card .thumb{background:linear-gradient(180deg,#E8F0F8,#D0DCE8);min-height:92px;position:relative}.prize-card .thumb:before{content:"示例联赛";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:700 17px/1 var(--mono);color:var(--accent-press)}.prize-card .info{padding:9px}.prize-card .info b{font-size:12px;font-weight:500}.prize-card .info p{font-size:9px;color:var(--n100);line-height:1.4;margin-top:4px}
+.feed.hot:before{display:none}.market{padding:10px;border-color:var(--n20);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}.market.hot{border-color:rgba(1,194,195,.45);box-shadow:0 0 0 1px rgba(1,194,195,.18),0 10px 18px rgba(20,21,26,.04)}.market .q{font-size:13px;line-height:1.38;margin:3px 0 8px}.market .match{font:9px/1.3 var(--mono);letter-spacing:.03em;color:var(--n100)}.market-top .btn{min-width:48px}.versus{grid-template-columns:1fr 18px 1fr;gap:4px}.side{border:1px solid var(--n20);padding:6px 4px}.side.yes{background:linear-gradient(180deg,var(--accent-soft),var(--n00));border-color:rgba(1,194,195,.3)}.side.no{background:var(--n00)}.side b:first-child{font-size:10px;color:var(--n140);font-weight:500}.side .odd{font-size:18px}.disc{border-top:0;background:var(--n-bg);border-radius:5px;padding:6px;margin-top:7px;line-height:1.35}.disc .hot-label{height:16px;padding:0 5px;border-radius:2px;background:var(--dewu-red);color:var(--n00);font-size:8px;font-weight:600;display:inline-flex;align-items:center}.disc.empty{display:none}.market-heat{grid-template-columns:1fr 1fr 1fr}.market-heat span{background:var(--n00)}
+.login-card{background:linear-gradient(135deg,var(--n140),#2B2C3C);color:var(--n00);border-radius:10px;padding:10px;margin-bottom:7px;border:1px solid rgba(0,254,255,.26);position:relative;overflow:hidden}.login-card:after{content:"888";position:absolute;right:-8px;top:4px;font:700 58px/1 var(--mono);color:rgba(0,254,255,.13)}.login-card .title{font-size:13px;font-weight:600}.login-card p{font-size:9px;line-height:1.45;color:var(--n80);margin-top:3px}.signin-axis{position:relative;z-index:2}.signin-axis span{height:34px;flex-direction:column;gap:2px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);color:var(--n80)}.signin-axis span.on{background:var(--accent);color:var(--n00);border-color:var(--accent)}.signin-axis span.jackpot{background:linear-gradient(180deg,var(--vip-gold),var(--vip-gold));border-color:var(--vip-gold);color:var(--n140);font-weight:700}.task-row.invite{grid-template-columns:42px 1fr auto;background:linear-gradient(135deg,var(--n00),var(--accent-soft));border-color:rgba(1,194,195,.26)}.invite-art{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,var(--n140),#2B2C3C);position:relative;overflow:hidden;flex-shrink:0}.invite-art:before,.invite-art:after{content:"";position:absolute;border-radius:999px;background:var(--accent-bright)}.invite-art:before{width:16px;height:16px;left:8px;top:8px}.invite-art:after{width:12px;height:12px;right:8px;bottom:9px}.friend-progress{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:3px;margin-top:6px}.friend-progress i{height:4px;border-radius:999px;background:var(--n40)}.friend-progress i.on{background:var(--accent)}.task-row.action .btn{min-width:70px}
+.prediction-hero{margin:10px;border-radius:12px;background:linear-gradient(135deg,var(--n140),#2B2C3C);padding:12px;color:var(--n00);border:1px solid rgba(0,254,255,.22);position:relative;overflow:hidden}.prediction-hero:after{content:"MY";position:absolute;right:10px;top:8px;font:700 54px/1 var(--mono);color:rgba(0,254,255,.1)}.diamond-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;position:relative;z-index:1}.diamond{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px}.diamond .num-hero{font-size:26px;color:var(--accent-bright)}.prediction-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:0 10px 8px}.prediction-tabs .chip{justify-content:center;border-radius:0}.record-card{background:var(--n00);border:1px solid var(--n20);border-radius:9px;margin:0 10px 7px;padding:9px}.record-card .top{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:500}.record-card .sub{font-size:10px;color:var(--n100);line-height:1.45;margin-top:4px}.record-card .tagline{display:flex;gap:5px;margin-top:7px}.record-card .tagline span{height:20px;padding:0 6px;border-radius:2px;background:var(--n-bg);font-size:9px;color:var(--n100);display:flex;align-items:center}.record-card .tagline span.good{background:var(--accent-soft);color:var(--accent-press)}
+.support-panel{margin:8px 10px;border-radius:12px;background:var(--n00);border:1px solid var(--n20);overflow:hidden}.support-head{padding:10px;background:linear-gradient(135deg,var(--n140),#2B2C3C);color:var(--n00);position:relative}.support-head .match{font:9px/1 var(--mono);color:var(--n80);letter-spacing:.04em}.support-head h3{font-size:17px;line-height:1.28;font-weight:600;margin:7px 0 8px}.support-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.support-metrics div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:5px}.support-metrics b{display:block;color:var(--accent-bright);font-size:14px}.support-panel .market{margin:0;border-radius:0;border-left:0;border-right:0}.bet-state{margin:0 10px 8px;border:1px solid rgba(1,194,195,.24);background:linear-gradient(135deg,var(--accent-soft),var(--n00));border-radius:10px;padding:9px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}.bet-state b{font-size:12px;font-weight:600}.bet-state p{font-size:9px;line-height:1.4;color:var(--n100);margin-top:2px}.bet-state .badge{height:24px;padding:0 8px;border-radius:2px;background:var(--n140);color:var(--accent-bright);font:10px/1 var(--mono);display:flex;align-items:center}.identity-strip{margin:0 10px 8px;display:grid;grid-template-columns:1fr 1fr;gap:5px}.identity-strip div{background:var(--n00);border:1px solid var(--n20);border-radius:7px;padding:7px}.identity-strip b{display:block;font-size:13px;color:var(--accent-press)}.identity-strip span{font-size:9px;color:var(--n100)}.impact-bar{margin:0 10px 8px;background:var(--n140);color:var(--n00);border-radius:8px;padding:8px;border:1px solid rgba(0,254,255,.24);font-size:10px;line-height:1.45}.impact-bar b{color:var(--accent-bright)}.mid-cta{margin:0 10px 8px;height:38px;width:calc(100% - 20px);font-size:13px}.dual-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0 10px 8px}.dual-tabs .chip{height:30px;justify-content:center;border-radius:0}.comment-like{margin-left:auto;height:20px;padding:0 7px;border-radius:999px;border:1px solid var(--n40);background:var(--n00);color:var(--n100);font-size:9px;display:inline-flex;align-items:center}.comment.like-on .comment-like{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-press)}.comment.composer{border:1px solid rgba(1,194,195,.24);background:linear-gradient(180deg,var(--n00),var(--accent-soft))}.comment-sticky{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:30;height:38px;width:176px;border:0;border-radius:999px;background:var(--n140);color:var(--n00);font-size:13px;font-weight:500;box-shadow:0 8px 22px rgba(20,21,26,.28)}.comment-space{height:54px}.bet-choice{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}.bet-option{border:1px solid var(--n40);background:var(--n-bg);border-radius:6px;padding:8px}.bet-option.active{background:var(--accent-soft);border-color:var(--accent)}.bet-option b{display:block;font-size:12px}.bet-option span{font:12px/1 var(--mono);color:var(--accent-press)}
+.phase-hero{margin:10px;border-radius:12px;background:linear-gradient(135deg,var(--n140),#2B2C3C);color:var(--n00);border:1px solid rgba(0,254,255,.24);padding:12px;position:relative;overflow:hidden}.phase-hero:after{content:"";position:absolute;right:-20px;top:-20px;width:128px;height:128px;border:1px solid rgba(0,254,255,.24);border-radius:999px}.phase-hero .k{font:10px/1 var(--mono);letter-spacing:.06em;color:var(--accent-bright)}.phase-hero h3{font-size:21px;line-height:1.2;font-weight:600;margin:10px 0 6px}.phase-status{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:10px;position:relative}.phase-status span{height:30px;border:1px solid rgba(255,255,255,.12);border-radius:4px;background:rgba(255,255,255,.07);font-size:10px;display:flex;align-items:center;justify-content:center;color:var(--n80)}.phase-status span.active{background:var(--accent);border-color:var(--accent);color:var(--n00);font-weight:500}.phase-card{background:var(--n00);border:1px solid var(--n20);border-radius:10px;margin:0 10px 7px;padding:10px}.phase-card .top{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:500}.phase-card p{font-size:10px;line-height:1.45;color:var(--n100);margin-top:5px}.phase-card .slots{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px}.phase-card .slots span{min-height:42px;border-radius:6px;background:var(--n-bg);padding:6px;font-size:9px;color:var(--n100);line-height:1.35}.phase-card .slots b{display:block;color:var(--n140);font-size:11px;margin-bottom:2px}.live-pulse{height:92px;border-radius:8px;background:var(--n140);position:relative;overflow:hidden;margin-top:8px}.live-pulse:before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--accent-bright),transparent)}.live-pulse:after{content:"LIVE ODDS 1.6x  →  1.9x";position:absolute;left:12px;bottom:12px;font:700 18px/1 var(--mono);color:var(--accent-bright)}.poster-stage{padding:10px;background:var(--n-bg);display:grid;gap:8px}.poster-card{min-height:154px;border-radius:12px;background:linear-gradient(135deg,var(--n140),#2B2C3C);color:var(--n00);padding:12px;position:relative;overflow:hidden;border:1px solid rgba(0,254,255,.24)}.poster-card:after{content:"{BRAND.name}";position:absolute;right:-8px;bottom:-4px;font:700 42px/1 var(--mono);color:rgba(0,254,255,.1)}.poster-card .label{font:10px/1 var(--mono);letter-spacing:.06em;color:var(--accent-bright)}.poster-card h3{font-size:24px;line-height:1.05;margin:8px 0 6px}.poster-card .big{font-size:36px;color:var(--accent-bright)}.poster-card .qr{position:absolute;right:12px;top:12px;width:42px;height:42px;border:5px solid var(--n00);background:repeating-linear-gradient(45deg,var(--n140) 0 3px,var(--n00) 3px 6px)}.share-actions{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:0 10px 10px}.share-actions .btn{height:34px}
+.user-pill{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:999px;background:rgba(1,194,195,.16);border:1px solid rgba(1,194,195,.34);color:var(--accent-bright);font:10px/1 var(--mono)}.market{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--n00),var(--n-bg));border-color:rgba(43,44,60,.08);box-shadow:0 6px 16px rgba(20,21,26,.035)}.market:before{content:"";position:absolute;inset:0 0 auto;height:34px;background:linear-gradient(90deg,rgba(1,194,195,.08),transparent 62%);pointer-events:none}.market-top{position:relative;align-items:center}.market .match{display:inline-flex;align-items:center;gap:4px;color:var(--n80)}.market .match:before{content:"LIVE";height:14px;padding:0 4px;border-radius:2px;background:var(--n140);color:var(--accent-bright);font:8px/14px var(--mono)}.market .q{font-size:13px;line-height:1.32;margin:4px 0 7px}.versus{position:relative}.side{min-height:48px;display:flex;flex-direction:column;justify-content:center}.side b:last-of-type{display:none}.mini-bar{display:none}.market-heat{grid-template-columns:1fr 1fr 1fr;margin-top:6px}.market-heat span{height:18px;background:var(--n-bg);border-color:transparent}.disc{padding:5px 6px;margin-top:6px}.disc .ava{display:none}.disc b{color:var(--accent-press)}.market.compact{height:82px;padding:7px 8px;margin:0;border-radius:8px;box-shadow:none}.market.compact .market-top>div{width:100%}.market.compact svg{display:none}.market.compact .match{font-size:8px}.market.compact .match:before{content:"示例业务";background:var(--accent-soft);color:var(--accent-press)}.market.compact .q{font-size:11px;line-height:1.25;margin:2px 0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:205px}.market.compact .versus{grid-template-columns:1fr 1fr;gap:4px}.market.compact .vs,.market.compact .market-heat,.market.compact .disc{display:none}.market.compact .side{min-height:28px;padding:3px 4px}.market.compact .side b:first-child{font-size:8px}.market.compact .side .odd{font-size:13px}.market.compact .btn{height:22px;min-width:42px;font-size:9px;padding:0 7px;position:absolute;right:8px;top:7px}.rec-market{grid-column:span 2;min-height:82px}.body.visual-grade{background:linear-gradient(180deg,var(--n-bg),var(--n00) 44%,var(--n-bg))}.poster-stage.visual-grade{background:linear-gradient(180deg,var(--n140),#2B2C3C 42%,var(--n-bg) 42%);min-height:100%}
+.market.v63{padding:9px;border-radius:10px;background:linear-gradient(180deg,var(--n00),var(--n-bg));border:1px solid rgba(43,44,60,.1);box-shadow:0 8px 18px rgba(20,21,26,.04)}.market.v63:before{height:3px;background:linear-gradient(90deg,var(--accent),rgba(1,194,195,.12),transparent)}.market.v63 .market-top{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start}.market.v63 .match{font:9px/1.2 var(--mono);letter-spacing:.04em;color:var(--n100)}.market.v63 .match:before{content:"LIVE";height:14px;padding:0 4px;margin-right:4px;border-radius:2px;background:var(--n140);color:var(--accent-bright);font:8px/14px var(--mono)}.market.v63 .q{font-size:13px;line-height:1.34;margin:5px 0 8px}.arena-line{height:26px;border-radius:6px;background:linear-gradient(90deg,var(--n140) 0 49%,rgba(0,254,255,.9) 49% 51%,var(--n140) 51%);border:1px solid rgba(0,254,255,.18);position:relative;margin-bottom:7px;overflow:hidden}.arena-line:before,.arena-line:after{content:"";position:absolute;top:6px;width:34px;height:12px;border:1px solid rgba(255,255,255,.22);border-radius:12px}.arena-line:before{left:14px}.arena-line:after{right:14px}.arena-line span{position:absolute;top:50%;transform:translateY(-50%);font:700 10px/1 var(--mono);color:rgba(255,255,255,.86)}.arena-line .home{left:10px}.arena-line .away{right:10px}.market.v63 .versus{grid-template-columns:1fr 8px 1fr;gap:5px}.market.v63 .vs{font-size:0}.market.v63 .vs:after{content:"";width:6px;height:6px;border-radius:999px;background:var(--accent);box-shadow:0 0 10px rgba(0,254,255,.65)}.market.v63 .side{min-height:42px;border-radius:6px;border:1px solid var(--n20);padding:6px 4px;background:var(--n00)}.market.v63 .side.yes{background:linear-gradient(180deg,var(--accent-soft),var(--n00));border-color:rgba(1,194,195,.28)}.market.v63 .side .odd{font-size:17px}.market.v63 .market-heat{grid-template-columns:1fr 1fr;margin-top:7px}.market.v63 .market-heat span:last-child{display:none}.market.v63 .disc{background:var(--n-bg);border:0;border-radius:5px;margin-top:7px;padding:6px;line-height:1.35}.market.v63.compact{height:74px;min-height:74px;padding:7px 8px}.market.v63.compact .arena-line,.market.v63.compact .market-heat,.market.v63.compact .disc,.market.v63.compact .vs{display:none}.market.v63.compact .market-top{display:block}.market.v63.compact .q{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:192px;margin:3px 0 6px}.market.v63.compact .versus{grid-template-columns:1fr 1fr;gap:4px}.market.v63.compact .side{min-height:26px;padding:3px 4px}.market.v63.compact .side .odd{font-size:13px}.market.v63.compact .btn{height:22px;min-width:42px;font-size:9px;padding:0 7px;position:absolute;right:8px;top:7px}.rec-banner{grid-column:span 2;min-height:182px;border-radius:12px;background:linear-gradient(135deg,var(--n140),#2B2C3C);color:var(--n00);padding:12px;position:relative;overflow:hidden;border:1px solid rgba(0,254,255,.26);box-shadow:0 14px 28px rgba(20,21,26,.16)}.rec-banner:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 12%,rgba(0,254,255,.25),transparent 34%),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:auto,28px 28px,28px 28px}.rec-banner .k{position:relative;font:10px/1 var(--mono);letter-spacing:.06em;color:var(--accent-bright);display:flex;justify-content:space-between}.rec-banner h3{position:relative;font-size:22px;line-height:1.15;font-weight:600;margin:16px 0 12px}.rec-banner .banner-odds{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:6px}.rec-banner .banner-odds div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px}.rec-banner .banner-odds b{display:block;color:var(--accent-bright);font-size:20px}.rec-banner .banner-foot{position:relative;margin-top:10px;display:flex;align-items:center;gap:8px;font-size:10px;color:var(--n80)}.rec-banner .banner-foot .btn{margin-left:auto}.detail-hero{margin:8px 10px 7px;border-radius:12px;background:linear-gradient(135deg,var(--n140),#2B2C3C);color:var(--n00);border:1px solid rgba(0,254,255,.24);padding:12px;position:relative;overflow:hidden;max-height:310px}.detail-hero:before{content:"";position:absolute;right:-38px;top:-48px;width:148px;height:148px;border-radius:999px;border:1px solid rgba(0,254,255,.25)}.detail-hero .k{font:10px/1 var(--mono);letter-spacing:.06em;color:var(--accent-bright);display:flex;justify-content:space-between;position:relative}.detail-hero h3{font-size:20px;line-height:1.18;font-weight:600;margin:12px 0 9px;position:relative}.detail-hero .detail-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;position:relative}.detail-hero .detail-meta div{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.08);border-radius:5px;padding:6px}.detail-hero .detail-meta b{display:block;color:var(--accent-bright);font-size:15px}.stance-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;position:relative}.stance-card{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);border-radius:7px;padding:8px}.stance-card.active{border-color:var(--accent);background:rgba(1,194,195,.18)}.stance-card b{display:block;font-size:11px;color:var(--n00)}.stance-card .num{font-size:20px;color:var(--accent-bright)}.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 10px 8px}.detail-actions .btn{height:36px}.specs{margin-top:48px;max-width:1260px}.specs h2{font-size:21px;margin-bottom:16px;color:var(--n00)}.spec-table{width:100%;border-collapse:collapse;background:var(--n00);font-size:11px}.spec-table th{background:var(--n20);text-align:left;padding:8px;font:600 10px/1 var(--mono);color:var(--n100);letter-spacing:.04em}.spec-table td{border-bottom:1px solid var(--n20);padding:8px;vertical-align:top}.spec-table tr:last-child td{border-bottom:0}.spec-table .ok{color:var(--auth-green)}.spec-table .fix{color:var(--dewu-red);font-weight:500}.spec-table .chg{color:var(--accent-press)}.footer{margin-top:28px;background:var(--n00);border:1px solid rgba(0,254,255,.22);border-radius:8px;padding:16px;font-size:12px;color:var(--n100);line-height:1.8}.footer b{color:var(--n140)}.footer .fix-list{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px}.footer .fix-list div{padding:4px 8px;border-radius:2px;font-size:10px}.footer .fix-list div.crit{background:var(--dewu-red-light);color:var(--dewu-red)}.footer .fix-list div.ok{background:var(--accent-soft);color:var(--auth-green)}
+/* v6.4 overrides: lighter feed, stance heat, fixed-bottom actions */
+.market.v63{padding:8px;border-radius:9px;box-shadow:0 6px 14px rgba(20,21,26,.035)}
+.market.v63 .arena-line{display:none}
+.match-rhythm{height:30px;border-radius:7px;background:var(--n140);border:1px solid rgba(0,254,255,.2);position:relative;overflow:hidden;margin:2px 0 7px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px;padding:0 8px}
+.match-rhythm:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,194,195,.2),transparent 45%,rgba(255,79,102,.12)),repeating-linear-gradient(90deg,rgba(255,255,255,.08) 0 1px,transparent 1px 18px)}
+.match-rhythm span{position:relative;z-index:1;font:700 9px/1 var(--mono);color:rgba(255,255,255,.82);white-space:nowrap}
+.match-rhythm i{position:relative;z-index:1;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--accent) var(--p),rgba(255,255,255,.24) var(--p));box-shadow:0 0 10px rgba(0,254,255,.28)}
+.market.v63 .side{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;text-align:left;gap:2px;padding:7px}
+.market.v63 .side b{font-size:9px}
+.market.v63 .side .odd{grid-row:1 / span 2;grid-column:2;font-size:18px;align-self:center}
+.market.v63 .side .mini-bar{grid-column:1 / span 2}
+.market.v63.compact .match-rhythm,.market.v63.compact .mini-bar{display:none}
+.rec-banner{min-height:73px;height:73px;padding:8px 9px;border-radius:9px;box-shadow:0 8px 18px rgba(20,21,26,.12)}
+.rec-banner:before{background:radial-gradient(circle at 92% 14%,rgba(0,254,255,.22),transparent 30%),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:auto,24px 24px}
+.rec-banner .k{font-size:8px}
+.rec-banner h3{font-size:13px;line-height:1.22;margin:5px 0 6px;max-width:205px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec-banner .banner-main{position:relative;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center}
+.rec-banner .banner-odds{display:flex;gap:4px;align-items:center}
+.rec-banner .banner-odds span{height:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);border-radius:2px;padding:0 5px;display:inline-flex;align-items:center;font:9px/1 var(--mono);color:var(--n80)}
+.rec-banner .banner-odds b{display:inline;color:var(--accent-bright);font-size:11px;margin-left:3px}
+.rec-banner .banner-foot{position:absolute;right:8px;bottom:8px;margin:0;font-size:8px;gap:4px}
+.rec-banner .banner-foot span:nth-child(2){display:none}
+.detail-actions.single{grid-template-columns:1fr}
+.screen-sticky{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:40;width:184px;height:40px;border:0;border-radius:999px;background:var(--n140);color:var(--n00);font-size:13px;font-weight:500;box-shadow:0 10px 26px rgba(20,21,26,.32)}
+.body.with-sticky{padding-bottom:64px}
+.rank-sticky{position:sticky;bottom:0}
+
+
+/* Interactive demo wrapper: preserves original phone screens, only changes outer canvas. */
+html,body{width:100%;height:100%;overflow:hidden;background:var(--n140)}
+.demo-canvas{min-height:100vh;width:100vw;display:grid;place-items:center;background:radial-gradient(circle at 50% -10%,rgba(0,254,255,.16),transparent 34%),var(--n140);padding:18px;position:relative;overflow:hidden}
+.demo-canvas:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.1) 1px,transparent 0) 0 0/28px 28px;opacity:.55;pointer-events:none}
+.demo-phone{position:relative;z-index:1}.demo-phone .phone-shell{width:320px;height:694px}.demo-phone .phone-screen{transition:transform 360ms var(--ease-ios-sheet),opacity 240ms var(--ease-ios),filter 240ms var(--ease-ios);will-change:transform,opacity,filter}.demo-phone.exit-push .phone-screen{transform:translate3d(-22px,0,0) scale(.985);opacity:0;filter:blur(.5px)}.demo-phone.enter-push .phone-screen{transform:translate3d(28px,0,0) scale(.985);opacity:0}.demo-phone.exit-pop .phone-screen{transform:translate3d(22px,0,0) scale(.985);opacity:0;filter:blur(.5px)}.demo-phone.enter-pop .phone-screen{transform:translate3d(-28px,0,0) scale(.985);opacity:0}
+.demo-toast{position:absolute;left:50%;bottom:34px;z-index:60;transform:translateX(-50%);height:34px;max-width:260px;padding:0 14px;border-radius:999px;background:rgba(20,21,26,.94);border:1px solid rgba(0,254,255,.28);color:var(--n00);display:flex;align-items:center;font-size:11px;box-shadow:0 12px 28px rgba(0,0,0,.28);animation:toastOut 2.1s var(--ease-ios) forwards;white-space:nowrap}.demo-toast b{color:var(--accent-bright);font-weight:500}
+.demo-hotspot{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform 180ms var(--ease-ios),filter 180ms var(--ease-ios),box-shadow 220ms var(--ease-ios)}.demo-hotspot.tap-active{transform:scale(.975);filter:brightness(.98)}.btn.demo-hotspot.tap-active,.chip.demo-hotspot.tap-active,.tab.demo-hotspot.tap-active,.screen-sticky.demo-hotspot.tap-active{transform:scale(.94)}.market.demo-hotspot,.rec-banner.demo-hotspot,.leader-entry.demo-hotspot,.record-card.demo-hotspot,.rank-row.demo-hotspot,.auction-card.demo-hotspot,.ex-card.demo-hotspot,.prize-card.demo-hotspot,.btn.demo-hotspot,.chip.demo-hotspot,.screen-sticky.demo-hotspot,.comment-like.demo-hotspot{position:relative;overflow:hidden}.tap-ripple{position:absolute;width:16px;height:16px;border-radius:999px;background:rgba(1,194,195,.2);pointer-events:none;transform:translate(-50%,-50%) scale(.2);animation:tapRipple 520ms var(--ease-ios) forwards}.detail-tab-content{animation:detailFade 260ms var(--ease-ios);padding-bottom:6px}.detail-tab-content .feed-grid{margin:0 10px 10px}.detail-tab-title{padding:0 10px 6px;font-size:10px;line-height:1.45;color:var(--n80)}.task-sheet{animation:sheetShadeIn 260ms var(--ease-ios)}.task-panel{animation:taskSheetIn 420ms var(--ease-ios-sheet)}.demo-modal{position:absolute;inset:7px;border-radius:36px;background:rgba(20,21,26,.42);z-index:45;display:flex;align-items:flex-end;overflow:hidden}.demo-modal-panel{background:var(--n00);width:100%;border-radius:18px 18px 0 0;padding:16px 14px 22px;box-shadow:0 -12px 30px rgba(20,21,26,.22);animation:sheetIn var(--dur-m) var(--ease-ios-sheet)}.demo-modal-panel textarea{width:100%;height:98px;border:1px solid var(--n40);border-radius:6px;background:var(--n-bg);padding:10px;font:13px/1.55 var(--ui);resize:none;outline:none}.demo-modal-panel .grab{width:32px;height:4px;border-radius:999px;background:var(--n40);margin:0 auto 12px}@keyframes sheetIn{from{transform:translateY(100%)}to{transform:translateY(0)}}@keyframes taskSheetIn{from{transform:translateY(96%)}to{transform:translateY(0)}}@keyframes sheetShadeIn{from{background:rgba(20,21,26,0)}to{background:rgba(20,21,26,.48)}}@keyframes toastOut{0%{opacity:0;transform:translate(-50%,8px)}12%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-8px)}}@keyframes tapRipple{to{opacity:0;transform:translate(-50%,-50%) scale(18)}}@keyframes detailFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media (max-width:520px){.demo-canvas{padding:0}.demo-phone .phone-shell{width:100vw;height:100vh;border-radius:0;padding:0;border:0}.demo-phone .phone-shell:before,.demo-phone .phone-shell:after{display:none}.demo-phone .phone-screen{border-radius:0;border:0}.demo-modal{inset:0;border-radius:0}.screen-sticky{bottom:18px}}
+
+/* {BRAND.name} DS compliance v6.5: shallow phone UI, legal N tokens, 4-tab community ownership. */
+.phone-screen,
+.phone-screen .body,
+.phone-screen .body.visual-grade{
+  background:var(--n-bg)!important;
+  color:var(--n140)!important;
+}
+.phone-screen *{color:inherit!important}
+.phone-screen .status,
+.phone-screen .nav,
+.phone-screen .top-tabs,
+.phone-screen .tabbar,
+.phone-screen .chiprow,
+.phone-screen .sheet-panel,
+.phone-screen .task-panel,
+.phone-screen .demo-modal-panel{
+  background:var(--n00)!important;
+  color:var(--n140)!important;
+  border-color:var(--n20)!important;
+}
+.phone-screen .tabbar{
+  grid-template-columns:repeat(4,1fr)!important;
+}
+.phone-screen .hero,
+.phone-screen .leader-entry,
+.phone-screen .detail-hero,
+.phone-screen .store-hero,
+.phone-screen .login-card,
+.phone-screen .prediction-hero,
+.phone-screen .phase-hero,
+.phone-screen .support-head,
+.phone-screen .poster-card,
+.phone-screen .rec-banner,
+.phone-screen .rank-sticky,
+.phone-screen .match-rhythm,
+.phone-screen .live-pulse{
+  background:var(--n00)!important;
+  color:var(--n140)!important;
+  border:1px solid var(--n20)!important;
+  box-shadow:none!important;
+}
+.phone-screen .hero:before,
+.phone-screen .hero:after,
+.phone-screen .leader-entry:after,
+.phone-screen .detail-hero:before,
+.phone-screen .store-hero:before,
+.phone-screen .login-card:after,
+.phone-screen .prediction-hero:after,
+.phone-screen .phase-hero:after,
+.phone-screen .poster-card:after,
+.phone-screen .rec-banner:before,
+.phone-screen .match-rhythm:before,
+.phone-screen .live-pulse:before,
+.phone-screen .live-pulse:after{
+  display:none!important;
+}
+.phone-screen .market,
+.phone-screen .market.v63,
+.phone-screen .feed,
+.phone-screen .comment,
+.phone-screen .record-card,
+.phone-screen .asset-row,
+.phone-screen .item,
+.phone-screen .auction-card,
+.phone-screen .ex-card,
+.phone-screen .prize-card,
+.phone-screen .phase-card,
+.phone-screen .support-panel,
+.phone-screen .detail-bet,
+.phone-screen .result,
+.phone-screen .diamond,
+.phone-screen .stance-card,
+.phone-screen .stat,
+.phone-screen .field,
+.phone-screen .bet-option,
+.phone-screen .identity-strip div,
+.phone-screen .rank-row{
+  background:var(--n00)!important;
+  color:var(--n140)!important;
+  border-color:var(--n20)!important;
+  box-shadow:none!important;
+}
+.phone-screen .feed-grid,
+.phone-screen .auction-list,
+.phone-screen .exchange-grid,
+.phone-screen .store-tabs,
+.phone-screen .sub-tabs,
+.phone-screen .identity-strip,
+.phone-screen .statgrid,
+.phone-screen .bet-choice{
+  gap:5px!important;
+}
+.phone-screen .market,
+.phone-screen .comment,
+.phone-screen .record-card,
+.phone-screen .asset-row,
+.phone-screen .item,
+.phone-screen .auction-card,
+.phone-screen .ex-card,
+.phone-screen .prize-card,
+.phone-screen .phase-card,
+.phone-screen .support-panel,
+.phone-screen .detail-bet,
+.phone-screen .result,
+.phone-screen .hero,
+.phone-screen .leader-entry,
+.phone-screen .detail-hero,
+.phone-screen .store-hero,
+.phone-screen .login-card,
+.phone-screen .prediction-hero,
+.phone-screen .poster-card{
+  padding:10px!important;
+}
+.phone-screen .hero h2,
+.phone-screen .leader-entry h3,
+.phone-screen .detail-hero h3,
+.phone-screen .store-hero h3,
+.phone-screen .phase-hero h3,
+.phone-screen .poster-card h3,
+.phone-screen .support-head h3,
+.phone-screen .feed .text,
+.phone-screen .comment p,
+.phone-screen .record-card .top,
+.phone-screen .auction-info b,
+.phone-screen .ex-card .ex-body b,
+.phone-screen .prize-card .info b,
+.phone-screen .rank-row,
+.phone-screen .task-row b{
+  color:var(--n140)!important;
+}
+.phone-screen .hero .eyebrow,
+.phone-screen .leader-entry .k,
+.phone-screen .store-hero .k,
+.phone-screen .detail-hero .k,
+.phone-screen .phase-hero .k,
+.phone-screen .poster-card .label,
+.phone-screen .rec-banner .k,
+.phone-screen .match,
+.phone-screen .more,
+.phone-screen .row-meta,
+.phone-screen .comment .line,
+.phone-screen .feed .rxn,
+.phone-screen .record-card .sub,
+.phone-screen .ex-card .ex-body .ex-meta,
+.phone-screen .prize-card .info p,
+.phone-screen .task-row p,
+.phone-screen .phase-card p,
+.phone-screen .detail-tab-title{
+  color:var(--n100)!important;
+}
+.phone-screen .num,
+.phone-screen .num-hero,
+.phone-screen .coins,
+.phone-screen .odd,
+.phone-screen .leader-entry .metric b,
+.phone-screen .detail-hero .detail-meta b,
+.phone-screen .diamond .num-hero,
+.phone-screen .poster-card .big,
+.phone-screen .stat .v,
+.phone-screen .asset-row.plus .delta,
+.phone-screen .identity-strip b{
+  color:var(--accent-press)!important;
+  text-shadow:none!important;
+}
+.phone-screen .leader-entry .metric,
+.phone-screen .detail-hero .detail-meta div,
+.phone-screen .rec-banner .banner-odds div,
+.phone-screen .phase-status span,
+.phone-screen .diamond{
+  background:var(--n-bg)!important;
+  border:1px solid var(--n20)!important;
+  color:var(--n140)!important;
+}
+.phone-screen .market:before,
+.phone-screen .market.v63:before,
+.phone-screen .arena-line{
+  display:none!important;
+}
+.phone-screen .match-rhythm,
+.phone-screen .disc,
+.phone-screen .market-heat span,
+.phone-screen .record-card .tagline span,
+.phone-screen .side,
+.phone-screen .side.no,
+.phone-screen .phase-card .slots span,
+.phone-screen .comment-like,
+.phone-screen .rank-sticky .pill{
+  background:var(--n-bg)!important;
+  color:var(--n100)!important;
+  border-color:var(--n20)!important;
+}
+.phone-screen .side.yes,
+.phone-screen .stance-card.active,
+.phone-screen .bet-option.active,
+.phone-screen .chip.aqua,
+.phone-screen .record-card .tagline span.good,
+.phone-screen .comment.like-on .comment-like,
+.phone-screen .badge-tag.support{
+  background:var(--accent-soft)!important;
+  color:var(--accent-press)!important;
+  border-color:var(--accent)!important;
+}
+.phone-screen .btn,
+.phone-screen button,
+.phone-screen .cta{
+  white-space:nowrap!important;
+}
+.phone-screen .btn.accent,
+.phone-screen .screen-sticky,
+.phone-screen .rank-sticky .cta,
+.phone-screen .comment-sticky,
+.phone-screen .phase-status span.active,
+.phone-screen .signin-axis span.on{
+  background:var(--accent)!important;
+  border-color:var(--accent)!important;
+  color:var(--n140)!important;
+  box-shadow:none!important;
+}
+.phone-screen .btn.primary,
+.phone-screen .chip.active{
+  background:var(--accent-soft)!important;
+  border-color:var(--accent)!important;
+  color:var(--accent-press)!important;
+}
+.phone-screen .btn.outline,
+.phone-screen .btn.ghost{
+  background:var(--n00)!important;
+  border-color:var(--n40)!important;
+  color:var(--n140)!important;
+}
+.phone-screen .screen-sticky{
+  color:var(--n140)!important;
+}
+.phone-screen .img,
+.phone-screen .item-img,
+.phone-screen .auction-img,
+.phone-screen .ex-img,
+.phone-screen .thumb,
+.phone-screen .invite-art{
+  background:var(--n20)!important;
+  border:1px solid var(--n40)!important;
+  box-shadow:none!important;
+}
+.phone-screen .img:before,
+.phone-screen .img:after,
+.phone-screen .item-img:before,
+.phone-screen .auction-img:before,
+.phone-screen .ex-img:before,
+.phone-screen .thumb:before,
+.phone-screen .invite-art:before,
+.phone-screen .invite-art:after{
+  color:var(--n140)!important;
+  border-color:var(--n40)!important;
+  box-shadow:none!important;
+}
+.phone-screen .disc .hot-label{
+  background:var(--accent-soft)!important;
+  color:var(--accent-press)!important;
+}
+.phone-screen .task-sheet{
+  background:var(--n-bg)!important;
+}
+.phone-screen .poster-stage,
+.phone-screen .poster-stage.visual-grade{
+  background:var(--n-bg)!important;
+}
+.phone-screen .stamp,
+.phone-screen .stamp.lose{
+  color:var(--accent-press)!important;
+  border-color:var(--accent-press)!important;
+}
+.phone-screen .feed-body,
+.phone-screen .auction-info,
+.phone-screen .ex-card .ex-body,
+.phone-screen .prize-card .info,
+.phone-screen .task-row,
+.phone-screen .side,
+.phone-screen .stance-card,
+.phone-screen .diamond,
+.phone-screen .stat,
+.phone-screen .bet-option,
+.phone-screen .phase-card .slots span{
+  padding:10px!important;
+}
+/* Compact market feed v6.7 */
+.phone-screen .market.market-card{padding:8px 9px!important;border-radius:8px!important;overflow:hidden}.phone-screen .market-card .market-top{display:flex;align-items:center;gap:5px}.phone-screen .market-card .match{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.phone-screen .market-card .q{font-size:12px!important;line-height:1.35!important;margin:5px 0 6px!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.phone-screen .odds-row{display:grid;grid-template-columns:1fr 1fr auto;gap:5px;align-items:stretch}.phone-screen .odds-row.no-cta{grid-template-columns:1fr 1fr}.phone-screen .odds-cell{min-width:0;height:34px;border:1px solid var(--n20);border-radius:2px;background:var(--n00);padding:4px 5px;display:flex;flex-direction:column;justify-content:center}.phone-screen .odds-cell.yes{background:var(--accent-soft);border-color:var(--accent)}.phone-screen .odds-cell small{font-size:8px;color:var(--n100)!important;line-height:1}.phone-screen .odds-cell b{font:700 15px/1 var(--mono);color:var(--accent-press)!important;margin-top:2px}.phone-screen .market-cta{width:42px;height:34px!important;padding:0!important}.phone-screen .market-signal{height:22px;margin-top:6px;border-top:1px solid var(--n20);display:flex;align-items:center;gap:5px;min-width:0}.phone-screen .sparkline{width:60px;height:18px;display:block;flex:0 0 60px;overflow:hidden}.phone-screen .sparkline svg{width:60px;height:18px;display:block}.phone-screen .trend-label{font:8px/1 var(--mono);width:28px;flex:0 0 28px}.phone-screen .trend-label.down,.phone-screen .flow-chip.hot,.phone-screen .countdown.urgent,.phone-screen .countdown.urgent b{color:var(--dewu-red)!important}.phone-screen .trend-label.up{color:var(--auth-green)!important}.phone-screen .signal-meta{min-width:0;flex:1;display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;font:8px/1 var(--mono);color:var(--n100)!important}.phone-screen .flow-chip{height:16px;padding:0 4px;border-radius:2px;background:var(--n00)!important;border:1px solid var(--n40)!important;color:var(--n80)!important;font:8px/1 var(--mono);display:inline-flex!important;align-items:center;flex:0 0 auto}.phone-screen .pos-badge{max-width:112px;height:17px;padding:0 5px;border-radius:2px;background:rgba(20,21,26,.75);color:var(--n00)!important;font:9px/17px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 0 auto}.phone-screen .pos-badge.gain{border-left:2px solid var(--accent)}.phone-screen .pos-badge.loss{border-left:2px solid var(--dewu-red)}.phone-screen .market-card .disc{padding:5px!important;margin-top:5px!important}.phone-screen .detail-poly{margin-top:7px;background:var(--n-bg);border:1px solid var(--n20);border-radius:2px;padding:6px;display:flex;align-items:center;gap:5px;min-width:0}.phone-screen .detail-poly .poly-copy{min-width:0;flex:1;font-size:9px;line-height:1.45;color:var(--n100)!important}.phone-screen .detail-poly .countdown{font:10px/1 var(--mono);margin-right:4px}@keyframes pulse{0%{opacity:1}50%{opacity:.55}100%{opacity:1}}.phone-screen .countdown.urgent{animation:pulse 1.8s ease-in-out infinite}
+.phone-screen .market-signal .pos-badge{max-width:88px!important}
+.phone-screen .pos-tiny.gain{color:var(--accent-press)!important}.phone-screen .pos-tiny.loss{color:var(--dewu-red)!important}
+/* Round 1 v6.8: home heat and task sheet */
+.phone-screen .btn{transition:transform var(--dur-xs) var(--ease-ios-tap),filter var(--dur-xs) var(--ease-ios-tap)!important}.phone-screen .btn:active{transform:scale(.96);filter:brightness(.95)}.phone-screen .market-card .btn.accent.sm:hover{transform:scale(1.04)}
+.phone-screen .home-hero{background:var(--n140)!important;color:var(--n00)!important;border-color:var(--n140)!important;position:relative}.phone-screen .home-hero:before{content:"";display:block!important;position:absolute!important;inset:0!important;width:auto!important;height:auto!important;right:auto!important;top:auto!important;border:0!important;border-radius:0!important;background:radial-gradient(circle at 12% 10%,rgba(1,194,195,.15),transparent 42%),radial-gradient(circle at 88% 88%,rgba(255,79,102,.08),transparent 46%);pointer-events:none}.phone-screen .home-hero h2{font-size:22px!important;line-height:1.4!important;font-weight:600!important;color:var(--n00)!important}.phone-screen .home-hero .eyebrow,.phone-screen .hero-live{position:relative;color:var(--n80)!important}.phone-screen .hero-live{font:10px/1.5 var(--mono);margin-top:4px}.phone-screen .hero-live .num-hero{font-size:16px;color:var(--accent)!important}
+.phone-screen .heat-live{font-size:10px;color:var(--dewu-red)!important}.phone-screen .market-card.hot{border:1px solid rgba(1,194,195,.45)!important;box-shadow:0 0 12px rgba(1,194,195,.2)!important}.phone-screen .view-all{height:44px!important;font-size:13px!important}.phone-screen .feed-grid{grid-template-columns:1fr 1fr!important;gap:5px!important}.phone-screen .feed{border-radius:8px!important;box-shadow:none!important}.phone-screen .feed .img{height:100px!important;min-height:100px!important;background:repeating-linear-gradient(135deg,var(--n20) 0 6px,var(--n-bg) 6px 12px)!important;border:0!important}.phone-screen .feed .img:before,.phone-screen .feed .img:after{display:none!important}
+.phone-screen .task-sheet{background:var(--n00)!important;border-top:1px solid var(--n40)!important}.phone-screen .signin-axis span{height:34px;border:1px solid var(--n40)!important;background:var(--n00)!important;color:var(--n100)!important;border-radius:2px!important}.phone-screen .signin-axis span.on{background:var(--accent-soft)!important;border-color:var(--accent)!important;color:var(--accent)!important}.phone-screen .signin-axis span.today{animation:pulse 1.8s var(--ease-ios-tap) infinite}.phone-screen .signin-axis span.jackpot{background:var(--n00)!important;border-color:var(--vip-gold)!important;color:var(--vip-gold)!important}
+.phone-screen .home-hero .coinbar{display:block!important;min-height:40px;padding-right:86px!important}.phone-screen .home-hero .coinbar>div{min-width:0;max-width:100%}.phone-screen .home-hero .coinbar .btn{position:absolute!important;right:0!important;bottom:2px!important;width:78px!important;height:25px!important;margin-left:0!important;padding:0!important;font-size:10px!important}
+/* Round 2 v6.9: rank motivation and reward proximity */
+.phone-screen .rank-tabs{display:grid!important;grid-template-columns:1fr 1fr!important;padding:8px 10px!important;gap:0!important}.phone-screen .rank-tabs .chip{justify-content:center;border-color:var(--accent)!important;color:var(--accent)!important}.phone-screen .rank-tabs .chip:first-child{border-radius:2px 0 0 2px!important}.phone-screen .rank-tabs .chip:last-child{border-radius:0 2px 2px 0!important;border-left:0!important}.phone-screen .rank-tabs .chip.active{background:var(--accent)!important;color:var(--n00)!important}.phone-screen .rank-list{animation:rankFade 220ms var(--ease-ios)}.phone-screen .rank-countdown{margin:4px 10px;font-size:9px;color:var(--n80)!important;text-align:center;background:var(--n20);padding:4px 8px;border-radius:2px}.phone-screen .rank-countdown .num{color:var(--accent)!important;font-family:var(--mono)}.phone-screen .rank-row.top1{background:var(--n00)!important;border-left:3px solid var(--vip-gold)!important}.phone-screen .rank-row.top1 .rank-name{font-size:14px!important;font-weight:700!important}.phone-screen .rank-row.top1 .rank-score{font-size:18px!important;color:var(--vip-gold)!important}.phone-screen .rank-row.top2{border-left:3px solid var(--n100)!important}.phone-screen .rank-row.top3{border-left:3px solid var(--n80)!important}.phone-screen .rank-row .rank-score{color:var(--accent-press)!important}.phone-screen .reward-line{margin:9px 10px 10px;display:flex;align-items:center;gap:6px;font:9px/1 var(--mono);color:var(--accent)!important;white-space:nowrap}.phone-screen .reward-line:before,.phone-screen .reward-line:after{content:"";height:1px;flex:1;border-top:1px dashed var(--accent)}.phone-screen .rank-sticky.rank-progress{position:sticky!important;bottom:0!important;background:var(--n00)!important;color:var(--n140)!important;border-top:1px solid var(--n20)!important;padding:9px 10px 12px!important;display:grid!important;grid-template-columns:18px 1fr auto!important;gap:8px!important;align-items:center!important}.phone-screen .rank-sticky.rank-progress .rank-copy{min-width:0}.phone-screen .rank-sticky.rank-progress .cta{height:28px!important;border:0!important;border-radius:2px!important;background:var(--accent)!important;color:var(--n00)!important;padding:0 9px!important;font-size:10px!important}.phone-screen .progress-row{grid-column:2 / 4;display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center}.phone-screen .progress-track{height:3px;border-radius:999px;background:var(--n40);position:relative;overflow:visible}.phone-screen .progress-fill{height:3px;width:89%;border-radius:999px;background:var(--accent);position:relative;animation:rankGrow .8s ease-out .6s both}.phone-screen .progress-fill:after{content:"";position:absolute;right:-2px;top:50%;width:4px;height:4px;border-radius:999px;background:var(--n00);transform:translateY(-50%);box-shadow:0 0 0 1px var(--accent)}.phone-screen .progress-target{font:9px/1 var(--mono);color:var(--n80)!important;white-space:nowrap}@keyframes rankGrow{from{width:0}to{width:89%}}@keyframes rankFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* Round 3 v7.0: settlement emotion, CSS-only burst */
+.phone-screen .settle-page{gap:8px!important;padding:10px!important}.phone-screen .settle-win,.phone-screen .settle-lose{position:relative;overflow:hidden;border-radius:8px!important;padding:14px 10px!important}.phone-screen .stamp.aqua{width:auto;height:24px;display:inline-flex;border-radius:2px;border:1px dashed var(--accent)!important;color:var(--accent)!important;padding:0 8px;margin:0 auto 6px;transform:rotate(-5deg);font-size:11px}.phone-screen .win-amount{font-family:"DIN Alternate","Oswald",sans-serif;font-size:56px!important;line-height:1!important;font-weight:700!important;letter-spacing:-.03em!important;color:var(--accent)!important;margin:5px 0!important;animation:winPop 1.2s cubic-bezier(.23,1,.32,1) .5s both}.phone-screen .share-preview{width:280px;height:160px;margin:12px auto 10px;border-radius:8px;background:var(--n140)!important;color:var(--n00)!important;text-align:left;padding:12px;position:relative;display:flex;flex-direction:column;justify-content:space-between}.phone-screen .share-preview .save{position:absolute;right:10px;top:10px;font:9px/1 var(--mono);color:var(--n80)!important}.phone-screen .share-preview .k{font:10px/1 var(--mono);letter-spacing:.04em;color:var(--n80)!important}.phone-screen .share-preview h4{font-size:14px;font-weight:500;line-height:1.35;color:var(--n00)!important}.phone-screen .share-preview .odds{font-size:18px;color:var(--accent)!important}.phone-screen .settle-actions{display:flex;gap:10px;margin-top:10px}.phone-screen .settle-actions .btn{flex:1;height:38px}.phone-screen .confetti-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden}.phone-screen .confetti-layer i{position:absolute;top:-16px;left:50%;width:5px;height:9px;background:var(--accent);opacity:0;animation:confettiFall 2.4s cubic-bezier(.23,1,.32,1) .3s both}.phone-screen .confetti-layer i:nth-child(4n+1){background:var(--vip-gold);border-radius:999px}.phone-screen .confetti-layer i:nth-child(4n+2){background:var(--auth-green);width:6px;height:6px;border-radius:999px}.phone-screen .confetti-layer i:nth-child(4n+3){background:var(--n00);height:11px}.phone-screen .confetti-layer i:nth-child(10n+1){left:6%;--drift:22px;animation-delay:.3s}.phone-screen .confetti-layer i:nth-child(10n+2){left:16%;--drift:-12px;animation-delay:.45s}.phone-screen .confetti-layer i:nth-child(10n+3){left:27%;--drift:18px;animation-delay:.36s}.phone-screen .confetti-layer i:nth-child(10n+4){left:38%;--drift:-18px;animation-delay:.5s}.phone-screen .confetti-layer i:nth-child(10n+5){left:49%;--drift:12px;animation-delay:.4s}.phone-screen .confetti-layer i:nth-child(10n+6){left:60%;--drift:-22px;animation-delay:.56s}.phone-screen .confetti-layer i:nth-child(10n+7){left:71%;--drift:16px;animation-delay:.34s}.phone-screen .confetti-layer i:nth-child(10n+8){left:82%;--drift:-14px;animation-delay:.52s}.phone-screen .confetti-layer i:nth-child(10n+9){left:91%;--drift:10px;animation-delay:.43s}.phone-screen .confetti-layer i:nth-child(10n){left:97%;--drift:-24px;animation-delay:.6s}.phone-screen .settle-lose{opacity:1!important}.phone-screen .settle-lose .lose-amount{font-size:36px!important;color:var(--n100)!important;margin:6px 0!important}.phone-screen .settle-lose .more{color:var(--n100)!important}.phone-screen .lose-link{margin-top:8px;font-size:10px;color:var(--accent)!important;display:inline-flex;align-items:center;gap:4px}.phone-screen .lose-link:before{content:"";width:10px;height:10px;border-radius:999px;background:var(--n40);display:inline-block}.phone-screen .text-link{border:0;background:transparent;color:var(--accent)!important;font-size:11px;padding:0}.phone-screen .result .btn.primary{background:var(--n140)!important;color:var(--n00)!important}@keyframes winPop{from{opacity:0;transform:translateY(10px) scale(.72);filter:blur(2px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}@keyframes confettiFall{0%{opacity:0;transform:translate3d(0,-8px,0) rotate(0)}12%{opacity:1}100%{opacity:0;transform:translate3d(var(--drift,18px),228px,0) rotate(720deg)}}
+/* v7.4 synthesis: keep compact markets, lock flow, sticky CTAs flush to bottom */
+.phone-screen .home-hero:after{display:none!important}.phone-screen .home-hero:before{display:block!important;z-index:0!important;border:0!important;border-radius:0!important;background:radial-gradient(circle at 12% 8%,rgba(1,194,195,.15),transparent 42%),radial-gradient(circle at 88% 88%,rgba(255,79,102,.08),transparent 48%)!important}.phone-screen .home-hero>*{position:relative;z-index:1}
+.phone-screen .market.market-card,.phone-screen .market.market-card *{min-width:0}.phone-screen .market.market-card{max-width:100%!important;margin-bottom:5px!important}.phone-screen .market-card .odds-row,.phone-screen .market-card .market-signal{max-width:100%;overflow:hidden}.phone-screen .market-card .btn.accent{background:var(--accent)!important;border-color:var(--accent)!important}
+.phone-screen .tab{pointer-events:none!important;cursor:default!important}.phone-screen .tabbar{user-select:none}.phone-screen .top-tabs span{cursor:default}.phone-screen .top-tabs span:nth-child(1),.phone-screen .top-tabs span:nth-child(3){cursor:pointer}
+.phone-screen .rank-sticky.rank-progress{position:relative!important;bottom:auto!important;margin:0!important;flex:0 0 auto!important;grid-template-columns:18px 1fr auto!important}.phone-screen .progress-fill{width:0!important;animation:none!important;transition:width .8s cubic-bezier(.23,1,.32,1) .6s}.phone-screen .progress-fill.on{width:89%!important}
+.phone-screen .screen-sticky{left:0!important;right:0!important;bottom:0!important;transform:none!important;width:100%!important;height:44px!important;border-radius:0!important;box-shadow:none!important}
+.phone-screen .settle-page{padding:10px 10px 0!important;gap:8px!important}.phone-screen .settle-page .section-head,.phone-screen .settle-page .market{display:none!important}.phone-screen .settle-win,.phone-screen .settle-lose{padding:16px 10px 12px!important}.phone-screen .share-preview{height:128px!important;max-width:280px;width:100%!important;margin:10px auto 0!important}.phone-screen .settle-bottom-actions{position:sticky;bottom:0;z-index:30;margin:auto -10px 0;padding:8px 10px;background:var(--n00);border-top:1px solid var(--n20);display:flex;gap:10px}.phone-screen .settle-bottom-actions .btn{flex:1;height:44px}
+.phone-screen .fun-hud{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;width:100%;max-height:32px;margin:7px 0 0;overflow:hidden}
+.phone-screen .fun-stat{height:14px;width:100%;min-width:0;border:1px solid var(--accent);border-radius:2px;background:var(--accent-soft);color:var(--n140)!important;display:flex;align-items:center;justify-content:center;gap:2px;font:8px/1 var(--ui);white-space:nowrap;overflow:hidden}
+.phone-screen .fun-stat b{font:700 9px/1 var(--mono);color:var(--accent)!important}
+.phone-screen .fun-stat em{font-style:normal;color:var(--n80)!important;overflow:hidden;text-overflow:ellipsis}
+.phone-screen .task-row.boss{position:relative;border-color:var(--vip-gold);background:linear-gradient(135deg,var(--n00),var(--n-bg));overflow:hidden}
+.phone-screen .task-row.boss:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--vip-gold)}
+.phone-screen .task-row.boss b{color:var(--n140)}
+.phone-screen .task-row.boss .boss-reward{color:var(--vip-gold);font-family:var(--mono);font-weight:600}
+.phone-screen .boss-prog{display:flex;gap:5px;margin-top:6px}
+.phone-screen .boss-prog i{width:18px;height:4px;border-radius:999px;background:var(--n40)}
+.phone-screen .boss-prog i.on{background:var(--vip-gold)}
+.phone-screen .poly-rhythm{width:44px;height:18px;display:flex;align-items:flex-end;gap:2px;flex:0 0 44px;overflow:hidden}
+.phone-screen .poly-rhythm i{width:2px;border-radius:2px;background:var(--accent);opacity:.52;animation:rhythmBeat 1.2s var(--ease-ios) infinite alternate}
+.phone-screen .poly-rhythm i:nth-child(1){height:30%;animation-delay:0s}.phone-screen .poly-rhythm i:nth-child(2){height:60%;animation-delay:.06s}.phone-screen .poly-rhythm i:nth-child(3){height:45%;animation-delay:.12s}.phone-screen .poly-rhythm i:nth-child(4){height:80%;animation-delay:.18s}.phone-screen .poly-rhythm i:nth-child(5){height:54%;animation-delay:.24s}.phone-screen .poly-rhythm i:nth-child(6){height:90%;animation-delay:.30s}.phone-screen .poly-rhythm i:nth-child(7){height:40%;animation-delay:.36s}.phone-screen .poly-rhythm i:nth-child(8){height:72%;animation-delay:.42s}.phone-screen .poly-rhythm i:nth-child(9){height:36%;animation-delay:.48s}.phone-screen .poly-rhythm i:nth-child(10){height:82%;animation-delay:.54s}.phone-screen .poly-rhythm i:nth-child(11){height:50%;animation-delay:.60s}.phone-screen .poly-rhythm i:nth-child(12){height:66%;animation-delay:.66s}
+.phone-screen .share-badges{display:flex;gap:4px;margin-top:2px}
+.phone-screen .share-badge{height:16px;max-width:74px;padding:0 5px;border:1px solid var(--accent);border-radius:2px;color:var(--accent)!important;background:var(--accent-soft);font:8px/16px var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phone-screen .home-hero .eyebrow{position:static!important}.phone-screen .home-hero .eyebrow>span{position:relative;z-index:2}
+.phone-screen .store-entry{position:absolute!important;right:10px!important;top:10px!important;z-index:9!important;width:58px!important;height:22px!important;padding:0!important;border-color:var(--accent)!important;background:var(--accent-soft)!important;color:var(--accent)!important;font-size:9px!important}
+.phone-screen .momentum-strip{position:relative;z-index:2;display:inline-flex;align-items:center;gap:7px;height:24px;margin-top:7px;padding:0 8px;border:1px solid var(--accent);border-radius:2px;background:var(--accent-soft);color:var(--n140)!important;font-size:9px;max-width:166px}
+.phone-screen .momentum-strip b{font:700 13px/1 var(--mono);color:var(--accent)!important}.phone-screen .momentum-strip i{width:1px;height:12px;background:var(--n40)}
+.phone-screen .hero-visual{position:absolute;left:58%!important;right:auto!important;top:56px;width:34%!important;max-width:112px;min-width:86px;height:76px;border:1px solid var(--accent);border-radius:8px;background:var(--n140);overflow:hidden;z-index:1}
+.phone-screen .hero-visual:before{content:"";position:absolute;inset:9px;border:1px solid var(--accent);border-radius:6px;opacity:.62}.phone-screen .hero-visual:after{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed var(--accent);opacity:.55}
+.phone-screen .hero-visual span{position:absolute;left:8px;top:7px;font:8px/1 var(--mono);color:var(--n80)!important}.phone-screen .hero-visual b{position:absolute;right:8px;bottom:8px;font:700 18px/1 var(--mono);color:var(--accent)!important}.phone-screen .hero-visual i{position:absolute;left:47px;top:29px;width:18px;height:18px;border-radius:999px;background:var(--dewu-red);opacity:.9}
+.phone-screen .heat-live .num,.phone-screen .market-participation .num{font-family:var(--mono);color:var(--accent)!important;font-weight:600}.phone-screen .market-participation{height:22px;display:flex;align-items:center;padding:0 8px;margin:0 0 5px;border-radius:2px;background:var(--n00);border:1px solid var(--n20);font-size:10px;color:var(--n100)!important}.phone-screen .market-card .match:before{content:"进行中"!important}
+.phone-screen .market-card .market-top .countdown{font:9px/1 var(--mono);color:var(--dewu-red)!important;white-space:nowrap;flex:0 0 auto}.phone-screen .market-card .market-signal{border-top:0;margin-top:4px;margin-bottom:6px}.phone-screen .market-card .odds-row{margin-top:0}
+.phone-screen .leader-entry.compact-rank{min-height:64px!important;padding:8px 9px!important;margin:7px 0 8px!important;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.phone-screen .leader-entry.compact-rank h3{font-size:13px!important;margin:0 0 3px!important;line-height:1.25}.phone-screen .leader-entry.compact-rank p{font-size:9px;line-height:1.35;color:var(--n100)!important}.phone-screen .leader-entry.compact-rank .rank-mini{min-width:54px;text-align:center;border-left:1px solid var(--n20);padding-left:8px}.phone-screen .leader-entry.compact-rank .rank-mini b{display:block;font:700 20px/1 var(--mono);color:var(--accent)!important}.phone-screen .leader-entry.compact-rank .rank-mini span{font-size:9px;color:var(--n80)!important}
+.phone-screen .product-card{position:relative;background:var(--n00);border:1px solid var(--n20);border-radius:8px;overflow:hidden;min-width:0}.phone-screen .product-thumb{height:74px;background:repeating-linear-gradient(135deg,var(--n20) 0 6px,var(--n-bg) 6px 12px);position:relative;overflow:hidden}.phone-screen .product-thumb:before{content:"";position:absolute;left:24px;right:20px;bottom:18px;height:22px;border-radius:18px 8px 10px 14px;background:var(--n00);border:1px solid var(--n40);transform:skewX(-12deg)}.phone-screen .product-thumb.jersey:before{content:"23";left:50%;top:13px;width:42px;height:44px;right:auto;bottom:auto;transform:translateX(-50%);border-radius:6px 6px 3px 3px;background:var(--vip-gold);color:var(--n140);display:flex;align-items:center;justify-content:center;font:700 16px/1 var(--mono)}.phone-screen .product-body{padding:7px}.phone-screen .product-tag{height:16px;padding:0 4px;border-radius:2px;background:var(--accent-soft);color:var(--accent)!important;font:8px/16px var(--mono);display:inline-flex;margin-bottom:4px}.phone-screen .product-body b{display:block;font-size:10px;line-height:1.35;font-weight:500;color:var(--n140)!important}.phone-screen .product-meta{font-size:8px;line-height:1.35;color:var(--n100)!important;margin-top:3px}.phone-screen .product-price{font:700 14px/1.2 var(--mono);color:var(--accent)!important;margin-top:4px}
+.phone-screen .detail-hero.simple{max-height:278px}.phone-screen .detail-hero.simple .detail-poly{margin-top:8px}.phone-screen .detail-hero.simple .stance-grid{margin-top:8px}
+.phone-screen .nav-actions{margin-left:auto;display:flex;align-items:center;gap:4px}.phone-screen .nav-action{height:22px!important;padding:0 6px!important;border:1px solid var(--n40)!important;border-radius:2px!important;background:var(--n00)!important;color:var(--n100)!important;font-size:10px!important}.phone-screen .nav-action.primary{border-color:var(--accent)!important;background:var(--accent-soft)!important;color:var(--accent)!important}
+.phone-screen .hero-actions{position:absolute;right:10px;top:10px;z-index:9;display:flex;gap:4px}.phone-screen .hero-mini{width:34px!important;height:20px!important;padding:0!important;font-size:9px!important;border-color:var(--accent)!important;background:var(--accent-soft)!important;color:var(--accent)!important}
+.phone-screen .rank-summary{margin:4px 10px 6px;padding:7px 8px;background:var(--n00);border:1px solid var(--n20);border-radius:4px;font-size:10px;line-height:1.45;color:var(--n100)!important}.phone-screen .rank-summary b{font-weight:500;color:var(--n140)!important}.phone-screen .rank-summary .num{color:var(--accent)!important;font-family:var(--mono)}.phone-screen .reward-rule{margin-top:5px;padding-top:5px;border-top:1px solid var(--n20);font:9px/1.45 var(--mono);color:var(--n100)!important}.phone-screen .reward-rule b{color:var(--accent)!important}
+.phone-screen .task-sheet{position:absolute!important;left:0!important;right:0!important;bottom:0!important;height:66%!important;padding-top:0!important;background:rgba(20,21,26,.28)!important;border-top:0!important;display:flex!important;align-items:flex-end!important}.phone-screen .task-panel{height:100%!important;width:100%!important;overflow-y:auto!important;border-radius:18px 18px 0 0!important;border-top:1px solid var(--n40)!important}.phone-screen .task-reward-rule{background:var(--n00);border:1px solid var(--n20);border-radius:8px;padding:8px;margin-bottom:6px;font-size:10px;line-height:1.5;color:var(--n100)!important}.phone-screen .task-reward-rule b{display:block;font-size:12px;color:var(--n140)!important;margin-bottom:2px}.phone-screen .task-reward-rule .num{color:var(--accent)!important}
+.phone-screen .detail-timebox{display:grid;grid-template-columns:1.15fr .85fr;gap:5px;margin-top:8px}.phone-screen .detail-timebox div{min-width:0;border:1px solid var(--accent);border-radius:2px;background:var(--n140);padding:6px}.phone-screen .detail-timebox span{display:block;font-size:8px;line-height:1;color:var(--n80)!important;margin-bottom:4px}.phone-screen .detail-timebox b{display:block;font:600 10px/1.25 var(--mono);color:var(--accent)!important;white-space:normal}.phone-screen .draw-note{margin-top:5px;padding:5px 6px;border:1px solid var(--n20);border-radius:2px;background:var(--n00);font-size:9px;line-height:1.35;color:var(--n100)!important}
+@keyframes rhythmBeat{from{opacity:.34;transform:scaleY(.72)}to{opacity:1;transform:scaleY(1)}}
+
+/* v7.6 flat flow overrides */
+html,body{width:auto!important;height:auto!important;overflow:auto!important;background:var(--n140)!important}
+.canvas{display:block!important}
+.phone-screen{isolation:isolate}
+.phone-screen .body{scrollbar-width:thin}
+
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="signature">✦ {BRAND.signature}</div>
+  <header class="head">
+    <div>
+      <span class="tag aqua">{BRAND.name} DS · latest demo synced</span><span class="tag">Flat Interaction Draft</span><span class="tag">v7.6 — 替换原始页面</span>
+      <h1>示例活动 · <b>示例联赛 预测示例业务</b></h1>
+      <div class="meta"><b>Source</b> v6.4 平面稿格式 · v7.5 最新交互 demo 页面内容 · 14 screens</div>
+    </div>
+    <div class="meta" style="text-align:right"><b>Main updates</b> 首页规则/客服 · 任务半浮层 · Top100 三档奖励<br><b>Detail updates</b> 详情页投注结束/倒计时/开奖时间 · 店铺/我的预测客服入口</div>
+  </header>
+  <section class="rules">
+    <div class="rule"><h3>{BRAND.name} DS 色板</h3><div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-soft)"></i><i style="background:var(--dewu-red)"></i><i style="background:var(--vip-gold)"></i><i style="background:var(--n-bg)"></i><i style="background:var(--n140)"></i></div><p style="margin-top:8px">沿用最新 demo 的浅色{BRAND.name} DS：页面 n-bg、卡片 n00、主 CTA accent。</p></div>
+    <div class="rule"><h3>页面替换原则</h3><ul><li>保留 v6.4 的多屏平面交互稿格式。</li><li>用最新 demo 的已改页面替换原页面。</li></ul></div>
+    <div class="rule"><h3>榜单规则</h3><p>Top100 三档奖励：Top3 8888 积分；4-50 名 1688 积分；51-100 名 666 积分。任务中心同步展示。</p></div>
+    <div class="rule"><h3>交互说明</h3><p>本文件是平面交互稿，不绑定点击跳转；交互关系通过 Rail、箭头和说明表格表达。</p></div>
+  </section>
+  <main id="flow"></main>
+  <section class="specs">
+    <h2>交互稿说明 · 14 页 × 8 要素</h2>
+    <table class="spec-table" id="spec-table"></table>
+    <div class="footer"><b>v7.6 版本说明</b><br>
+      <div class="fix-list">
+        <div class="ok">✓ 使用 v6.4 平面稿画布格式，替换为最新 v7.5 页面内容</div>
+        <div class="ok">✓ 首页：规则/客服入口、活动 Hero、紧凑示例业务 Feed、商品双列流</div>
+        <div class="ok">✓ 任务中心：底部半浮层、BOSS 活动期间任务、Top100 三档奖励</div>
+        <div class="ok">✓ 排行榜：结算倒计时 + 最高 8888 积分 + 底部进度条</div>
+        <div class="ok">✓ 示例业务详情：客服/分享、投注结束时间、倒计时、开奖时间说明</div>
+        <div class="ok">✓ 兑换商店/我的预测：补齐客服入口</div>
+        <div class="ok">✓ 保留{BRAND.name} 4 Tab 规范和页面类型规则</div>
+        <div class="ok">✓ 单 HTML，可直接打开查看</div>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+
+
+const tabs = ['推荐','趋势','示例活动','灵感','关注','穿搭'];
+/* v4.2: 16人名池打乱周回 — 闪火/西鱼/小叮当/许/铭浩/云樵/泓予/一鵬/皮耶罗/小野/西门/立昂/望舒/赵钊/夜枭/狮子头 */
+const users = ['闪火','西鱼','小叮当','许','铭浩','云樵','泓予','一鵬','皮耶罗','小野','西门','立昂','望舒','赵钊','夜枭','狮子头'];
+const icons = {
+  dewu: '<rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 3v14"/><path d="M13 3v14"/><path d="M3 7h14"/><path d="M3 13h14"/>',
+  buy: '<path d="M4 6h12l-1.5 11h-9z"/><path d="M8 6a2 2 0 0 1 4 0"/>',
+  explore: '<circle cx="9" cy="9" r="6"/><line x1="13.5" y1="13.5" x2="18" y2="18"/><circle cx="7" cy="7" r="1"/><circle cx="11" cy="7" r="1"/><circle cx="9" cy="11" r="1"/>',
+  me: '<circle cx="10" cy="6.5" r="3.5"/><path d="M3.5 19c1.5-5 11.5-5 13 0"/>'
+};
+const TabBar = a=>`<div class="tabbar">${[['{BRAND.name}','dewu'],['购买','buy'],['探索','explore'],['我','me']].map(([t,k],i)=>`<div class="tab ${i===a?'active':''}"><svg viewBox="0 0 20 20">${icons[k]}</svg><span>${t}</span></div>`).join('')}</div>`;
+const Status = ()=>`<div class="status"><span>9:41</span><span>5G ▰</span></div>`;
+const TopTabs = i=>`<div class="top-tabs">${tabs.map((t,idx)=>`<span class="${idx===i?'active':''}">${t}</span>`).join('')}</div>`;
+const Nav = (title,right='')=>`<div class="nav"><span class="back">‹</span><span class="title">${title}</span><span class="right">${right}</span></div>`;
+const NavActions = (title,items=[])=>`<div class="nav"><span class="back">‹</span><span class="title">${title}</span><span class="nav-actions">${items.map((t,i)=>`<button class="nav-action ${i===items.length-1?'primary':''}">${t}</button>`).join('')}</span></div>`;
+const sparkSets=[[1.9,1.8,1.8,1.7,1.6,1.6,1.6,1.4],[2.2,2.3,2.4,2.4,2.5,2.6,2.7,2.9],[1.5,1.5,1.6,1.5,1.4,1.4,1.3,1.2],[2.0,1.9,2.0,2.1,2.2,2.1,2.0,2.2]],flowSeeds=[342,28,76,124,44,18,205,63,12];
+function trendData(d){var a=d.spark||sparkSets[(d.q.length+d.match.length)%sparkSets.length],delta=a[a.length-1]-a[a.length-2];return {a:a,delta:delta,down:delta<0}}
+function Spark(d){var t=trendData(d),a=t.a,mn=Math.min(...a),mx=Math.max(...a),r=mx-mn||1,pts=a.map(function(v,i){return (2+i*8)+','+(16-(v-mn)/r*13).toFixed(1)}).join(' ');return '<span class="sparkline"><svg viewBox="0 0 60 18" preserveAspectRatio="none"><polyline fill="none" stroke="'+(t.down?'var(--dewu-red)':'var(--auth-green)')+'" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" points="'+pts+'"/></svg></span>'}
+function TrendLabel(d){var t=trendData(d);return '<span class="trend-label '+(t.down?'down':'up')+'">'+(t.down?'↓':'↑')+Math.abs(t.delta).toFixed(1)+'x</span>'}
+function flowOf(d){return d.flow==null?flowSeeds[(d.q.length+d.match.length)%flowSeeds.length]:d.flow}
+function FlowChip(d){var n=flowOf(d),hot=n>100;return '<span class="chip flow-chip '+(hot?'hot':'')+'">'+(hot?'🔥 ':'')+'近 4 小时 +'+n+' 注</span>'}
+function urgent(t){var m=String(t||'').match(/(\d{1,2}):/);return /min/i.test(t||'')||(m&&+m[1]<=1)}
+function PosBadge(d){return d.pos?'<div class="pos-badge '+d.pos+'">'+(d.pos==='gain'?'浮盈':'浮亏')+'</div>':''}
+function PosTiny(d){return d.pos?' · <span class="pos-tiny '+d.pos+'">'+(d.pos==='gain'?'浮盈':'浮亏')+'</span>':''}
+function PolyRhythm(){return '<div class="poly-rhythm">'+('<i></i>'.repeat(12))+'</div>'}
+const Market = (d,opt={})=>`<div class="market v63 market-card ${opt.hot?'hot':''} ${opt.compact?'compact':''}">
+  <div class="market-top"><div class="match">${d.match}</div><span class="countdown ${urgent(d.ends)?'urgent':''}">${d.ends||'--'}</span></div>
+  <div class="q">${d.q}</div>
+  ${(d.heat||d.ends)?`<div class="market-signal">${Spark(d)}${TrendLabel(d)}<div class="signal-meta"><span>${d.heat||'--'} 注</span>${FlowChip(d)}</div></div>`:''}
+  <div class="odds-row ${opt.cta?'':'no-cta'}"><div class="odds-cell yes"><small>正方 · ${d.yp}%${PosTiny(d)}</small><b>${d.yes}</b></div><div class="odds-cell"><small>反方 · ${100-d.yp}%</small><b>${d.no}</b></div>${opt.cta?`<button class="btn accent sm market-cta">${opt.cta}</button>`:''}</div>
+  ${(!opt.noDisc&&d.disc)?`<div class="disc"><span class="ava"></span>${d.hotComment?'<span class="hot-label">热评</span>':''}<span><b>${d.user}</b>：${d.disc}</span></div>`:''}
+</div>`;
+const Feed = (img,user,text,rxn='♥ 256 · 评论 89')=>`<div class="feed"><div class="img ${img}"></div><div class="feed-body"><div class="user"><span class="ava"></span>${user}</div><div class="text">${text}</div>${rxn?`<div class="rxn">${rxn}</div>`:''}</div></div>`;
+const ProductFeed = (type,name,price,meta,kind='shoe')=>`<div class="product-card ${type==='拍卖'?'auction':'exchange'}"><div class="product-thumb ${kind}"></div><div class="product-body"><span class="product-tag">${type}</span><b>${name}</b><div class="product-meta">${meta}</div><div class="product-price">${price}</div></div></div>`;
+const RecBanner = d=>`<div class="rec-banner"><div class="k"><span>推荐主示例业务</span><span>${d.ends}</span></div><div class="banner-main"><h3>${d.q}</h3><button class="btn accent sm">投注</button></div><div class="banner-odds"><span>正方 <b class="num">${d.yes}</b></span><span>反方 <b class="num">${d.no}</b></span><span>${d.heat}人</span></div><div class="banner-foot"><span>${d.comments}条评论</span></div></div>`;
+const Comment = (u,t,label='128赞 · 46回复',badge='')=>`<div class="comment"><div class="head2"><span class="ava"></span><b>${u}</b>${badge?`<span class="badge-tag ${badge}">${badge==='support'?'正方':'反方'}</span>`:''}<button class="comment-like">♡ ${label.split('赞')[0]}</button></div><p>${t}</p><div class="line"><span>${label}</span><span>回复</span></div></div>`;
+
+/* v4.2: 16人名周回 — 闪火→西鱼→小叮当→许→铭浩→云樵→泓予→一鵬→皮耶罗→小野→西门→立昂→望舒→赵钊→夜枭→狮子头 */
+const markets = [
+  {match:'Lakers vs Knicks',q:'Lakers 能赢下 G3 客场战吗？',yes:'1.6x',no:'2.5x',yp:62,user:'闪火',disc:'关键战最怕盲信主场，篮板差和失误转化才是这题的命门。',hotComment:true,heat:'18,420',ends:'00:42:18',comments:'1,280',flow:342,spark:[1.9,1.8,1.8,1.7,1.6,1.6,1.6,1.4],pos:'gain',entry:'1.6x',now:'1.4x',logoL:'lakers',logoR:'knicks'},
+  {match:'Thunder vs 76ers',q:'系列赛会打满 7 场吗？',yes:'2.8x',no:'1.4x',yp:35,user:'西鱼',disc:'Embiid膝盖能不能扛到G5，决定这题是不是诱多。',hotComment:true,heat:'9,876',ends:'05:48:21',comments:'846',flow:28,spark:[1.4,1.5,1.5,1.6,1.7,1.7,1.8,1.9],pos:'loss',entry:'1.6x',now:'1.9x',logoL:'thunder',logoR:'sixers'},
+  {match:'Spurs vs Mavs',q:'文班亚马本场能否 25+10？',yes:'3.2x',no:'1.3x',yp:28,user:'小叮当',disc:'',heat:'6,214',ends:'08:32:11',comments:'392',logoL:'spurs',logoR:'mavs'},
+  {match:'Celtics vs Heat',q:'Celtics 能否半场领先 8 分？',yes:'1.9x',no:'1.9x',yp:51,user:'许',disc:'半场领先8分不是看气势，是看第一节换防有没有被打穿。',heat:'4,502',ends:'明日 19:30',comments:'274',logoL:'celtics',logoR:'heat'},
+  {match:'Nuggets vs Suns',q:'KD 本场三分能否命中 4+？',yes:'2.2x',no:'1.7x',yp:44,user:'铭浩',disc:'',heat:'3,918',ends:'明日 21:00',comments:'205',logoL:'nuggets',logoR:'suns'}
+];
+const extraMarkets = [
+  {match:'Bucks vs Pacers',q:'字母哥本场能否 30+10？',yes:'1.8x',no:'2.0x',yp:55,user:'云樵',disc:'Pacers包夹一上来，30+10就不是体力问题，是出球问题。',heat:'2,884',ends:'明日 20:00',comments:'166',logoL:'bucks',logoR:'pacers'},
+  {match:'Warriors vs Kings',q:'Curry 三分命中能否 6+？',yes:'2.4x',no:'1.6x',yp:42,user:'泓予',disc:'',heat:'2,140',ends:'明日 22:00',comments:'118',logoL:'warriors',logoR:'kings'},
+  {match:'Cavs vs Magic',q:'系列赛总分能否超 220？',yes:'1.7x',no:'2.2x',yp:58,user:'一鵬',disc:'两队节奏慢得离谱，220看着香，实际是坑。',hotComment:true,heat:'1,772',ends:'已结算',comments:'96',logoL:'cavs',logoR:'magic'},
+  {match:'Wolves vs Pelicans',q:'Edwards 本场扣篮能否 2+？',yes:'2.6x',no:'1.5x',yp:38,user:'皮耶罗',disc:'',heat:'1,095',ends:'已结算',comments:'61',logoL:'wolves',logoR:'pelicans'}
+];
+
+/* S01 — Type 1: TopTabs + TabBar, no back */
+const screen1 = ()=>`${Status()}${TopTabs(2)}<div class="body visual-grade">
+  <div class="hero home-hero"><div class="hero-actions"><button class="btn outline sm hero-mini">规则</button><button class="btn outline sm hero-mini">客服</button></div><div class="eyebrow"><span>示例联赛 PLAYOFFS 2026</span></div><h2>你的判断，<br>就是赔率。</h2><div class="momentum-strip"><span><b>3</b> 连胜中</span><i></i><span><b>52%</b> 命中率</span></div><div class="hero-visual"><span>示例联赛 ZONE</span><i></i><b>1.6x</b></div><div class="coinbar"><div><div class="num-hero coins">1,280</div><div style="font-size:10px;color:var(--n80)">活动积分余额 · 可用于示例业务</div></div><button class="btn accent sm">每日免费积分</button></div></div>
+  <div class="pad"><div class="section-head"><span>热门示例业务</span><span class="heat-live">现在最活跃</span></div><div class="market-participation">今日 <b class="num">24,816</b> 人已参与示例业务</div>${markets.slice(0,3).map((m,i)=>Market(m,{cta:'投注',hot:i===0,noDisc:true})).join('')}
+  <button class="btn accent block view-all" style="margin:4px 0 8px">查看全部示例业务列表 →</button>
+  <div class="leader-entry compact-rank"><div><div class="k">RANKING · S08</div><h3>今日预言家榜</h3><p>Top100 最高 8,888 积分，每日 00:00 结算。</p></div><div class="rank-mini"><b>#14</b><span>当前排名</span></div></div>
+  <div class="section-head" style="margin-top:6px"><span>积分商品</span><button class="btn outline sm shop-more">查看更多</button></div><div class="feed-grid">${ProductFeed('拍卖','LeBron 签名战靴','22,798','36 人围观 · 02:14 后结拍','shoe')}${ProductFeed('兑换','示例联赛 联名热身服','380','库存 24 · 立即兑换','')}${ProductFeed('拍卖','Lakers 限定球衣','9,680','每次加价 20 · 今晚结拍','jersey')}${ProductFeed('兑换','球队贴纸包','120','库存 86 · 赛后发货','jersey')}</div>
+  <div class="section-head" style="margin-top:6px"><span>热门内容</span><span class="more">双列社区 Feed</span></div><div class="feed-grid">${Feed('court','小野','G3复盘：Knicks那防守轮转慢得像五个人在散步——笑死。','♥ 1.9k · 评论 318',{hot:true})}${Feed('shoe','西门','季后赛后卫鞋实测：别被ZoomX营销洗脑了——穿过几场？','',{hot:true})}${Feed('jersey','立昂','OOTD｜别再穿假球衣了——真球迷一眼认出来的低级错误。','♥ 730')}${Feed('dunk','望舒','Thunder赔率被严重低估——那些砸76ers的等输到底裤都不剩吧。','',{hot:true})}</div></div>
+</div>${TabBar(0)}`;
+
+const screenTask = ()=>`${Status()}${TopTabs(2)}<div class="body" style="position:relative">
+  <div class="hero" style="min-height:178px"><div class="eyebrow"><span>TASK & DU COIN</span><span>{BRAND.placeholder_user} 预测 →</span></div><h2>每日免费积分，<br>先领再开喷。</h2><div class="coinbar"><div><div class="num-hero coins">+50</div><div style="font-size:10px;color:var(--n80)">S01 点击按钮后拉起任务中心</div></div><button class="btn accent sm">已拉起</button></div></div>
+  <div class="task-sheet"><div class="task-panel">
+    <div style="width:32px;height:4px;border-radius:999px;background:var(--n40);margin:0 auto 12px"></div>
+    <div class="section-head"><span>任务中心</span></div>
+    <div class="task-reward-rule"><b>榜单奖励规则</b><span>Top3 最高 <span class="num">8,888</span> 积分 · 4-50名 <span class="num">1,688</span> 积分 · 51-100名 <span class="num">666</span> 积分</span></div>
+    <div class="login-card"><div class="title">七日登录 · 第7天大奖预告</div><p>连续签到越久奖励越高，第7天直接开 888 积分。</p><div class="signin-axis"><span class="on">D1<br>188</span><span class="on">D2<br>188</span><span class="on today">D3<br>188</span><span>D4<br>188</span><span>D5<br>188</span><span>D6<br>188</span><span class="jackpot">D7<br>888</span></div><button class="btn accent sm" style="width:100%">点击领取 +188</button></div>
+    <div class="task-row boss"><div><b>BOSS 任务 · 连胜冲刺</b><p>活动期间押中 3 场连胜立得 <span class="boss-reward">+999</span> 积分，已完成 2/3</p><div class="boss-prog"><i class="on"></i><i class="on"></i><i></i></div></div><button class="btn accent sm">去押注</button></div>
+    <div class="task-row"><div><b>投注预测</b><p>完成一次投注预测，点击领取 +10</p></div><button class="btn accent sm">领取 +10</button></div>
+    <div class="task-row invite"><div class="invite-art"></div><div><b>邀请好友组队助力</b><p>每邀请 1 个好友完成首投 +666，每天最多 5 个。</p><div class="friend-progress"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div><button class="btn accent sm">领取 +666</button></div>
+    <div class="task-row action"><div><b>预言家</b><p>活动榜单 Top100，最高可得 8,888 积分</p></div><button class="btn outline sm">查看榜单</button></div>
+    <div class="task-row action"><div><b>评论家</b><p>赛事评论获赞 Top100，最高可得 8,888 积分</p></div><button class="btn outline sm">查看榜单</button></div>
+  </div></div>
+</div>${TabBar(0)}`;
+
+/* S02 — Type 2: Nav only, no tabs. Filled page with VS cards. */
+const screen2 = ()=>`${Status()}${Nav('热门示例业务','筛选')}<div class="chiprow"><span class="chip active">进行中</span><span class="chip">即将开始</span><span class="chip">已结算</span><span class="chip aqua">{BRAND.placeholder_user} 参与</span></div><div class="body visual-grade"><div class="pad">${[...markets,...extraMarkets].map((m,i)=>Market({...m,match:(i<3?'今日 · ':(i<7?'明日 · ':'已结算 · '))+m.match},{cta:i<7?'投注':'查看'})).join('')}</div></div>`;
+
+/* S08 — Type 2. Community detail is rendered by screen3Detail for interactive tabs. */
+const screen3 = ()=>screen3Detail();
+
+/* S06 — Type 2, rendered as sheet overlay on top of detail/list context */
+const screen4 = ()=>`${Status()}${Nav('投注')}<div class="body visual-grade" style="position:relative;display:flex;flex-direction:column">
+  <div style="padding:10px;opacity:.55">
+    <div class="detail-bet"><div class="match">Lakers vs Knicks · 今日 19:30</div><div class="q" style="font-size:14px">Lakers 能赢下 G3 客场战吗？</div>${Market({...markets[0],disc:''})}</div>
+  </div>
+  <div class="sheet-overlay" style="position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end">
+    <div class="sheet-panel" style="background:var(--n00);border-top:1px solid var(--n40)">
+      <div style="width:32px;height:4px;border-radius:999px;background:var(--n40);margin:0 auto 12px"></div>
+      <div class="section-head"><span>投入积分</span><span class="more">余额 1,280 · 单题上限 30%</span></div>
+      <div class="bet-choice"><div class="bet-option active"><b>正方</b><span>1.6x · 62%</span></div><div class="bet-option"><b>反方</b><span>2.5x · 38%</span></div></div>
+      <div class="field"><span>投入数量</span><b class="num" style="font-size:18px">120</b></div>
+      <div class="statgrid">
+        <div class="stat"><div class="num v">1.6x</div><div class="more" style="font-size:10px">当前赔率</div></div>
+        <div class="stat"><div class="num v">192</div><div class="more" style="font-size:10px">预计获得</div></div>
+        <div class="stat"><div class="num v">5%</div><div class="more" style="font-size:10px">手续费</div></div>
+      </div>
+      <button class="btn accent" style="width:100%;margin-top:12px;height:40px;font-size:14px">投注 · 正方 1.6x</button>
+      <div style="text-align:center;font-size:9px;color:var(--n80);margin-top:6px">投注后去讨论区发评论，评论点赞也会计入评论家榜。</div>
+    </div>
+  </div>
+</div>`;
+
+/* S05 — Type 2. Dual-state: win + lose. */
+const Confetti = ()=>'<div class="confetti-layer">'+('<i></i>'.repeat(40))+'</div>';
+const screen5win = ()=>`<div class="result win settle-win">${Confetti()}<div class="stamp aqua">预测命中</div><div style="font-size:16px;font-weight:600;color:var(--auth-green);margin:4px">Lakers 112:106 Knicks</div><div class="num-hero win-amount">+192</div><div class="more">120 积分 × 1.6x 已即时到账</div><div class="share-preview"><span class="save">长按保存</span><div class="k">押注时区 · 示例联赛 ZONE</div><h4>Lakers 能赢下 G3 客场战吗？</h4><div class="num odds">正方 1.6x ✓</div><div class="share-badges"><span class="share-badge">3连胜</span><span class="share-badge">预测命中</span><span class="share-badge">#14</span></div><div style="font-size:10px;color:var(--n80)">{BRAND.placeholder_user} · 预测命中</div></div></div>`;
+const screen5lose = ()=>`<div class="result lose settle-lose"><div class="stamp lose">再接再厉</div><div style="font-size:16px;font-weight:600;color:var(--n80);margin:4px">Knicks 108:104 Lakers</div><div class="num-hero lose-amount">-120</div><div class="more">68% 的人和你一起押错了 — 你不孤单</div><div class="lose-link">正方 #14 赵钊 押中了 · 看他的分析</div></div>`;
+const screen5 = ()=>{ var lose = route.settle==='lose'; return `${Status()}${Nav('示例业务结算')}<div class="body settle-page" style="display:flex;flex-direction:column">${lose?screen5lose():screen5win()}<div class="settle-bottom-actions">${lose?'<button class="btn accent">看复盘分析</button><button class="btn outline">下一场还有机会</button>':'<button class="btn accent">分享战绩卡</button><button class="btn outline">继续押注</button>'}</div></div>`; };
+
+
+/* S08 — Type 2. 预言家/评论家 50:50 Tab，最多展示前20名，强化每日奖励。 */
+const prophetData = [
+  {name:'泓予',tokens:8560,likes:2340,acc:82},{name:'一鵬',tokens:7920,likes:1890,acc:78},{name:'赵钊',tokens:6840,likes:3120,acc:76},
+  {name:'望舒',tokens:5980,likes:1680,acc:73},{name:'狮子头',tokens:5240,likes:2890,acc:70},{name:'皮耶罗',tokens:4680,likes:2450,acc:68},
+  {name:'夜枭',tokens:4120,likes:1980,acc:65},{name:'闪火',tokens:3760,likes:2760,acc:62},{name:'云樵',tokens:3420,likes:1540,acc:60},
+  {name:'西门',tokens:3080,likes:1320,acc:57},{name:'小野',tokens:2840,likes:2180,acc:54},{name:'铭浩',tokens:2560,likes:1150,acc:52},
+  {name:'立昂',tokens:2280,likes:1620,acc:49},{name:'西鱼',tokens:1980,likes:980,acc:46},{name:'许',tokens:1640,likes:1240,acc:43},
+  {name:'小叮当',tokens:1320,likes:870,acc:39},{name:'阿澈',tokens:1180,likes:760,acc:38},{name:'北岸',tokens:1040,likes:690,acc:36},
+  {name:'陈野',tokens:960,likes:640,acc:35},{name:'Drew',tokens:880,likes:590,acc:34}
+];
+const criticData = [...prophetData].sort((a,b)=>b.likes-a.likes);
+const medal = i=>i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
+const medalStyle = i=>i===0?'color:var(--vip-gold);font-weight:700;background:var(--n00);border:1px solid var(--vip-gold);border-radius:8px':
+  i===1?'color:var(--n100);font-weight:700;background:var(--n00);border:1px solid var(--n80);border-radius:8px':
+  i===2?'color:var(--n100);font-weight:700;background:var(--n00);border:1px solid var(--n100);border-radius:8px':'';
+const screen7 = ()=>`${Status()}${Nav('排行榜')}<div class="chiprow" style="display:grid;grid-template-columns:1fr 1fr;padding:8px 10px;gap:0">
+  <span class="chip active" style="justify-content:center;border-radius:2px 0 0 2px">预言家</span><span class="chip" style="justify-content:center;border-radius:0 2px 2px 0">评论家</span></div><div class="body" style="padding-bottom:72px;position:relative">
+  <div style="margin:4px 10px;font-size:9px;color:var(--n80);text-align:center;background:var(--n20);padding:3px 8px;border-radius:2px">每日 00:00 更新 · 当前最多展示前 20 名</div>
+  <div class="rank-tip">榜单前100名最高 8,888 积分 · Top3 8,888 / 4-50名 1,688 / 51-100名 666</div>
+  ${prophetData.slice(0,20).map((u,i)=>`<div class="rank-row" style="${medalStyle(i)}">
+    <div class="rank-no" style="font-size:${i<3?'18px':'13px'};${i<3?'':'color:var(--n100)'};width:${i<3?'32px':'26px'}">${i<3?medal(i):`#${i+1}`}</div>
+    <span class="ava"></span><div style="flex:1"><div style="font-size:12px;font-weight:500">${u.name}${i<3?'':''}</div><div class="row-meta">准确率 ${u.acc}% · 获赞 ${u.likes} · 仍在奖励线内</div></div><div class="num" style="color:var(--accent-press);font-size:${i<3?'16px':'13px'}">${u.tokens.toLocaleString()}</div>
+  </div>`).join('')}
+  <div style="margin:4px 10px 10px;font-size:9px;color:var(--n80)">预言家按赚取积分排序；评论家按获赞数排序。Top100 奖励每日结算一次。</div>
+  <div class="rank-sticky"><span class="ava"></span><div style="flex:1"><div style="font-size:11px;font-weight:500">立昂 · 当前 #14</div><div style="font-size:9px;color:var(--n80)">今日赚取 2,280 · 距 #13 还差 280</div></div><span class="pill">+1,688 奖励线内</span><button class="cta">继续投注</button></div>
+</div>`;
+
+/* S04 — Type 2. My prediction: merges former activity and du-coin asset pages. */
+const screen8 = ()=>`${Status()}${NavActions('我的预测',['客服','兑换'])}<div class="body visual-grade">
+  <div class="prediction-hero"><div style="font:10px/1 var(--mono);color:var(--accent-bright);letter-spacing:.06em;margin-bottom:8px">MY PREDICTION · {BRAND.placeholder_user}</div><div class="diamond-grid"><div class="diamond"><div class="num-hero">1,280</div><div style="font-size:10px;color:var(--n80)">积分余额</div></div><div class="diamond"><div class="num-hero">52%</div><div style="font-size:10px;color:var(--n80)">示例业务准确率</div></div></div></div>
+  <div class="prediction-tabs"><span class="chip active">积分流水</span><span class="chip">示例业务记录</span><span class="chip">评论记录</span></div>
+  <div class="pad" style="padding-top:0"><div class="section-head"><span>积分流水</span><span class="more">当前 1,280</span></div></div>
+  ${assetRows.map(r=>`<div class="asset-row ${r[3]}"><div><div style="font-size:12px;font-weight:500">${r[0]}</div><div class="row-meta">${r[1]}</div></div><div class="num delta">${r[2]}</div></div>`).join('')}
+  <div class="record-card"><div class="top"><span>示例业务记录 · 23 场</span><span class="more">切换 Tab</span></div><div class="sub">进行中 8 场 · 已结算 15 场 · 可点击任一记录回到示例业务详情页。</div><div class="tagline"><span class="good">Lakers G3 正方 +192</span><span>Thunder 7场 待结算</span></div></div>
+  <div class="record-card"><div class="top"><span>评论记录 · 86 赞</span><span class="more">评论详情 ›</span></div><div class="sub">「还扯什么第三节崩盘，数据列出来啊？」被顶到讨论区前排。</div><div class="tagline"><span class="good">获赞 86</span><span>回复 32</span><span>正方</span></div></div>
+</div>`;
+
+/* S09 — Type 2. Auction detail. */
+const screen9 = ()=>`${Status()}${Nav('拍卖详情','分享')}<div class="body">
+  <div class="item"><div class="item-img sneaker"></div><div class="section-head"><span>LeBron 签名战靴</span><span class="more">今天 18:00 结拍</span></div><div class="num-hero" style="font-size:32px">22,798</div><div class="more">当前最高出价 · 每次加价 10 积分 · 剩余 2h 14m</div><button class="btn accent" style="width:100%;margin-top:10px;height:38px;font-size:13px">我要出价</button></div>
+  <div class="chiprow"><span class="chip active">竞价记录</span><span class="chip">出价流程</span></div>
+  ${['望舒 22,798 领先','赵钊 22,680 出局','夜枭 22,560 出局'].map(x=>`<div class="rank-row"><span class="ava"></span><div style="flex:1;font-size:11px">${x}</div><span class="more">刚刚</span></div>`).join('')}
+  <div class="item" style="margin-top:6px"><div class="section-head"><span>出价保障</span><span class="more">保证金 300 积分</span></div><div class="more">结拍前 5 分钟有人出价将自动延时 2 分钟；未中拍保证金即时退回。</div></div>
+</div>`;
+
+/* S10 — Type 2. Exchange store, auction tab. */
+const AuctionCard = (kind,title,price,meta,timer)=>`<div class="auction-card"><div class="auction-img ${kind}"></div><div class="auction-info"><b>${title}</b><div class="num-hero price">${price}</div><div class="more">${meta}</div><div class="timer">${timer}</div></div></div>`;
+const screen10 = ()=>`${Status()}${NavActions('兑换商店',['规则','客服'])}<div class="body">
+  <div class="store-hero"><div class="k">DU COIN EXIT · AUCTION</div><h3>把预测赢来的积分，换成真正稀缺的东西。</h3><div class="more" style="color:var(--n80)">今日 18:00 / 22:00 两场结拍 · 出价前展示近 7 天成交参考</div></div>
+  <div class="rank-row" style="margin-top:0"><span class="ava"></span><div style="flex:1"><div style="font-size:12px;font-weight:500">{BRAND.placeholder_user} 的预测</div><div class="row-meta">余额 1,280 · 准确率 52% · 点击查看流水/记录</div></div><div class="num" style="font-size:18px;color:var(--accent-press)">1,280</div></div>
+  <div class="store-tabs"><span class="chip active">限时拍卖</span><span class="chip">限量兑换</span><span class="chip">我的奖品</span></div>
+  <div class="pad" style="padding-top:0"><div class="section-head"><span>拍卖的商品列表</span><span class="more">按结拍时间排序</span></div></div>
+  <div class="auction-list">
+    ${AuctionCard('','LeBron 签名战靴 · 品控版','22,798','当前最高出价 · 36 人围观','02:14:08 后结拍')}
+    ${AuctionCard('jersey','Lakers 总决赛限定球衣','9,680','当前最高出价 · 每次加价 20','今晚 22:00 结拍')}
+    ${AuctionCard('','Air Jordan Player Exclusive','31,240','稀缺拍品 · 保证金 300 积分','明日 12:00 开拍')}
+  </div>
+</div>`;
+
+/* S11 — Type 2. Exchange store, limited redeem tab. Keeps current v4.5 S11 content. */
+const screen11 = ()=>`${Status()}${NavActions('兑换商店',['规则','客服'])}<div class="body">
+  <div class="store-hero"><div class="k">DU COIN EXIT · REDEEM</div><h3>限量兑换，不拼概率，只拼手速和判断。</h3><div class="more" style="color:var(--n80)">保留原 S11 商品内容 · 每日 10:00 / 20:00 补货</div></div>
+  <div class="store-tabs"><span class="chip">限时拍卖</span><span class="chip active">限量兑换</span><span class="chip">我的奖品</span></div>
+  <div class="pad" style="padding-top:0"><div style="font-size:12px;font-weight:500;margin-bottom:4px">积分兑换 · 限时商品</div><div class="more" style="margin-bottom:10px">每日 10:00 / 20:00 补货 · 先到先得</div></div>
+  <div class="exchange-grid">
+    <div class="ex-card"><div class="ex-img warmup"></div><div class="ex-body"><b>示例联赛 联名热身服</b><div class="ex-meta"><span>380 积分</span><span class="stock">余量 32</span></div></div></div>
+    <div class="ex-card"><div class="ex-img stickers"></div><div class="ex-body"><b>球队限定贴纸包</b><div class="ex-meta"><span>120 积分</span><span class="stock">余量 110</span></div></div></div>
+    <div class="ex-card"><div class="ex-img coupon"></div><div class="ex-body"><b>{BRAND.name} ¥50 券包</b><div class="ex-meta"><span>260 积分</span><span style="color:var(--n80)">20:00 补货</span></div></div></div>
+    <div class="ex-card" style="opacity:.55"><div class="ex-img trophy"></div><div class="ex-body"><b>观赛通兑券</b><div class="ex-meta"><span>900 积分</span><span class="sold">已售罄</span></div></div></div>
+  </div>
+</div>`;
+
+const screenPrize = ()=>`${Status()}${NavActions('兑换商店',['规则','客服'])}<div class="body">
+  <div class="store-hero"><div class="k">DU COIN EXIT · PRIZE</div><h3>我的奖品，不混在兑换流里找。</h3><div class="more" style="color:var(--n80)">展示已被我获取的奖品，拍卖记录在二级 Tab 内切换。</div></div>
+  <div class="store-tabs"><span class="chip">限时拍卖</span><span class="chip">限量兑换</span><span class="chip active">我的奖品</span></div>
+  <div class="sub-tabs"><span class="chip active">我的奖品</span><span class="chip">我的拍卖</span></div>
+  <div class="prize-card"><div class="thumb"></div><div class="info"><b>示例联赛 联名热身服</b><p>2026-05-09 20:01 兑换成功 · 待发货</p><button class="btn outline sm" style="margin-top:7px">查看物流</button></div></div>
+  <div class="prize-card"><div class="thumb"></div><div class="info"><b>球队限定贴纸包</b><p>2026-05-08 10:04 兑换成功 · 已签收</p><button class="btn outline sm" style="margin-top:7px">晒单</button></div></div>
+  <div class="prize-card"><div class="thumb"></div><div class="info"><b>Lakers 总决赛限定球衣</b><p>拍卖未中 · 保证金 300 积分已退回</p><button class="btn outline sm" style="margin-top:7px">查看拍卖</button></div></div>
+</div>`;
+
+const assetRows = [
+  ['每日免费积分','任务中心领取','+50','plus'],
+  ['七日登录','D3 签到奖励','+188','plus'],
+  ['猜中了','Lakers G3 结算命中','+192','plus'],
+  ['限量兑换','示例联赛 联名热身服','-380','minus'],
+  ['拍卖消耗','LeBron 签名战靴出价','-22,798','minus'],
+  ['拍卖退回','未中拍保证金退回','+300','plus']
+];
+
+/* S02 — Type 1: TopTabs(0) + TabBar(0). Feeds card in community feed. */
+const screen12 = ()=>`${Status()}${TopTabs(0)}<div class="body visual-grade"><div class="pad"><div class="feed-grid">
+  ${Feed('jersey','铭浩','OOTD｜球衣叠穿的真实效果——别再问能不能穿了。','♥ 257 · 评论 83',{hot:true})}
+  ${Feed('shoe','云樵','后卫鞋横评：这5双实测数据vs营销吹的对比——差多少？','')}
+  ${RecBanner(markets[0])}
+  ${Feed('court','一鵬','Knicks主场气氛沸腾——但赔率已经把这气氛溢价了，值不值？','♥ 678 · 评论 203',{hot:true})}
+  ${Feed('ball','皮耶罗','G3前瞻：市场共识在跑向Lakers——但上次集体翻车才三天前。','♥ 1.2k · 评论 312')}
+  ${Feed('trophy','小野','冠军赔率追踪：这4支队的赔率变动——比你们瞎猜靠谱多了。','♥ 980 · 评论 275')}
+  ${Feed('dunk','西门','十佳球慢放：每一个动作拆开看——你们平时在球场学的啥啊。','♥ 2.1k · 评论 567')}
+</div></div></div>${TabBar(0)}`;
+
+const screenShare = ()=>`${Status()}${Nav('战绩海报','保存')}<div class="body">
+  <div class="poster-stage visual-grade">
+    <div class="poster-card"><div class="qr"></div><div class="label">SHARE CARD · PREDICTION HIT</div><h3>神预测<br><span class="num-hero big">+192</span></h3><p style="font-size:10px;line-height:1.5;color:var(--n80)">Lakers G3 正方命中 · 准确率升至 52%</p></div>
+    <div class="poster-card"><div class="qr"></div><div class="label">SHARE CARD · HOT COMMENT</div><h3>评论被赞<br><span class="num-hero big">342</span></h3><p style="font-size:10px;line-height:1.5;color:var(--n80)">{BRAND.placeholder_user} 的评论进入讨论区前排 · 评论家榜 #37</p></div>
+    <div class="poster-card"><div class="qr"></div><div class="label">SHARE CARD · RANK LINE</div><h3>榜单进线<br><span class="num-hero big">#14</span></h3><p style="font-size:10px;line-height:1.5;color:var(--n80)">今日前100名奖励线内 · 预计 +1,688 积分</p></div>
+  </div>
+  <div class="share-actions"><button class="btn accent">发到{BRAND.name}社区</button><button class="btn outline">邀请好友来战</button></div>
+</div>`;
+
+const screens = [
+  {id:'S01',rail:1,name:'活动主页',render:screen1,notes:['Type 1：TopTabs(示例活动) + TabBar({BRAND.name})，无返回。','首页右上角为规则/客服；每日免费积分拉起半浮层任务中心。']},
+  {id:'S02',rail:1,name:'推荐 Feeds 轻量示例业务卡',render:screen12,notes:['Type 1：TopTabs(推荐) + TabBar({BRAND.name})。','推荐流里的示例业务入口压缩到约 40% 高度，只保留命题、赔率、倒计时、投注和参与热度。']},
+  {id:'S03',rail:2,name:'任务中心半浮层',render:screenTask,notes:['从 S01 每日免费积分拉起，保持底部半浮层而非全屏。','榜单奖励规则同步：Top3 8888 / 4-50名 1688 / 51-100名 666。']},
+  {id:'S04',rail:2,name:'我的预测',render:screen8,notes:['合并原我的活动 + 我的积分；右上角客服/兑换进入对应功能。','金刚位展示积分余额与示例业务准确率；三 Tab：积分流水/示例业务记录/评论记录。']},
+  {id:'S05',rail:3,name:'示例业务列表页',render:screen2,notes:['Type 2：Nav 返回，无顶/底 Tab。','示例业务 Feed 去掉球队 icon 和主客场硬标签，以阵营热度、赔率和正反方支持率建立主体感。']},
+  {id:'S06',rail:3,name:'投注面板（正方/反方）',render:screen4,notes:['半屏 Sheet 支持选择正方或反方。','行动按钮统一为「投注」，不再出现旧支持确认文案。']},
+  {id:'S07',rail:3,name:'示例业务结算（赢/亏双态）',render:screen5,notes:['赢=去打脸反方；亏=看复盘学别人分析。','去掉底部评论模块，只保留下一场可投入口。']},
+  {id:'S08',rail:4,name:'示例业务详情页',render:screen3,notes:['顶部整合投注结束时间、倒计时和开奖时间说明；右上角增加客服/分享。','讨论与热门内容双 Tab；底部固定发布评论按钮。']},
+  {id:'S09',rail:4,name:'排行榜',render:screen7Rank,notes:['预言家/评论家 50:50二分Tab；最多展示前20人。','Top100 三档奖励：Top3 8888、4-50名 1688、51-100名 666；底部进度条贴底。']},
+  {id:'S10',rail:4,name:'战绩海报',render:screenShare,notes:['从原 S17 合并到 RAIL04 社区互动。','三张传播卡：神预测、评论被赞、榜单进线；默认 CTA 是发到{BRAND.name}社区。']},
+  {id:'S11',rail:5,name:'兑换商店 · 限时拍卖',render:screen10,notes:['兑换商店三Tab；限时拍卖激活。','右上角规则旁增加客服入口；顶部明确展示拍卖商品列表。']},
+  {id:'S12',rail:5,name:'拍卖详情',render:screen9,notes:['从兑换商店进入；大商品图+当前价+竞价记录。','去掉讨论模块，保留出价保障信息。']},
+  {id:'S13',rail:5,name:'兑换商店 · 限量兑换',render:screen11,notes:['同一兑换商店的「限量兑换」Tab状态，右上角规则/客服并列。','复用原限量兑换商品卡内容：380/120/260/900积分。']},
+  {id:'S14',rail:5,name:'兑换商店 · 我的奖品',render:screenPrize,notes:['三Tab中「我的奖品」激活，下设我的奖品/我的拍卖二级Tab。','右上角规则/客服保留；展示已被我获取的奖品。']}
+];
+
+const route = { current:'S01', stack:[], toast:'', modal:null, rankMode:'prophet', detailTab:'discussion', settle:'win' };
+const screenById = Object.fromEntries(screens.map(function(s){ return [s.id,s]; }));
+const detailComments = [
+  ['赵钊','我站正方。Lakers 的二次进攻虽然丑，但关键战容错比 Knicks 高。','342赞 · 96回复','support'],
+  ['夜枭','反方别被名气骗，Knicks 主场节奏一起，Lakers 第三节很容易掉线。','219赞 · 71回复','oppose'],
+  ['狮子头','这一题我只看两件事：篮板保护和失误转化。谁在评论区晒数据，谁就更像真懂。','156赞 · 38回复','support'],
+  ['闪火','正方现在赔率不算甜，但盘口没有把替补衔接段的优势算满。','128赞 · 24回复','support'],
+  ['西鱼','别忽略 Knicks 前场篮板，Lakers 如果第一节被抢 5 个，后面会非常被动。','104赞 · 19回复','oppose'],
+  ['小叮当','我投 80 积分正方，理由是 Knicks 今天换防会被点名，不是玄学。','96赞 · 18回复','support'],
+  ['许','讨论区别只喊口号，谁能把第三节阵容轮换说清楚，我给谁点赞。','82赞 · 12回复','support'],
+  ['铭浩','反方有价值。Lakers 被迫提速之后失误会上来，2.5x 不是白给。','75赞 · 15回复','oppose'],
+  ['云樵','看热度 62:38，正方已经有点拥挤了，但我还是跟基本面。','63赞 · 9回复','support'],
+  ['皮耶罗','这类题最怕赛前情绪盘，等首节篮板数据出来再补仓更稳。','51赞 · 7回复','oppose']
+];
+const detailFeeds = [
+  ['shoe','西鱼','LeBron XXI实穿：营销吹得天花乱坠——到底值不值那个价？','♥ 1.3k · 评论 286'],
+  ['court','小叮当','战术前瞻｜Knicks防守对位全错了——三节数据复盘。','♥ 980 · 评论 214'],
+  ['jersey','许','OOTD｜球衣外穿的秘诀——别再直接套身上了行吗？','♥ 742 · 评论 96'],
+  ['trophy','铭浩','Lakers夺冠赔率一周跌了1.2——现在冲还赶得上吗？','♥ 1.8k · 评论 403'],
+  ['ball','闪火','赔率笔记：正方热度过 60% 后，为什么还没明显降赔？','♥ 856 · 评论 167'],
+  ['dunk','望舒','十佳球慢放：Lakers 第四节那个空切，其实是整场胜负手。','♥ 1.1k · 评论 238'],
+  ['court','立昂','G3 复盘模板：别只看比分，把失误转化和二次进攻拆开看。','♥ 693 · 评论 122'],
+  ['shoe','夜枭','季后赛装备观察：Knicks 后卫线今天为什么全换低帮？','♥ 528 · 评论 84']
+];
+function screen3Detail(){
+  var tab = route.detailTab;
+  var discussion = detailComments.map(function(c){ return Comment(c[0],c[1],c[2],c[3]); }).join('');
+  var hot = '<div class="detail-tab-title">热门内容 Tab：同一示例业务下的复盘、装备、球衣、赔率内容。</div><div class="feed-grid">' + detailFeeds.map(function(f){ return Feed(f[0],f[1],f[2],f[3]); }).join('') + '</div>';
+  return Status()+NavActions('示例业务详情',['客服','分享'])+'<div class="body visual-grade with-sticky" style="position:relative">' +
+  '<div class="detail-hero simple">' +
+    '<div class="k"><span>Lakers vs Knicks · G3</span><span>PLAYOFF MARKET</span></div>' +
+    '<h3>Lakers 能赢下 G3 客场战吗？</h3>' +
+    '<div class="detail-timebox"><div><span>投注结束时间</span><b>2026年05月11日 20:30</b></div><div><span>倒计时</span><b class="countdown '+(urgent(markets[0].ends)?'urgent':'')+'">'+markets[0].ends+'</b></div></div>' +
+    '<div class="draw-note">开奖时间：2026年05月11日 22:00 · 官方比分确认后自动结算。</div>' +
+    '<div class="detail-poly">'+PolyRhythm()+Spark(markets[0])+TrendLabel(markets[0])+'<div class="poly-copy"><b>18,420 已投注 · 资金流动加速</b><br>'+FlowChip(markets[0])+'<span style="margin-left:4px">正方热度 62%</span></div></div>' +
+    '<div class="stance-grid"><div class="stance-card active"><b>正方 · Lakers 赢</b><span class="num">1.6x</span><p style="font-size:9px;color:var(--n80);line-height:1.35;margin-top:2px">62% 支持 · 你已投注 120</p></div><div class="stance-card"><b>反方 · Knicks 守主场</b><span class="num">2.5x</span><p style="font-size:9px;color:var(--n80);line-height:1.35;margin-top:2px">38% 支持 · 高赔率反击</p></div></div>' +
+  '</div>' +
+  '<div class="detail-actions single"><button class="btn accent">立即投注</button></div>' +
+  '<div class="dual-tabs"><span class="chip '+(tab==='discussion'?'active':'')+'">讨论 '+(1280+detailComments.length)+'</span><span class="chip '+(tab==='hot'?'active':'')+'">热门内容 '+(24+detailFeeds.length)+'</span></div>' +
+  '<div class="detail-tab-content">' + (tab==='discussion' ? discussion : hot) + '</div>' +
+  '</div><button class="screen-sticky">发布评论</button>';
+}
+function screen7Rank(){
+  var data = route.rankMode === 'critic' ? criticData : prophetData;
+  var rows = data.slice(0,20).map(function(u,i){
+    var no = i===0 ? '🥇' : (i===1 ? '🥈' : (i===2 ? '🥉' : '#'+(i+1)));
+    var reward = i<3 ? '8,888' : (i<50 ? '1,688' : '666');
+    return '<div class="rank-row '+(i<3?'top'+(i+1):'')+'">' +
+      '<div class="rank-no">'+no+'</div>' +
+      '<span class="ava"></span><div style="flex:1;min-width:0"><div class="rank-name">'+u.name+'</div><div class="row-meta">准确率 '+u.acc+'% · 获赞 '+u.likes+' · 预计奖励 '+reward+' 积分</div></div><div class="num rank-score">'+u.tokens.toLocaleString()+'</div>' +
+    '</div>';
+  }).join('');
+  return Status()+Nav('排行榜')+'<div class="chiprow rank-tabs">' +
+    '<span class="chip '+(route.rankMode==='prophet'?'active':'')+'">预言家</span><span class="chip '+(route.rankMode==='critic'?'active':'')+'">评论家</span></div><div class="body" style="padding-bottom:0;position:relative">' +
+    '<div class="rank-summary"><b>每日 00:00 更新 · 距离今日结算 <span class="num">06:14:22</span></b><br>榜单前100名，最高 <span class="num">8,888</span> 积分<div class="reward-rule"><b>Top100 奖励</b> Top3 8,888 · 4-50名 1,688 · 51-100名 666</div></div><div class="rank-list">' + rows + '</div>' +
+    '<div class="reward-line">奖励线 · Top100 最高 8,888 积分</div>' +
+    '<div style="margin:4px 10px 10px;font-size:9px;color:var(--n80)">预言家按赚取积分排序；评论家按获赞数排序。奖励每日结算一次。</div></div>' +
+    '<div class="rank-sticky rank-progress"><span class="ava"></span><div class="rank-copy"><div style="font-size:11px;font-weight:500">立昂 · 当前 #14</div><div style="font-size:9px;color:var(--n80)">距 #13 还差 280</div></div><button class="cta">继续投注</button><div class="progress-row"><div class="progress-track"><div class="progress-fill"></div></div><span class="progress-target">#13 2,560</span></div></div>';
+}
+
+const Phone = html=>`<div class="phone-shell"><div class="phone-screen">${html}</div></div>`;
+const Wrap = s=>`<div class="phone-wrap">${Phone(s.render())}<div style="margin-top:10px"><div class="meta"><b>${s.id}</b> · ${s.name}</div><div style="font-size:12px;line-height:1.5;margin-top:4px">${s.notes.map(n=>`<div>${n}</div>`).join('')}</div></div></div>`;
+const Arrow = t=>`<div class="arrow">${t}</div>`;
+const rails = [
+  [1,'入口与推荐','活动主页与推荐流，把示例业务嵌入{BRAND.name}社区入口。'],
+  [2,'任务与资产','半浮层任务中心、我的预测与积分资产。'],
+  [3,'示例业务交易链路','示例业务列表、投注面板、结算反馈。'],
+  [4,'社区互动闭环','详情讨论、排行榜、战绩海报。'],
+  [5,'积分消耗出口','兑换商店、拍卖详情、限量兑换与我的奖品。']
+];
+const arrows = {1:['顶部推荐互切'],2:['资产入口'],3:['点击投注','提交投注'],4:['榜单/分享'],5:['拍卖详情','切换兑换','我的奖品']};
+const flow = document.getElementById('flow');
+rails.forEach(([id,title,sub])=>{
+  const group = screens.filter(s=>s.rail===id);
+  flow.insertAdjacentHTML('beforeend',`<section class="rail"><div class="rail-title"><span>RAIL ${String(id).padStart(2,'0')}</span><h2>${title}</h2><p>${sub}</p></div><div class="track">${group.map((s,i)=>Wrap(s)+(i<group.length-1?Arrow((arrows[id]||[])[i]||'下一步'):'')).join('')}</div></section>`);
+});
+const specRows = screens.map(s=>`<tr><td><b>${s.id}</b><br>${s.name}</td><td>${s.id==='S01'||s.id==='S02'?'<span class="ok">Type 1</span>：TopTabs+TabBar':'<span class="chg">Type 2</span>：Nav返回'}</td><td>${s.notes.join('<br>')}</td><td>{BRAND.name} DS：页面背景 n-bg，卡片 n00；间距 5pt/10pt；控件 2px 圆角。</td><td>状态含默认、半浮层、已投注、已结算、库存/奖品状态。</td><td>手势含点击卡片 Push、投注 Sheet、任务半浮层、Tab 切换、固定发布评论。</td><td>交互 Demo 使用 iOS push/sheet/tap feedback；本稿为平面交互说明版。</td><td>异常含积分不足、赛事延期、网络失败、开奖延迟、库存售罄。</td></tr>`).join('');
+document.getElementById('spec-table').innerHTML='<tr><th>页面</th><th>页面类型</th><th>关键说明</th><th>DS约束</th><th>状态</th><th>手势</th><th>动效</th><th>异常</th></tr>'+specRows;
+
+</script>
+<!-- VERSION: dewu-interaction-design-example-v7.6 -->
+<!-- CHANGES: 更新为示例活动 示例联赛 预测示例业务最新平面交互稿；覆盖 Type1/Type2 页面、双列 Feeds、任务半浮层、讨论/热门内容、排行榜、结算、兑换出口 -->
+<!-- BASED ON: /Users/admin/open-design/.od/projects/13d329a3-2ac0-4835-8da0-11e7025b01f2/nba-prediction-screens-v7.6-updated-flat-flow.html -->
+</body>
+</html>

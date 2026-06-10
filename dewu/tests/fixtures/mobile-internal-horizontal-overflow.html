@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <!-- MODE: MODE_DEMO -->
+  <meta charset="utf-8">
+  <style>
+    :root { --accent:#01C2C3; --n140:#14151A; --n-bg:#F5F5F9; --n20:#F1F1F5; }
+    .btn { white-space: nowrap; }
+    .chrome-layer, .body-container {}
+    .nav { backdrop-filter: blur(10px); }
+    .phone-screen { width:390px; overflow:hidden; }
+    .body { overflow-y:auto; }
+    .tiny-dot { position:absolute; right:-12px; width:8px; height:8px; }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: 1ms; } }
+  </style>
+</head>
+<body>
+  <div class="signature">@ianzhao</div>
+  <main class="workbench">
+    <section class="phone-screen"><div class="body"><span class="tiny-dot"></span>探索</div></section>
+    <aside class="hud"><div class="hud-title"></div><div class="hud-current"></div><div class="hud-kv"></div><div class="hud-jump"></div><div class="hud-controls"></div><div class="hud-log"></div></aside>
+  </main>
+  <script>const ready = true;</script>
+</body>
+</html>

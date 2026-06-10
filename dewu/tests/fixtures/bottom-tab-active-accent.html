@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <!-- MODE: MODE_DEMO -->
+  <style>
+    :root { --accent: #01C2C3; --ease-ios: cubic-bezier(.32,.72,0,1); }
+    .btn { white-space: nowrap; }
+    .chrome-layer, .body-container {}
+    .nav { backdrop-filter: blur(10px); }
+    .tabbar { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .tab svg { width: 20px; height: 20px; stroke: currentColor; fill: none; }
+    .tab.active { color: var(--accent); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: 1ms; } }
+  </style>
+</head>
+<body>
+  <div class="signature">✦ @ianzhao</div>
+  <div class="workbench">
+    <div class="phone-screen">
+      <main class="body-container">品牌首页内容</main>
+      <nav class="chrome-layer tabbar">
+        <span class="tab active"><svg viewBox="0 0 20 20"><path d="M3 9l7-6 7 6v8H3z"></path></svg>得物</span>
+        <span class="tab"><svg viewBox="0 0 20 20"><path d="M4 5h12l-1 8H6L4 5z"></path></svg>购买</span>
+        <span class="tab"><svg viewBox="0 0 20 20"><path d="M4 5h12v8H8l-4 3z"></path></svg>探索</span>
+        <span class="tab"><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3"></circle></svg>我</span>
+      </nav>
+    </div>
+    <aside class="hud">
+      <div class="hud-title"></div><div class="hud-current"></div><div class="hud-kv"></div>
+      <div class="hud-jump"></div><div class="hud-controls"></div><div class="hud-log"></div>
+    </aside>
+  </div>
+  <script>const ready = true;</script>
+</body>
+</html>

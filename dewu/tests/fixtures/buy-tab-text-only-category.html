@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <!-- MODE: MODE_DEMO -->
+  <meta charset="utf-8">
+  <style>
+    :root { --accent:#01C2C3; --n140:#14151A; --n-bg:#F5F5F9; --n20:#F1F1F5; }
+    .btn { white-space: nowrap; }
+    .chrome-layer, .body-container {}
+    .nav { backdrop-filter: blur(10px); }
+    .commerce-tabs { height:48px; display:flex; gap:18px; }
+    .commerce-tabs span.active::after { content:""; display:block; width:27px; height:3px; background:var(--accent); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: 1ms; } }
+  </style>
+</head>
+<body>
+  <div class="signature">@ianzhao</div>
+  <main class="workbench">
+    <section class="phone-screen">
+      <div class="commerce-tabs"><span class="active">推荐</span><span>潮玩</span><span>男装</span><span>美妆</span><span>鞋类</span><span>女装</span><span>分类</span></div>
+    </section>
+    <aside class="hud"><div class="hud-title"></div><div class="hud-current"></div><div class="hud-kv"></div><div class="hud-jump"></div><div class="hud-controls"></div><div class="hud-log"></div></aside>
+  </main>
+  <script>const ready = true;</script>
+</body>
+</html>

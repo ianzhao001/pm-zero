@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=393">
+<title>{BRAND.name} · 心愿池 — 线框流程画布</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: var(--accent); --accent-bright: #00FEFF; --accent-press: #029999; --accent-soft: #D9F4F4;
+  --dewu-red: var(--semantic-danger); --dewu-red-light: #FFA9A9;
+  --auth-green: #00C853; --vip-gold: #C9A84C;
+  --n00: #FFFFFF; --n-bg: #F5F5F9; --n20: #F1F1F5; --n40: #E6E6EB;
+  --n80: #AAAABB; --n100: #7F7F8E; --n140: var(--n140);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"PingFang SC","PingFang HK",-apple-system,"Noto Sans SC",sans-serif; background:#f6f5f1; }
+.canvas { position:relative; background:#f6f5f1; padding:32px; padding-top:72px; min-height:100vh; overflow-x:auto; }
+.canvas::before {
+  content:''; position:fixed; inset:0;
+  background-image: radial-gradient(circle, #d4d2ca 0.5px, transparent 0.5px);
+  background-size:28px 28px; pointer-events:none; z-index:0;
+}
+/* signature */
+.signature {
+  position:absolute; top:24px; left:32px; z-index:100;
+  font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  font-size:11px; letter-spacing:0.08em;
+  color:rgba(20,21,26,.5); pointer-events:none; user-select:none;
+}
+.signature::first-letter { color:var(--accent); margin-right:2px; }
+/* header */
+.canvas-header { position:relative; z-index:1; margin-bottom:28px; }
+.tag-row { display:flex; gap:8px; margin-bottom:12px; }
+.tag { display:inline-block; padding:2px 10px; font-size:10px; font-weight:500; border-radius:2px; font-family:"JetBrains Mono",monospace; letter-spacing:.04em; background:var(--accent-soft); color:var(--accent-press); }
+.tag.outline { background:transparent; border:1px solid var(--n40); color:var(--n100); }
+.canvas-title { font-size:26px; font-weight:600; color:var(--n140); margin-bottom:6px; }
+.canvas-title em { font-style:normal; color:var(--accent); }
+.meta-line { font-size:12px; color:var(--n100); line-height:1.6; font-family:"JetBrains Mono",monospace; }
+.meta-line strong { color:var(--n140); font-weight:500; }
+.right-meta { position:absolute; top:0; right:0; text-align:right; font-size:11px; color:var(--n80); line-height:1.7; font-family:"JetBrains Mono",monospace; }
+/* specs cards */
+.specs { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px; position:relative; z-index:1; }
+.spec-card { background:var(--n00); border:1px solid var(--n40); border-radius:8px; padding:14px; font-size:11px; }
+.spec-card h4 { font-size:11px; font-weight:600; color:var(--n80); letter-spacing:.04em; margin-bottom:6px; text-transform:uppercase; }
+.spec-card .swatch { display:inline-block; width:16px; height:16px; border-radius:2px; vertical-align:middle; margin-right:4px; }
+.spec-row { display:flex; justify-content:space-between; padding:2px 0; color:var(--n100); }
+.spec-row .val { color:var(--n140); font-weight:500; }
+/* notes palette */
+.note { position:relative; background:#fff; border-radius:2px; padding:10px 12px; margin-bottom:8px; color:var(--n140); width:auto; display:inline-flex; align-items:flex-start; gap:6px; transform:rotate(var(--r,0deg)); }
+.note .pin { position:absolute; top:-4px; left:50%; transform:translateX(-50%); width:10px; height:10px; background:#DB3A34; border-radius:999px; box-shadow:0 1px 2px rgba(0,0,0,.15); }
+.note.mint { background:#E8F5E9; --r:-2deg; }
+.note.lemon { background:#FFF9C4; --r:3deg; }
+.note.sakura { background:#FCE4EC; --r:-1deg; }
+.note.sky { background:#E3F2FD; --r:2deg; }
+.note.lavender { background:#EDE7F6; --r:-3deg; }
+.note.sun { background:#FFE0B2; --r:1deg; }
+/* rails */
+.rail { position:relative; z-index:1; margin-bottom:40px; }
+.rail-head { margin-bottom:12px; }
+.rail-num { display:inline-block; font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--accent); background:var(--accent-soft); padding:1px 8px; border-radius:2px; margin-right:6px; }
+.rail-title { font-size:16px; font-weight:500; color:var(--n140); }
+.rail-sub { font-size:11px; color:var(--n80); font-family:"JetBrains Mono",monospace; letter-spacing:.03em; }
+.rail-track { display:flex; align-items:flex-start; gap:0; overflow-x:auto; padding:8px 0; }
+/* phone frame */
+.phone-shell { flex-shrink:0; width:280px; height:608px; border:1.5px solid var(--n140); border-radius:36px; background:#fff; padding:5px; position:relative; margin:0 8px; box-shadow:0 8px 24px rgba(12,18,28,.08), 0 2px 6px rgba(12,18,28,.04); }
+.phone-shell::before { content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%); width:72px; height:20px; background:var(--n140); border-radius:999px; z-index:5; }
+.phone-screen { width:100%; height:100%; border:1px solid var(--n40); border-radius:32px; background:#fff; overflow:hidden; position:relative; display:flex; flex-direction:column; font-size:12px; }
+/* screen internals */
+.status-bar { display:flex; justify-content:space-between; padding:4px 12px; font-size:10px; color:var(--n140); background:var(--n00); }
+.nav-bar { display:flex; align-items:center; justify-content:space-between; padding:6px 10px; font-size:12px; font-weight:500; color:var(--n140); }
+.nav-bar .back { font-size:16px; cursor:default; }
+.nav-bar .btn { padding:3px 10px; background:var(--accent); color:var(--n00); border-radius:2px; font-size:10px; white-space:nowrap; }
+.nav-bar .rt { color:var(--n80); font-size:10px; }
+.body-content { flex:1; overflow:hidden; display:flex; flex-direction:column; }
+.ph-img { background:repeating-linear-gradient(135deg,#efefef 0 6px,#f7f7f7 6px 12px); border:1px solid var(--n40); display:flex; align-items:center; justify-content:center; color:var(--n80); font-size:10px; font-family:"JetBrains Mono",monospace; border-radius:4px; }
+/* feed card */
+.feed-card { margin:0 8px 6px; border-radius:8px; overflow:hidden; }
+.feed-card .head { display:flex; align-items:center; gap:6px; padding:6px 0; }
+.feed-card .avatar { width:18px; height:18px; border-radius:999px; background:var(--n40); }
+.feed-card .name { font-size:10px; font-weight:500; color:var(--n140); }
+.feed-card .img { height:80px; background:repeating-linear-gradient(135deg,#efefef 0 6px,#f7f7f7 6px 12px); border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--n80); font-size:9px; margin-bottom:4px; }
+.feed-card .meta { display:flex; gap:8px; font-size:9px; color:var(--n80); }
+/* tabbar */
+.tabbar { display:grid; grid-template-columns:repeat(4,1fr); height:32px; background:var(--n00); border-top:1px solid var(--n40); }
+.tabbar .tab { display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:7px; color:var(--n80); gap:1px; }
+.tabbar .tab.active { color:var(--accent); }
+.tabbar .tab svg { width:14px; height:14px; }
+/* button */
+.btn { padding:4px 14px; border-radius:2px; font-size:11px; font-weight:500; white-space:nowrap; display:inline-flex; align-items:center; justify-content:center; gap:4px; cursor:default; }
+.btn.accent { background:var(--accent); color:var(--n00); box-shadow:0 2px 4px rgba(0,0,0,.05); }
+.btn.primary { background:var(--n140); color:var(--n00); box-shadow:0 2px 4px rgba(0,0,0,.05); }
+.btn.outline { background:var(--n00); color:var(--n140); border:1px solid var(--n40); }
+/* chip */
+.chip { display:inline-block; padding:2px 8px; border-radius:2px; font-size:9px; background:var(--n20); color:var(--n80); }
+.chip.solid { background:var(--accent-soft); color:var(--accent-press); }
+/* hot marker */
+.hot { outline:2px dashed var(--accent); outline-offset:2px; position:relative; }
+.hot::after { content:attr(data-hot); position:absolute; top:-10px; right:-4px; font-family:"JetBrains Mono",monospace; font-size:8px; color:var(--n00); background:var(--accent); padding:0 4px; border-radius:2px; white-space:nowrap; line-height:14px; }
+/* arrow connector */
+.arrow { flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; width:60px; min-height:100px; position:relative; }
+.arrow .line { flex:1; width:0; border-left:1.5px dashed var(--n80); }
+.arrow .label { font-size:9px; color:var(--n80); text-align:center; padding:4px 0; line-height:1.4; white-space:nowrap; }
+.arrow .label b { color:var(--accent); font-weight:500; }
+.arrow .tip { width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid var(--n80); }
+.rail-connector { display:flex; justify-content:center; margin:4px 0; }
+.rail-connector .vline { width:0; height:24px; border-left:1.5px dashed var(--n80); }
+.rail-connector .vline.tip { border-left:1.5px dashed var(--n80); }
+.rail-connector .vline.tip::after { content:''; display:block; margin:-3px 0 0 -4px; width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid var(--n80); }
+/* grid helpers */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+.space-between { display:flex; justify-content:space-between; align-items:center; }
+.gap-4 { gap:4px; }
+.gap-8 { gap:8px; }
+.flex { display:flex; }
+.flex-1 { flex:1; }
+.p-8 { padding:8px; }
+.px-8 { padding-left:8px; padding-right:8px; }
+.mt-4 { margin-top:4px; }
+.mb-4 { margin-bottom:4px; }
+.ml-a { margin-left:auto; }
+/* stamp */
+.stamp { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:999px; border:1.5px dashed var(--accent); font-size:8px; color:var(--accent); font-family:"JetBrains Mono",monospace; transform:rotate(8deg); background:rgba(1,194,195,.04); }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+<!-- Signature -->
+<div class="signature">✦ {BRAND.signature}</div>
+
+<!-- Header -->
+<div class="canvas-header">
+  <div class="tag-row">
+    <span class="tag">Wireframe · Mid-fidelity</span>
+    <span class="tag outline">{BRAND.name} · {BRAND.name}</span>
+    <span class="tag outline">iOS 26</span>
+  </div>
+  <div class="canvas-title">{BRAND.name} · <em>心愿池</em></div>
+  <div class="meta-line"><strong>Platform</strong> iOS 26 · <strong>Spec</strong> 393×852 · <strong>Flow</strong> 5 rails · <strong>Owner</strong> {BRAND.signature}</div>
+  <div class="right-meta">
+    <div>KPI: 心愿创建率 ↑32%</div>
+    <div>Version: v2.0</div>
+    <div style="margin-top:4px">Accent: <span style="display:inline-block;width:10px;height:10px;background:var(--accent);border-radius:2px;vertical-align:middle;"></span> var(--accent)</div>
+  </div>
+</div>
+
+<!-- Specs -->
+<div class="specs">
+  <div class="spec-card">
+    <h4>🧱 原子库</h4>
+    <div class="spec-row"><span>按钮 (btn)</span><span class="val">2px · 500w · nowrap</span></div>
+    <div class="spec-row"><span>芯片 (chip)</span><span class="val">2px · 400w</span></div>
+    <div class="spec-row"><span>卡片</span><span class="val">8px round</span></div>
+    <div class="spec-row"><span>手机框</span><span class="val">36px · 1.5px</span></div>
+  </div>
+  <div class="spec-card">
+    <h4>🎨 色阶</h4>
+    <div class="spec-row"><span class="swatch" style="background:var(--accent)"></span> accent</div>
+    <div class="spec-row"><span class="swatch" style="background:var(--n140)"></span> n140</div>
+    <div class="spec-row"><span class="swatch" style="background:#7F7F8E"></span> n100</div>
+    <div class="spec-row"><span class="swatch" style="background:#F5F5F9"></span> n-bg</div>
+    <div class="spec-row"><span class="swatch" style="background:#D9F4F4"></span> accent-soft</div>
+  </div>
+  <div class="spec-card">
+    <h4>📐 间距层级</h4>
+    <div class="spec-row"><span>卡片间距</span><span class="val">5pt</span></div>
+    <div class="spec-row"><span>卡片内边距</span><span class="val">10pt</span></div>
+    <div class="spec-row"><span>页面布局</span><span class="val">20pt</span></div>
+    <div class="spec-row"><span>导航边距</span><span class="val">16pt</span></div>
+  </div>
+  <div class="spec-card">
+    <h4>✏️ 便利贴</h4>
+    <div class="note mint" style="font-size:10px;padding:6px 10px;margin:2px 0"><span class="pin"></span>创建流程</div>
+    <div class="note lemon" style="font-size:10px;padding:6px 10px;margin:2px 0"><span class="pin"></span>浏览互动</div>
+    <div class="note sakura" style="font-size:10px;padding:6px 10px;margin:2px 0"><span class="pin"></span>社交分发</div>
+  </div>
+</div>
+
+<!-- RAIL 0 -->
+<div class="rail">
+  <div class="rail-head">
+    <span class="rail-num">RAIL 00</span>
+    <span class="rail-title">入口 · 发现心愿池</span>
+    <span class="rail-sub">ENTRY · DISCOVER WISH POOL</span>
+  </div>
+  <div class="rail-track">
+    <!-- S01 -->
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>📶 5G 🔋</span></div>
+        <div class="nav-bar"><span class="back">‹</span><span>{BRAND.name}</span><span style="font-size:14px">🔍</span></div>
+        <div class="body-content p-8">
+          <div style="display:flex;gap:4px;margin-bottom:6px;overflow-x:auto;padding:2px 0">
+            <span class="chip solid">推荐</span><span class="chip">趋势</span><span class="chip">灵感</span><span class="chip">穿搭</span><span class="chip">关注</span>
+          </div>
+          <div class="feed-card hot" data-hot="S01-A">
+            <div class="head">
+              <div class="avatar"></div><span class="name">{BRAND.placeholder_user}</span>
+              <span style="font-size:8px;color:var(--n80);margin-left:auto">3h</span>
+            </div>
+            <div class="img">📸 OOTD 滑板穿搭</div>
+            <div style="font-size:10px;color:var(--n140);font-weight:500;margin-bottom:2px">滑板街头 · 心愿池已收录</div>
+            <div class="meta"><span>❤️ 342</span><span>💬 28</span><span class="ml-a"><span style="color:var(--accent)">✨ 心愿池</span></span></div>
+          </div>
+          <div class="feed-card">
+            <div class="head"><div class="avatar"></div><span class="name">Noah</span><span style="font-size:8px;color:var(--n80);margin-left:auto">5h</span></div>
+            <div class="img">👟 Nike Air Force 1 开箱</div>
+            <div style="font-size:10px;color:var(--n140);font-weight:500;margin-bottom:2px">经典白勾</div>
+            <div class="meta"><span>❤️ 187</span><span>💬 14</span></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>{BRAND.name}</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>购买</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>探索</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>我</div>
+        </div>
+      </div>
+    </div>
+    <!-- arrow -->
+    <div class="arrow">
+      <div class="line"></div>
+      <div class="label">点击 Feed 卡<b>✨ 心愿池</b>标签</div>
+      <div class="tip"></div>
+    </div>
+    <!-- S02 -->
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>📶 5G 🔋</span></div>
+        <div class="nav-bar"><span class="back">‹</span><span>心愿池</span><span class="rt">···</span></div>
+        <div class="body-content p-8">
+          <div style="text-align:center;margin-bottom:8px">
+            <div style="font-size:14px;font-weight:600;color:var(--n140)">{BRAND.placeholder_user} 的心愿池</div>
+            <div style="font-size:10px;color:var(--n80)">32 件商品 · 更新于昨天</div>
+          </div>
+          <div class="grid-2" style="gap:6px">
+            <div class="feed-card hot" data-hot="S02-B"><div class="img" style="height:80px">👟 AJ1 Retro High</div><div style="font-size:10px;font-weight:500">AJ1 芝加哥</div><div class="num" style="font-size:10px;color:var(--n140)">¥2,399</div></div>
+            <div class="feed-card"><div class="img" style="height:80px">🧥 Essentials Hoodie</div><div style="font-size:10px;font-weight:500">Essentials 卫衣</div><div class="num" style="font-size:10px;color:var(--n140)">¥899</div></div>
+            <div class="feed-card"><div class="img" style="height:80px">⌚ G-Shock DW-5600</div><div style="font-size:10px;font-weight:500">G-Shock 黑金</div><div class="num" style="font-size:10px;color:var(--n140)">¥1,299</div></div>
+            <div class="feed-card"><div class="img" style="height:80px">🎒 Supreme 腰包</div><div style="font-size:10px;font-weight:500">Supreme 红色</div><div class="num" style="font-size:10px;color:var(--n140)">¥1,899</div></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>{BRAND.name}</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>购买</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>探索</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>我</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RAIL 1 -->
+<div class="rail">
+  <div class="rail-head">
+    <span class="rail-num">RAIL 01</span>
+    <span class="rail-title">创建心愿 · 从商品页加入</span>
+    <span class="rail-sub">CREATE WISH · ADD FROM PRODUCT</span>
+  </div>
+  <div class="rail-track">
+    <!-- S03 -->
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>📶 5G 🔋</span></div>
+        <div class="nav-bar"><span class="back">‹</span><span>商品详情</span><span style="font-size:12px">⋯</span></div>
+        <div class="body-content">
+          <div class="ph-img" style="height:180px;margin:0 0 8px">👟 Air Jordan 1 Retro High OG <br>「Chicago Reimagined」</div>
+          <div class="px-8">
+            <div style="font-size:13px;font-weight:600;color:var(--n140)">Air Jordan 1 Retro High OG</div>
+            <div style="font-size:10px;color:var(--n80)">Chicago Reimagined · 2025</div>
+            <div style="margin:4px 0">
+              <span class="num" style="font-size:16px;font-weight:600;color:var(--n140)">¥2,399</span>
+              <span style="font-size:10px;color:var(--dewu-red);margin-left:6px">低于估价 ¥200</span>
+            </div>
+            <div style="display:flex;gap:4px;margin:6px 0">
+              <span class="chip">42</span><span class="chip solid hot" data-hot="S03-C">加入心愿池</span>
+            </div>
+            <div class="btn accent" style="width:100%;margin-top:6px">立即购买</div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>{BRAND.name}</div>
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>购买</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>探索</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>我</div>
+        </div>
+      </div>
+    </div>
+    <!-- arrow -->
+    <div class="arrow">
+      <div class="line"></div>
+      <div class="label">点击<b>加入心愿池</b>芯片</div>
+      <div class="tip"></div>
+    </div>
+    <!-- S04 -->
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>📶 5G 🔋</span></div>
+        <div class="nav-bar"><span class="back">‹</span><span>新建心愿</span><span class="btn accent" style="padding:2px 10px;font-size:10px">发布</span></div>
+        <div class="body-content p-8">
+          <div class="ph-img" style="height:100px;margin-bottom:6px">👟 AJ1 Chicago Reimagined</div>
+          <div style="font-size:10px;color:var(--n100);margin-bottom:4px">商品已自动添加</div>
+          <div class="feed-card" style="padding:6px;background:var(--n20);border-radius:4px;margin-bottom:8px">
+            <div style="display:flex;gap:6px">
+              <div class="ph-img" style="width:40px;height:40px;border-radius:4px"></div>
+              <div>
+                <div style="font-size:10px;font-weight:500">Air Jordan 1 Retro High OG</div>
+                <div class="num" style="font-size:10px">¥2,399</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom:6px">
+            <div style="font-size:10px;color:var(--n100);margin-bottom:2px">心愿备注</div>
+            <div style="border:1px solid var(--n40);border-radius:2px;padding:6px;font-size:11px;color:var(--n80)">写下你想要的理由...</div>
+          </div>
+          <div class="space-between">
+            <span style="font-size:10px;color:var(--n80)">公开 · 所有人可见</span>
+            <span style="font-size:16px">🔒 🔓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RAIL 2 -->
+<div class="rail">
+  <div class="rail-head">
+    <span class="rail-num">RAIL 02</span>
+    <span class="rail-title">浏览 · 发现与互动</span>
+    <span class="rail-sub">BROWSE · DISCOVER &amp; ENGAGE</span>
+  </div>
+  <div class="rail-track">
+    <!-- S05 -->
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>📶 5G 🔋</span></div>
+        <div class="nav-bar"><span class="back">‹</span><span>热门心愿</span><span style="font-size:12px">🔍</span></div>
+        <div class="body-content p-8">
+          <div style="margin-bottom:6px">
+            <span class="chip solid">🔥 热门</span><span class="chip">最新</span><span class="chip">关注的人</span>
+          </div>
+          <div class="feed-card hot" data-hot="S05-D">
+            <div class="head"><div class="avatar"></div><span class="name">Allie</span><span style="font-size:8px;color:var(--n80);margin-left:auto">1h</span></div>
+            <div class="space-between">
+              <span style="font-size:10px;font-weight:500">想要这双好久了 🤞</span>
+              <span style="font-size:9px;color:var(--n80)">❤️ 89</span>
+            </div>
+            <div style="display:flex;gap:4px;margin:4px 0">
+              <div class="ph-img" style="width:60px;height:60px;border-radius:4px">👟</div>
+              <div class="ph-img" style="width:60px;height:60px;border-radius:4px">🧥</div>
+            </div>
+          </div>
+          <div class="feed-card" style="margin-top:6px">
+            <div class="head"><div class="avatar"></div><span class="name">Leo</span><span style="font-size:8px;color:var(--n80);margin-left:auto">3h</span></div>
+            <div style="font-size:10px">攒钱入的 stüssy 卫衣到了 ✨ 心愿达成！</div>
+            <div class="ph-img" style="height:80px;margin:4px 0">🧥 Stüssy Basic Logo Hoodie</div>
+            <div class="meta"><span>❤️ 234</span><span>💬 31</span><span class="ml-a" style="color:var(--auth-green)">✅ 已达成</span></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>{BRAND.name}</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>购买</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>探索</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>我</div>
+        </div>
+      </div>
+    </div>
+    <!-- arrow -->
+    <div class="arrow">
+      <div class="line"></div>
+      <div class="label">点击心愿卡<b>❤️ 点赞</b>互动</div>
+      <div class="tip"></div>
+    </div>
+    <!-- S06 -->
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>📶 5G 🔋</span></div>
+        <div class="nav-bar"><span class="back">‹</span><span>Allie 的心愿池</span><span>···</span></div>
+        <div class="body-content p-8">
+          <div class="space-between" style="margin-bottom:6px">
+            <div><span style="font-size:13px;font-weight:600">Allie</span><span style="font-size:10px;color:var(--n80)"> · 18 件心愿</span></div>
+            <span class="btn outline" style="font-size:9px;padding:2px 10px">+ 关注</span>
+          </div>
+          <div class="grid-2" style="gap:6px">
+            <div class="feed-card"><div class="img" style="height:70px">👟 New Balance 990v6</div><div class="num" style="font-size:10px">¥1,899</div><div style="font-size:8px;color:var(--n80)">❤️ 23</div></div>
+            <div class="feed-card"><div class="img" style="height:70px">🧢 Carhartt Beanie</div><div class="num" style="font-size:10px">¥299</div><div style="font-size:8px;color:var(--n80)">❤️ 12</div></div>
+            <div class="feed-card"><div class="img" style="height:70px">👕 Essentials Tee</div><div class="num" style="font-size:10px">¥459</div><div style="font-size:8px;color:var(--n80)">❤️ 8</div></div>
+            <div class="feed-card"><div class="img" style="height:70px">📱 iPhone 16 Pro</div><div class="num" style="font-size:10px">¥8,999</div><div style="font-size:8px;color:var(--n80)">❤️ 45</div></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>{BRAND.name}</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>购买</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>探索</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>我</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RAIL 3 -->
+<div class="rail">
+  <div class="rail-head">
+    <span class="rail-num">RAIL 03</span>
+    <span class="rail-title">社交 · 心愿达成与分享</span>
+    <span class="rail-sub">SOCIAL · WISH FULFILLMENT &amp; SHARE</span>
+  </div>
+  <div class="rail-track">
+    <!-- S07 -->
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>📶 5G 🔋</span></div>
+        <div class="nav-bar"><span class="back">‹</span><span>心愿详情</span><span class="rt">···</span></div>
+        <div class="body-content p-8">
+          <div class="ph-img" style="height:120px;margin-bottom:6px">👟 AJ1 Chicago Reimagined</div>
+          <div style="font-size:13px;font-weight:600;color:var(--n140)">¥2,399</div>
+          <div style="font-size:10px;color:var(--n80);margin-bottom:6px">已攒 <span class="num" style="font-weight:600">68%</span> · 目标达成还需 ¥768</div>
+          <div style="height:4px;background:var(--n20);border-radius:2px;margin-bottom:6px;overflow:hidden">
+            <div style="width:68%;height:100%;background:var(--accent);border-radius:2px"></div>
+          </div>
+          <div class="space-between">
+            <span class="chip solid hot" data-hot="S07-E">🎉 告诉朋友</span>
+            <span style="font-size:9px;color:var(--n80)">❤️ 56 人也在看</span>
+          </div>
+          <div style="margin-top:8px;padding:6px;background:var(--n20);border-radius:4px">
+            <div style="font-size:10px;color:var(--n100)">心愿留言</div>
+            <div style="font-size:10px;color:var(--n140);margin:2px 0">"攒钱中，发了年终奖就冲！"</div>
+            <div class="meta"><span>{BRAND.placeholder_user}</span><span>1d</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- arrow -->
+    <div class="arrow">
+      <div class="line"></div>
+      <div class="label">点击<b>🎉 告诉朋友</b>分享</div>
+      <div class="tip"></div>
+    </div>
+    <!-- S08 -->
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>📶 5G 🔋</span></div>
+        <div class="nav-bar"><span class="back">‹</span><span style="font-size:10px">分享到</span><span class="btn accent" style="font-size:9px;padding:2px 8px">发送</span></div>
+        <div class="body-content p-8">
+          <div style="font-size:10px;color:var(--n100);margin-bottom:6px">分享我的心愿</div>
+          <div style="display:flex;gap:16px;margin-bottom:8px;justify-content:center">
+            <div style="text-align:center"><div style="width:36px;height:36px;background:var(--n20);border-radius:999px;margin:0 auto 2px;display:flex;align-items:center;justify-content:center">💬</div><span style="font-size:8px;color:var(--n80)">私信</span></div>
+            <div style="text-align:center"><div style="width:36px;height:36px;background:var(--accent-soft);border-radius:999px;margin:0 auto 2px;display:flex;align-items:center;justify-content:center;color:var(--accent)">📋</div><span style="font-size:8px;color:var(--n80)">动态</span></div>
+            <div style="text-align:center"><div style="width:36px;height:36px;background:var(--n20);border-radius:999px;margin:0 auto 2px;display:flex;align-items:center;justify-content:center">🔗</div><span style="font-size:8px;color:var(--n80)">复制</span></div>
+          </div>
+          <div style="font-size:10px;color:var(--n100);margin-bottom:4px">最近聊天</div>
+          <div style="display:flex;gap:8px;overflow-x:auto;padding:2px 0">
+            <div style="text-align:center"><div style="width:28px;height:28px;border-radius:999px;background:var(--n40);margin:0 auto"></div><span style="font-size:8px;color:var(--n80)">Leo</span></div>
+            <div style="text-align:center"><div style="width:28px;height:28px;border-radius:999px;background:var(--n40);margin:0 auto"></div><span style="font-size:8px;color:var(--n80)">Allie</span></div>
+            <div style="text-align:center"><div style="width:28px;height:28px;border-radius:999px;background:var(--n40);margin:0 auto"></div><span style="font-size:8px;color:var(--n80)">Noah</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RAIL 4 -->
+<div class="rail">
+  <div class="rail-head">
+    <span class="rail-num">RAIL 04</span>
+    <span class="rail-title">个人中心 · 心愿池管理</span>
+    <span class="rail-sub">PROFILE · WISH POOL MANAGEMENT</span>
+  </div>
+  <div class="rail-track">
+    <!-- S09 -->
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="status-bar"><span>9:41</span><span>📶 5G 🔋</span></div>
+        <div class="nav-bar"><span class="back">‹</span><span>我的</span><span style="font-size:12px">⚙️</span></div>
+        <div class="body-content p-8">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <div style="width:36px;height:36px;border-radius:999px;background:var(--n40)"></div>
+            <div><div style="font-size:13px;font-weight:600">{BRAND.placeholder_user}</div><div style="font-size:9px;color:var(--n80)">潮流爱好者</div></div>
+          </div>
+          <div style="display:flex;gap:0;margin-bottom:8px;text-align:center;border:1px solid var(--n40);border-radius:4px;overflow:hidden">
+            <div style="flex:1;padding:6px;border-right:1px solid var(--n40)"><div class="num" style="font-size:13px;font-weight:600">32</div><div style="font-size:8px;color:var(--n80)">心愿</div></div>
+            <div style="flex:1;padding:6px;border-right:1px solid var(--n40)"><div class="num" style="font-size:13px;font-weight:600">5</div><div style="font-size:8px;color:var(--n80)">已达成</div></div>
+            <div style="flex:1;padding:6px"><div class="num" style="font-size:13px;font-weight:600;color:var(--auth-green)">¥58.2K</div><div style="font-size:8px;color:var(--n80)">心愿总值</div></div>
+          </div>
+          <div class="feed-card" style="padding:6px;background:var(--n20);border-radius:4px">
+            <div class="space-between"><span style="font-size:10px;font-weight:500">我的心愿池</span><span style="font-size:10px;color:var(--accent)">查看全部 ›</span></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>{BRAND.name}</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>购买</div>
+          <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>探索</div>
+          <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>我</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer notes -->
+<div style="position:relative;z-index:1;margin-top:8px;display:flex;gap:16px;flex-wrap:wrap">
+  <div class="note mint"><span class="pin"></span>心愿池入口：<b>Feed 卡标签 / 商品页芯片 / 个人中心</b></div>
+  <div class="note lemon"><span class="pin"></span>创建流程：<b>选商品 → 加备注 → 设可见范围 → 发布</b></div>
+  <div class="note sakura"><span class="pin"></span>社交核心：<b>点赞 / 关注池 / 私信 / 分享至动态</b></div>
+  <div class="note sky"><span class="pin"></span>达成闭环：攒钱进度 → 下单购买 → <b>自动标记已达成</b></div>
+</div>
+
+</div><!-- .canvas -->
+</body>
+</html>

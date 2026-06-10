@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <!-- MODE: MODE_DEMO -->
+  <meta charset="utf-8">
+  <style>
+    :root { --accent:#01C2C3; --n140:#14151A; --n-bg:#F5F5F9; --n20:#F1F1F5; }
+    .btn { white-space: nowrap; }
+    .chrome-layer, .body-container {}
+    .nav { backdrop-filter: blur(10px); }
+    .commerce-tabs { height:40px; display:flex; gap:10px; }
+    .commerce-tabs span.active::after { content:""; display:block; width:27px; height:3px; background:var(--accent); }
+    .commerce-menu svg { width:15px; height:15px; }
+    .channel-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; padding:8px; }
+    .trust-row { height:26px; }
+    .product-card { padding:6px; }
+    .product-media { height:80px; }
+    .product-card strong { font-size:17px; }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: 1ms; } }
+  </style>
+</head>
+<body>
+  <div class="signature">@ianzhao</div>
+  <main class="workbench">
+    <section class="phone-screen">
+      <div class="commerce-tabs"><span class="active">推荐</span><span>潮玩</span><span>男装</span><span>美妆</span><span>鞋类</span><span>女装</span><span class="commerce-menu"><svg viewBox="0 0 16 16"><path d="M3 5h10M3 8h10M3 11h10"></path></svg>分类</span></div>
+      <div class="channel-grid"><div>必抽奖</div><div>天天低价</div></div>
+      <div class="trust-row">先鉴别后发货的开创者</div>
+      <article class="product-card"><div class="product-media"></div><strong>商品标题</strong></article>
+    </section>
+    <aside class="hud"><div class="hud-title"></div><div class="hud-current"></div><div class="hud-kv"></div><div class="hud-jump"></div><div class="hud-controls"></div><div class="hud-log"></div></aside>
+  </main>
+  <script>const ready = true;</script>
+</body>
+</html>

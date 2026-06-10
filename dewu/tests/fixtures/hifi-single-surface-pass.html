@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dewu HIFI Single Surface Fixture</title>
+  <style>
+    :root {
+      --accent: #01C2C3;
+      --n00: #FFFFFF;
+      --n-bg: #F5F5F9;
+      --n20: #F1F1F5;
+      --n40: #E6E6EB;
+      --n80: #AAAABB;
+      --n100: #7F7F8E;
+      --n140: #14151A;
+      --dewu-red: #FF4F66;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #ECEEF2; font-family: "PingFang SC", -apple-system, sans-serif; color: var(--n140); }
+    .phone-shell { width: 390px; height: 844px; border-radius: 48px; padding: 8px; background: #111217; box-shadow: 0 28px 80px rgba(20, 21, 26, .28); }
+    .phone-screen { height: 100%; overflow: hidden; border-radius: 40px; background: var(--n-bg); position: relative; }
+    .status-bar { height: 45px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; font-size: 13px; font-weight: 600; }
+    .status-icons { display: flex; gap: 5px; align-items: center; }
+    .signal-dot { width: 4px; height: 4px; border-radius: 999px; background: var(--n140); }
+    .battery { width: 22px; height: 10px; border: 1px solid var(--n140); border-radius: 3px; }
+    .nav-bar { height: 54px; display: flex; align-items: center; gap: 12px; padding: 0 16px; background: var(--n00); border-bottom: 1px solid var(--n20); }
+    .back-btn { width: 30px; height: 30px; border: 0; background: transparent; display: grid; place-items: center; color: var(--n140); }
+    .nav-title { flex: 1; text-align: center; font-size: 18px; font-weight: 600; margin-right: 42px; }
+    .detail-scroll { height: calc(100% - 45px - 54px - 78px); overflow: auto; scrollbar-width: none; }
+    .hero-photo { height: 420px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='780' height='840' viewBox='0 0 780 840'%3E%3Crect width='780' height='840' fill='%23f8f8fa'/%3E%3Cpath d='M128 536c112-124 214-210 358-274 34-15 72-3 94 27l54 75c23 32 13 77-22 96L298 633c-35 20-79 13-107-17l-63-68c-4-4-4-8 0-12z' fill='%2314151a'/%3E%3Cpath d='M179 548c98-99 204-174 334-229' stroke='%2301C2C3' stroke-width='28' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='560' cy='296' r='42' fill='%23E6E6EB'/%3E%3Cpath d='M276 612c78-38 164-80 244-122' stroke='%23ffffff' stroke-width='18' stroke-linecap='round' opacity='.76'/%3E%3C/svg%3E"); background-size: cover; background-position: center; }
+    .product-panel { margin-top: -26px; background: var(--n00); border-radius: 18px 18px 0 0; padding: 18px 16px 20px; position: relative; }
+    .badge-row { display: flex; gap: 6px; margin-bottom: 10px; }
+    .auth-badge { height: 22px; padding: 0 7px; border-radius: 2px; background: #D9F4F4; color: #029999; display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; }
+    .brand-badge { height: 22px; padding: 0 7px; border-radius: 2px; background: var(--n20); display: inline-flex; align-items: center; font-size: 11px; }
+    .product-title { font-size: 18px; line-height: 1.42; font-weight: 600; margin: 0 0 8px; }
+    .product-subtitle { font-size: 12px; line-height: 1.55; color: var(--n100); margin: 0 0 14px; }
+    .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+    .price { color: var(--dewu-red); font-size: 24px; font-weight: 700; font-family: "DIN Alternate", "Helvetica Neue", sans-serif; }
+    .pay-count { color: var(--n100); font-size: 12px; }
+    .size-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-bottom: 14px; }
+    .size-chip { height: 38px; border: 1px solid var(--n40); border-radius: 4px; display: grid; place-items: center; font-size: 12px; background: var(--n00); }
+    .size-chip.active { border-color: var(--accent); color: #029999; background: #D9F4F4; font-weight: 600; }
+    .service-card { border: 1px solid var(--n20); border-radius: 10px; padding: 12px; display: grid; gap: 10px; margin-bottom: 12px; }
+    .service-row { display: flex; align-items: center; gap: 10px; }
+    .service-icon { width: 28px; height: 28px; border-radius: 999px; background: #D9F4F4; display: grid; place-items: center; }
+    .service-copy { flex: 1; }
+    .service-copy strong { display: block; font-size: 13px; margin-bottom: 2px; }
+    .service-copy span { display: block; font-size: 11px; color: var(--n100); }
+    .story-module { margin: 10px 0 0; padding: 12px; border-radius: 10px; background: var(--n-bg); }
+    .story-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .story-head h3 { margin: 0; font-size: 15px; font-weight: 600; }
+    .story-head span { color: var(--n100); font-size: 11px; }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .story-card { min-height: 72px; border-radius: 8px; padding: 10px; background: var(--n00); display: flex; flex-direction: column; justify-content: space-between; }
+    .story-card strong { font-size: 12px; line-height: 1.35; }
+    .story-card span { font-size: 10px; color: var(--n100); }
+    .bottom-cta { height: 78px; position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 10px; align-items: center; padding: 10px 16px 18px; background: rgba(255, 255, 255, .96); border-top: 1px solid var(--n20); }
+    .cta-secondary { width: 88px; height: 44px; border: 1px solid var(--n40); border-radius: 4px; background: var(--n00); color: var(--n140); font-size: 14px; font-weight: 500; }
+    .cta-primary { flex: 1; height: 44px; border: 0; border-radius: 4px; background: var(--accent); color: var(--n00); font-size: 15px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <main class="phone-shell">
+    <section class="phone-screen">
+      <div class="status-bar"><span>9:41</span><div class="status-icons"><span class="signal-dot"></span><span class="signal-dot"></span><span class="signal-dot"></span><span class="battery"></span></div></div>
+      <nav class="nav-bar">
+        <button class="back-btn" aria-label="返回">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="nav-title">商品详情</div>
+      </nav>
+      <div class="detail-scroll">
+        <div class="hero-photo" role="img" aria-label="Air Jordan 4 商品主图"></div>
+        <section class="product-panel">
+          <div class="badge-row"><span class="auth-badge">95分鉴别通过</span><span class="brand-badge">Air Jordan</span></div>
+          <h1 class="product-title">Air Jordan 4 Retro Seafoam 女款复古篮球鞋</h1>
+          <p class="product-subtitle">清爽薄荷绿配色，鞋面皮革纹理清晰，适合日常街头穿搭与轻运动场景。</p>
+          <div class="price-row"><span class="price">¥1,429</span><span class="pay-count">近 24 小时 238 人付款</span></div>
+          <div class="size-strip">
+            <span class="size-chip">36</span><span class="size-chip active">37.5</span><span class="size-chip">38</span><span class="size-chip">39</span>
+          </div>
+          <div class="service-card">
+            <div class="service-row"><span class="service-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#029999" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></span><div class="service-copy"><strong>先鉴别 后发货</strong><span>平台质检中心复核鞋盒、鞋标、走线与材质细节</span></div></div>
+            <div class="service-row"><span class="service-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#029999" stroke-width="2"><path d="M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6l7-4z"/></svg></span><div class="service-copy"><strong>防伪扣与鉴别证书</strong><span>收货后可在得物 App 内查看完整鉴别记录</span></div></div>
+          </div>
+          <section class="story-module">
+            <div class="story-head"><h3>潮流玩家正在看</h3><span>3 条穿搭参考</span></div>
+            <div class="story-grid">
+              <article class="story-card"><strong>灰色卫裤与短夹克组合</strong><span>Nike / Supreme</span></article>
+              <article class="story-card"><strong>薄荷绿呼应棒球帽</strong><span>OOTD 26.1k</span></article>
+            </div>
+          </section>
+        </section>
+      </div>
+      <footer class="bottom-cta"><button class="cta-secondary">想要</button><button class="cta-primary">立即购买</button></footer>
+    </section>
+  </main>
+</body>
+</html>

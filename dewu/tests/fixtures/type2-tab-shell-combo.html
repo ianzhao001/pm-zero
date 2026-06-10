@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<!-- MODE: MODE_DEMO -->
+<style>
+:root { --accent:#01C2C3; --ease-ios:cubic-bezier(.32,.72,0,1); }
+.btn { white-space:nowrap; }
+.workbench { place-content:center; }
+.phone-screen { overflow:hidden; }
+.chrome-layer, .body-container {}
+.nav { backdrop-filter:blur(10px); }
+.tabbar { display:grid; grid-template-columns:repeat(4,1fr); }
+</style>
+</head>
+<body>
+<div class="signature">@ianzhao</div>
+<div class="workbench">
+  <div class="phone-screen">
+    <div class="body-container">Type 2 页面残留导航</div>
+    <div class="chrome-layer nav">导航</div>
+    <div class="tabbar"><span>得物</span><span>购买</span><span>探索</span><span>我</span></div>
+  </div>
+</div>
+<aside class="hud"><div class="hud-title"></div><div class="hud-current"></div><div class="hud-kv"></div><div class="hud-jump"></div><div class="hud-controls"></div><div class="hud-log"></div></aside>
+<script>
+const route = { state: "Type 2", tabs: true };
+</script>
+</body>
+</html>
