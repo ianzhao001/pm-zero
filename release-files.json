@@ -1,0 +1,1680 @@
+{
+  "schema_version": 1,
+  "version": "0.2.0",
+  "files": [
+    {
+      "path": ".codex-plugin/plugin.json",
+      "sha256": "8b883c6c52f666203f8f5c33f115b7cf66ea9d31fe5158768adf51fb8fe1fbdd",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": ".github/workflows/verify.yml",
+      "sha256": "266c0b0ea46218c5dd8fb7067561760556500192f246e1cc72794a54e73147cd",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "637c9dee45914675751b808af4705fba46435dd5c0cb91c85ce4dff21b8f0015",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": ".mcp.json",
+      "sha256": "1cd89e83d128d9f297a3d182901dee31b64839615b44a8d2f814acf7bc4b0cde",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "588890999a56bcc7f2ede7636617f527b0bb9bd68a32481fa5b75e0fdf64892a",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "8bb395d23a9b9009110649b290b6991ade754ed5136ca0435d30b2935f752627",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "e17beacf5287de5995f9168bf2de6df83c1d20313978e435e2b41813be088a93",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "README.md",
+      "sha256": "764415e1465712d86791d008b8aba660612eae5488c457ca56892145726fab72",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "brand-packs/dewu/SKILL.md",
+      "sha256": "cd07c8a71766f59f784c920e4e9750a00f7bec5df57f6825b5d20f84c9bc7415",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/dewu/assets/tokens.css",
+      "sha256": "3d32d55f8a882ef0c9d01dfca9f4fa30c27550870c780408e02a3285d07db8db",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/dewu/brand-pack.json",
+      "sha256": "8d40e9f15fc912a53bfc7c608cca06168fc1fd02e08e4fa80666953ef9ea738c",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/dewu/rules/business.md",
+      "sha256": "93376316d989dc0cfb9bd64ca9dec665f377a692ce1e75ea8bcba0ab69c26740",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/dewu/rules/visual.md",
+      "sha256": "0ed4817f97b4d48d3f8b657f1b346e7f4ad7c11bf2c4240f3d2efcece294277d",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/jd/SKILL.md",
+      "sha256": "ced0f703bc2cfa2c33f19214ba8a433285e105ba70260fca5cf83743c0f8a31a",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/jd/assets/recipes.css",
+      "sha256": "1b3e32af06b27c4d45e977988a590410cb193c1c7fd9397377e2e705d23fc949",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/jd/assets/tokens.css",
+      "sha256": "2b2ca2a870b3aa93f77861642201843586d4a3e5366ecc5cb9fded948feaff6d",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/jd/brand-pack.json",
+      "sha256": "8f8b6b216bf8cfd8c75e73d475695a1f0d7bfd859ab3d856e0581572e3f74255",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/jd/rules/business.md",
+      "sha256": "e60aae82c00b71025478a37e93431aa85bc3e389642e47074b3f05aadaede3b1",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "brand-packs/jd/rules/visual.md",
+      "sha256": "68ad487d0c4775d4b4017dff781fb43873fc53195fffaf62e4ca0c9915ed1956",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "docs/brands.md",
+      "sha256": "09b98fab7dc27afc4366ac449005e4b12b77e520c943df182f20c66363f3f55b",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "docs/installation.md",
+      "sha256": "7f148319d12ad42b7e0c2101e444c40aaf5a15268affc29b60db5eff59992a32",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "docs/migration.md",
+      "sha256": "c33c0b6ebaee0e03b2d5fd05ef794b8d41520869d5cfc87bf0bd644ab54c8c5f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "docs/private-brand-pack-guide.md",
+      "sha256": "ee5b70218089ae46a3867cba6f80b8cb991d5bec7a30a095476d3781b09ed938",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "mcp/diagnose.mjs",
+      "sha256": "74561057699c23c8029823950d381d0275f9d18e94de8e07b14885006bb4906b",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "mcp/response-view.mjs",
+      "sha256": "1e5426e335e9a0fa1541696fc2fbadff384aebc5607095110d395f67ae8bfc21",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "mcp/server.mjs",
+      "sha256": "788f13c2b5c437b0c6f8b380720f2e958ce031b7c93b6af83765f54d06455d5f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "mcp/tool-descriptions.mjs",
+      "sha256": "64de8f65a4f17fde980ec8a96375b7a6c065fbc80ce86cb0dba2d35a6eb6c409",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "0b8c6d6eb55da1ba8c24d51c15975763988bf23c223bc1e404cc709c55c4de70",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "package.json",
+      "sha256": "e641d523e5299c252e584be3aee901f204aaf0ac247459315e45299dab5fafab",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "pm-zero.manifest.json",
+      "sha256": "41c117d878f9f7a7e81a46a871d973c9a633854f6fd4954c8e478eba39c78db3",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "scripts/brand-pack/cli.mjs",
+      "sha256": "2cc85072cdf36391ba62d8179f5df868fb46307d97234e57254625deb8fad16e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "scripts/brand-pack/core.mjs",
+      "sha256": "9c3c00ba1175db78e931935d279c93b60c5f9291847deadd5ff7a3a9bf0b34db",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "scripts/brand-pack/schema.json",
+      "sha256": "394fe45d8462ca1eee081951979b97a70c8dc05eeac0f1d0b76fb8455a532562",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "scripts/release/build.mjs",
+      "sha256": "e0c6e4355bc90271758a2b9d362c18ce678bff891f7f939b3eb2d20042e39307",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "scripts/release/smoke.test.mjs",
+      "sha256": "5f7ecfa3996a1000f316fc496435095160281fb2c5cfed6f663fdfb9c1a21273",
+      "executable": false,
+      "runtime": false
+    },
+    {
+      "path": "skills/browser-verification/SKILL.md",
+      "sha256": "8bd9ddff59a480c6130db182bf03a10ae366f1cebbed2c8b44b360e33e7cb411",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/business-modeling/SKILL.md",
+      "sha256": "536fe42ec6530282bb22676bded8c3bf7cec3551f37db6f936981af4eb185353",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/color-typography/SKILL.md",
+      "sha256": "6d4e0f463baf7ac44a4ba243373e1e21617fecd67abb6ed8d38eb17800a22c90",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/demo-authoring/SKILL.md",
+      "sha256": "86637081578b544ee25f01a4ca4f90a3a26498c2528d7800bb0670ac2380c157",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/SKILL.md",
+      "sha256": "18b96ba31960b070b7bd15d9cae7597dac9c9d367dd78daba532474613219117",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/assets/demo-shell/core.css",
+      "sha256": "cc27d3dfd09a59e7e132682e677e83820eb9e31f6f6500a89565d2cdb2fcd650",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/assets/demo-shell/core.js",
+      "sha256": "d289cb1af39f725524cecc688f8db85bc31f3493d15cb7f9998863f544a33e6d",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/assets/demo-shell/library-runtime.js",
+      "sha256": "2890c97a4ca53e1932a4b905f86d9d0691afa30efd45b8841d024ce1883004e3",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/assets/demo-shell/library.css",
+      "sha256": "992432db221449ba0e69be4771ca253ec881939aead07942d175710fd6866709",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/assets/demo-shell/liquid-glass.css",
+      "sha256": "8826b5b7de0de2219bec61a1e1931c98f9a9e5a895df021e38fcb489b66b9346",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/examples/canonical/flow-canvas-template.html",
+      "sha256": "fb6e750556684e19743292c481dc0fc25f563eb7a9eaf4680ceeab6494612fb0",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/examples/canonical/interactive-demo-template.html",
+      "sha256": "469aeb3f79d0e274dcfa298993feb207c6dfe2d598adf274c555b67c6e957243",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/brand-pack-loader.md",
+      "sha256": "3a51eb6f64a1cd10d28dc237fbe1f61158bec8f256bf4ffe367d391a2476238d",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/demo-authoring.md",
+      "sha256": "3d274d860ef7ac22634f625a5a1e09fde47f00376de54b4f00bf137aa951346e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/demo-batch-output.md",
+      "sha256": "75bdd56651651259d01919d96ead50cf8dfa3cac5351b3d15363abbd62f8dad1",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/demo-reuse-strategy.md",
+      "sha256": "f0c8e53030b387ba17f44b83ccffaac7c200443e5f11bf54858f38e9549cd3ce",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/ds-spec.lock.md",
+      "sha256": "1a60fbff4093834b4047473690e991f8ffab69db6ae8c57b34b24a3f1a8a5add",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/interaction-feedback-patterns.md",
+      "sha256": "329203de96ac351adcddfb0e91242a51de3d4d83706a93e4d3857ac5e3c29793",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/interaction-spec-protocol.md",
+      "sha256": "660db66ffbe7db32e29b9702de13e59b3e0a7df45af89297a0b415b9b4c8b48b",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/asset-search-policy.md",
+      "sha256": "f2e8c5b0f4204aeb1e30de6767f3d94775e9de36b888d81e04e9c540e0672ae9",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/atom-defaults.md",
+      "sha256": "366057b071adbec0cc7f21798e1d9a6956fbd7d4c5c9029fd8f564c70c753e31",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/checklist.md",
+      "sha256": "dc97ff5b81dee48328b87e5e0138de6f73a3249e75ce864d2fe007a22112ebc8",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/do-and-dont.md",
+      "sha256": "39c3d373a42cb91de2acca817fd70c052a4e809290677ae7051c7a541b2de35c",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/flow-canvas-recipe.md",
+      "sha256": "be50c2d7a0c228b1d8820ab65567240b8bae14616808883cc83ba34713450803",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/hifi-story-flow-canvas.md",
+      "sha256": "877fe4d70732bf5ba18678c7743565aa75665e84c6498f465631d7dde3283389",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/hifi-surface-authoring.md",
+      "sha256": "8b68496a752f1b3a53c086c1637fafb513036f091711f1e5acc6af21a47f3de2",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/interactive-demo-system.md",
+      "sha256": "286d40c8251100edd54106ae215ca56f3e7636b21c54194d494930a45b7ad0a3",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/mobile-craft.md",
+      "sha256": "5761ccc264d23189592186022fc934613aa21985be7805d97fe2ec712f364f76",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/screenshot-absorption.md",
+      "sha256": "f4a57401196b55d667d313eeb54fc0f0d63ce5d1765f82b829f6889b45205774",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/methodology/visual-quality-bar.md",
+      "sha256": "6495e940fbee0e697d8ebc1cea6870c11bbfe02c347eeba9c1bc6441ef2bbddd",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/scenario-anchoring.md",
+      "sha256": "d0aea1613f249362f14dfaa7fdb9f658b19d130e113dc8c7b18a47a83071b3be",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/references/screenshot-evidence.schema.json",
+      "sha256": "518c893a9df2f86e3063124d35e4123920bac3ed5d0a3f392ccc08eed47bc295",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/asset-manifest.mjs",
+      "sha256": "0bc81c76be5a3ca8215ffc6f48f0c574e1e2201f7aa9895342c7b15bf390f9b9",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/check-doc-budget.mjs",
+      "sha256": "722a223f58e953c0dd1b1829a980330272108d225c4cc75eb045bcac8690aa82",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/create-demo-from-library.mjs",
+      "sha256": "20d0b8d5ddbe47fc3b65af05839acfc34c1f0ea328ad706a443437756bd17bc9",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/materialize-design-assets.mjs",
+      "sha256": "0c782401c209edcfae570f0bbc3bbddbb4598b1e736c579d783ce48e13407617",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/preflight.mjs",
+      "sha256": "c7c96285ff4b26d4c8a884a02d8376c77d22de671dc9d5ecd53f39b075396d24",
+      "executable": true,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/prepare-demo-assets.mjs",
+      "sha256": "79b346c4305f50959fc248167a63639b0a2b265ee2cc99cd4e7a72327f787910",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/report-demo-validation.mjs",
+      "sha256": "91bc70a8b1946540f3c3faef1dd4616616d551527c0959185466dc2b2cd1b228",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/rules/common.mjs",
+      "sha256": "7572453ac6cab1154721aa2542c63f67da2ea516efb6ba57d5581f89bf40eb18",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/rules/demo.mjs",
+      "sha256": "ebab6a7875260c5432e9f12424bd41dc55b8cd574fecd507a2f063691fdbaad9",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/rules/flow.mjs",
+      "sha256": "15880f14ad179a6547237da970e6fe956a8247753476bcd8cece0f34693a7dc6",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/rules/image-assets.mjs",
+      "sha256": "e9d7497ddb6049e3f58715ac79ee5c34ba4559a44b84e6e3fc1410228668b911",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/rules/version.mjs",
+      "sha256": "13d75403fba75e3bf4dd2b2e8656007eb58f2600ff32f60ee2b20eb03ce0105e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/run-frontend-robustness-tests.mjs",
+      "sha256": "a8973553ce5aa8903029935cb628449bc9620fe3e4a298a3df040401a1219eae",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/design-forge/scripts/validate-rendered-layout.mjs",
+      "sha256": "defd761375b23b5fe22a133a3f7fb98f4f1b315727099eb1d8df2a32325476f2",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/interaction-design/SKILL.md",
+      "sha256": "a0c605b1dd7d327f1aedab85cf23f1cd654d950df510ed42fcaa8fb7a7fb8144",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/mrd-authoring/SKILL.md",
+      "sha256": "9ad85cd09ca20eb2d23e36b88345f88a1332940b27db80dbc8a62e6920afbc81",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/pm-zero/SKILL.md",
+      "sha256": "c35b9b49df7fe9f456a6cae98cf0dfbd82238cc0437eebcd33e46047e047f4d7",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/pm-zero/agents/openai.yaml",
+      "sha256": "2a8575aa62e004ff26a0db8f83323cb1ba41a4c94fb9c493f7cf8fef8580effa",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/pm-zero/references/manual-steps.md",
+      "sha256": "d2777dfda87a050a2062b432a1511d726885da4a058478c1f55ee4728534dc61",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/pm-zero/references/project-recovery.md",
+      "sha256": "fd2aafa59db8a74c5985df64becc5154578c1abb07a140df49c40db70334dc0d",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/SKILL.md",
+      "sha256": "b779996319c81ca179ea249693011ba7978af56e46dd5ee3ae8cc6bf1c3df9a0",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/element-checklist.md",
+      "sha256": "f00d1de591526b3e7a664eb156efb961a5e6f7b208591e3431aa7440c314e614",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/format-constraints.md",
+      "sha256": "43a189ba1ba73ae9e52c6ec252497a80d5d95e2c8bdfcdadf8e9e50de9360080",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/format_spec.md",
+      "sha256": "92341b933190a79c4a2ab71c7d04656c183f6bc9e0a0720cb69176ff14b5abc6",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/prd-direction-layout.md",
+      "sha256": "c2cbbb9c12395c4586ac54fcce2a70416b791b69e0a4f08c7ff8de6ec553313f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/prd-feedback-patterns.md",
+      "sha256": "72c9b5e9459811b1e66a741d2be3915ebb5fbd2c11fdb42bd22301fc1fe6e2d3",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/prd-rationale-vs-implementation.md",
+      "sha256": "735f688df368c1aef98771206aca1b6bc92a28775ca2036ee6c125b8bafa559c",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/prd-schema.lock.md",
+      "sha256": "f9b87b601645fc46601c3a9f243901faf45205fa728461dedf983ba951254ba8",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/prd-self-checklist.md",
+      "sha256": "6e5b87e516376281dcfa50e9a9e9e32a55b26f459f7f3217be8652661cbda5ac",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/prd-type-routing.md",
+      "sha256": "626681b97bbae2fe92b5c58c733fa2d1c4b24e131245fb9c3bbeaf384ed7a5c3",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/prd_schema.md",
+      "sha256": "63ee967ae7c4be92ff51e16ac03f7d29ff1695673ee2380e08930c6c787293d0",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/scope-boundary.md",
+      "sha256": "ae73a42527107ee978b3f25f9f563b59773a9398e9d8a30232c3ae805f585934",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/screenshot_manifest.schema.md",
+      "sha256": "681346a9771cf55108f77a2a9ef8a44b85d10e8b00a0646f807ab084a064d0e7",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/references/writing_templates.md",
+      "sha256": "dbcf7b718561ae274e7f71b845123f28773e50ba6e4ceae639950a95beecc1af",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/scripts/rules/brand_pluggable.py",
+      "sha256": "8fc8e3092023c0ec39dd24b339009caa23d5dc925f08472042ccaf2f9ae96f75",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/scripts/rules/common.py",
+      "sha256": "7fd5cd6bde920fbcd830cbe064b062cdbd7d14ad4d032dd29f396b8ee3b700fd",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/prd-forge/scripts/validate_prd.py",
+      "sha256": "01ec8585ce32af5fb1bda9a01fd1abcad3e9b866d7b5b3e34092c3858db6c886",
+      "executable": true,
+      "runtime": true
+    },
+    {
+      "path": "skills/product-discovery/SKILL.md",
+      "sha256": "e92dabafe0cd601d8c34c8dd2f64a32ae97421e7c5a9efdecf26493dbdddc582",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/SKILL.md",
+      "sha256": "ab077e615dd7cd122e9dd16600a843203c32743ef10ec08e098f583ee77ac60c",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/examples/sample-prd-review.md",
+      "sha256": "7f274190d42beb49df62aeac9c023c1eaa88746a3da3638b128b2a97e71911e6",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/references/evidence-grading.md",
+      "sha256": "c6a9a793e9b24d35e5d217ecc88faa9439aaba5a119de25270f3520d1a14eb37",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/references/review-dimensions.md",
+      "sha256": "9cdd135817e503072219602446d4d5b458dcaf150faad629c95ed32271545299",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/references/review-modes.md",
+      "sha256": "253d9b485f31d27bd300702109398caf7da5940ddc4ce23797ddd44c4174f0ec",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/references/severity-levels.md",
+      "sha256": "34d99d0aa47b2f5571836c50cb6ea620bfccfdd5bc42272cf3e9216a7b9e146f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/templates/interaction-spec-review.md",
+      "sha256": "42bdab4b947dc1725dd21ad57afc31f673004dd8c407f5c75dfb8875cac66c0b",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/templates/phase-1-review.md",
+      "sha256": "b43606f3523b6e481068212527f401399987cbe687bf7d1654920263d41a685c",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/templates/phase-2-review.md",
+      "sha256": "d30bb731c79b39481640deca9c652b764f102f569433128337952c4fc8c96269",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/reviewer-forge/templates/phase-3-review.md",
+      "sha256": "9b4e0017769fe08976c0d39a8c2da881221b69e0f9ffa8280ff855b1d6a78c22",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/visual-assets/SKILL.md",
+      "sha256": "680fd653fe7bd3339a8ea81e7e7c2e1487a09b1d4052511d01a218ffea5a7260",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/visual-design/SKILL.md",
+      "sha256": "74b60939c350d85fef25266ed7fc52cad769cde6ea8f02086582430d08cbbdbf",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/visual-direction/SKILL.md",
+      "sha256": "f95b0395a6b5e19f01576db08e933edb1f623acbba7273db26c67b9ae2051fa6",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/wireframe-design/SKILL.md",
+      "sha256": "64785b3980876be00abf2bf417d9c19ca4e5e9ff0172a59efdaaad6906671e10",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/wireframe-design/references/presentation-model.md",
+      "sha256": "f94beb3a272576f65cb3aef5afffe794dceb75a353a98952a87d0b54124771a1",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/wireframe-design/references/upstream-reference.md",
+      "sha256": "5a399a7946435f1a8339059dcaf7a1523d3a70697116d90e8232403a66e50996",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "skills/wireframe-design/scripts/render-wireframes.mjs",
+      "sha256": "02fc40846d430d5de869a9b03c8ee5f91dab0df36c9b95450daee385fe7d1252",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/brand-registry/scripts/multi-context-resolver.mjs",
+      "sha256": "fe24df7af28cc81213e498806b6a6bd6cedb334259f363c619f10f58297d6931",
+      "executable": true,
+      "runtime": true
+    },
+    {
+      "path": "system/brand-registry/scripts/read-step.mjs",
+      "sha256": "1ea2f1d8f8f44bcf510d6e690d68a4f9c1fb6ba1e64532989395a923f24f6431",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/brand-registry/scripts/resolver-core.mjs",
+      "sha256": "24727c95bf6a09e00cf341c8d6227fb182cee6c5c889702ea15a586cfa28704f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/brand-registry/scripts/stage-planner.mjs",
+      "sha256": "9be5b7c7d1cd8a4ee4b3aa331c2ff051b824802a8b61ad375045cdde98b576d9",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/memory/templates/DECISION.template.md",
+      "sha256": "a3b653ec0be62b15d61de8db0edb2c83661aa64b02af4291e5b95df61e8fec6f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/memory/templates/INTERACTION_SPEC.template.md",
+      "sha256": "b8d02c171821432b6d07ffeb468135ede50eaece2a973519958a0b09399d5dd6",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/memory/templates/MEMORY.template.md",
+      "sha256": "61acc67dcbb7af3d6a5b716130573242826ef9177db9a45fc51f36e79765817f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/memory/templates/MRD.template.md",
+      "sha256": "9e91af4188371cd3dea2acf6aeaffc070b70222287086a1c610cf46443fc31a4",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/memory/templates/REQUIREMENT.template.md",
+      "sha256": "d48f4f00311b90d6fe4f86825d808f7060cc919fcd8cd2ca3f035be1c4c9fcdb",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/memory/templates/STATE.template.md",
+      "sha256": "8efa9bada5426b7791b54e23182fc04ce948f125664b7ee3065f7d482618154a",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/case-study-resolution-protocol.md",
+      "sha256": "686bdba3034f2b6e5e0a22ec7cc5f08e902ae0d72b9566d6ba99aeaff096c3ca",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/context-accumulation-protocol.md",
+      "sha256": "a16455b7c76d03d3030071e319e57a96a5052fe59ceb505385b61ed7bb469e19",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/context-package-protocol.md",
+      "sha256": "cd3c1600e963eee7c7d1bdb6774df6ed8254368c505ea3cd8fd5b9feb6fc651e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/cross-device-git-protocol.md",
+      "sha256": "392df0b93d9e03586586b98710813a42725c2e7b327bb2a340472b1a23bbf77b",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/cross-review-protocol.md",
+      "sha256": "5055b8ad15704a5a1ef1140545653197520e6880738ee3d7d81b5e939b2b36a9",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/demo-workspace-protocol.md",
+      "sha256": "722b43c7dccaa984207a08fcd52309016c736ac6fdfa3e9653596bfee34335cb",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/directory-layout-protocol.md",
+      "sha256": "3142f8967bc8529c3f43a607e501d9e3cd1055a8bd244997f153fef625b114bb",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/ds-pack-interface.md",
+      "sha256": "f5172b9bebd7422507b579bdad37b31a4f35061836129bbddb21ee39ad562e3d",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/evidence-grading-protocol.md",
+      "sha256": "1083cb655c54d4b803bd434c2b332c21bef1f6e71c44017631a2791ae88c15ac",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/evidence-grading-stage-application.md",
+      "sha256": "15938f84431e21aa1f586fb07093794b4272ea5db2c86be9282bebeaa6ec90ba",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/fallback-deadline-protocol.md",
+      "sha256": "d76308cbfb9be33e3b16a9da36ef210f222a0273ea6ce4c8f571d402ec9b682e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/fixture-governance-protocol.md",
+      "sha256": "fc4203b01f5148cc46e6c8b175eccfd2934ca469a8dda09328e442fbdbf88315",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/legacy-cleanup-decision-protocol.md",
+      "sha256": "d30d15718b7d327e11e70c165eeca1984b28869eda6629b4d1a4739d41ba0462",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/license-decision-protocol.md",
+      "sha256": "f1786b57c0f049b4e4d7eaca6a4d7f1653c1c36eed099a48a530d477483b77ac",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/local-only-support-protocol.md",
+      "sha256": "beba13880c3e589cba323c9ab7f2bb783a1ee34f64842816e260c9c0ff47e004",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/manifest-protocol.md",
+      "sha256": "fcc964032bf0bcd4c4fd50f09c272a1ddf6565957fd21c7d1aa9ff351b78da69",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/memory-md-protocol.md",
+      "sha256": "f1dc917e1bd215793f094464198ca9a06d37511e1fac7180934d33c8a77edd81",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/migration-decision-protocol.md",
+      "sha256": "684826de34d489019b7864018fac0106cecff19eb5da6bd1c9e6da5ac6238bd8",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/mode-declaration.md",
+      "sha256": "d120960ad4271654794345213e74098b1e6347aff6e835e93ba3eea072c7efc5",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/multi-context-resolution.md",
+      "sha256": "b93368a145c83b5397832a4387bf2ef5201c3849d574259b449051a13528173d",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/pipeline-format-validator.md",
+      "sha256": "d742906e8979ba2ab36c4be2b2ee753ea6c38edc2fdc257b5b40540939faf76b",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/pipeline-stage-protocol.md",
+      "sha256": "35664f86043d406da66b6973a3e08414845ad31e040b0ec4413a2d68538816bf",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/proactive-action-consent-protocol.md",
+      "sha256": "bdbaf1c568ec11a9ca415e7c1789eb8b9aad774dd9ab6f136ce1aadbaa486f41",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/proactive-product-workflow.md",
+      "sha256": "21a63be7e3be3fbf50242030f07431024c8d5260f9ab6ddeae404be72c31ee29",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/process-input-protocol.md",
+      "sha256": "0579a117ebbea22dffe7c1d280ba274aa581318dddf69b004589b13c73a383d9",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/public-scope-selection-protocol.md",
+      "sha256": "f2e475dc86231e388fe5556e0ee2276e880dc97732a859ef46cb34beb210f128",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/release-workflow.md",
+      "sha256": "aff81411cda3a8ee290cc98a8e5e7c5786c4077030fce50a9a8964fc1e43d4aa",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/requirement-md-protocol.md",
+      "sha256": "7d9b8d13a5c16d7b4abab158f13941ffd3560a41a9e46ea87cd7cfa7e6d3c0d8",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reverse-time-acknowledgment.md",
+      "sha256": "5dc17aa192a367eb62eb7e8449e5ae533567e58f152a4f13f84a48dcba1a63c7",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/review-record-schema.md",
+      "sha256": "904d6c378a6185f4585d098c38db4e005dbcd2ef7eb75c514d08078d9f1fccaa",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewer-role-protocol.md",
+      "sha256": "c13ac8df88ba2bc8524d188227b3e2d9f38a0776b99c1ef329ce7a0619823a7e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/README.md",
+      "sha256": "96e638492cdbbef5573be0aa8ad8565246e6a1b1eef0197a2ad571511f495c43",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/architect-critic/role.md",
+      "sha256": "1712fb420acf798bdc24b475548df845daf7b5348a448dd7dcd2a18cdd62e56f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/boss-distilled-mock/role.md",
+      "sha256": "a8c16beff896e350fbc4f97515cf49798dc742dc67c22840a0f7ac7c6ab3adf7",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/generic-advocate/references/advocacy-dimensions.md",
+      "sha256": "492fb9b5a49f741af50568b01e27c6fc2c1f314fed1182192171f6ce89d66e32",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/generic-advocate/role.md",
+      "sha256": "ff29a2b936840309cec46ac3614e05056fe6496615ff5626e5e8fcb51ae1ff95",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/generic-advocate/templates/review-record.template.md",
+      "sha256": "018938bbb3b3ea156e01eedd2c5ed3e8ab0cce1d57f2959afaf519c61704494b",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/generic-critic/references/review-dimensions-demo.md",
+      "sha256": "341b21a3aa77b454fd64020ae79ec621c3854c5019902c52b1285e46c712fd2f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/generic-critic/references/review-dimensions-interactive.md",
+      "sha256": "d78b4e04b364e6ac75814ffecfc4b1e85ef51f10aa9ce1a1dc7ff96549e11f02",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/generic-critic/references/review-dimensions.md",
+      "sha256": "64250e0692483301e0169d9668f0f5141b69383d02e9b1f34340a5316e18ea55",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/generic-critic/role.md",
+      "sha256": "7e4ec9911b9031aad17ae8a7de17e0e00319bf1d85b75059ad1d9f2cce8218c5",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/generic-critic/templates/review-record.template.md",
+      "sha256": "21c44b719b13b95b8723403edaf7fada20b0f13205a809d01dddc4a948aa3412",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/pragmatic-advocate/role.md",
+      "sha256": "65789f03caa05a454d1785c46c6659bc2d800270f1b76e04f9c2dcc502ef3a06",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/reviewers/security-skeptic/role.md",
+      "sha256": "40435754cd9833c2a4fc94910e88546f711bb966da4284239c19993895302622",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/six-stage-product-workflow.md",
+      "sha256": "4e5a03550f36c4c5ea6bb2e7a865837bf922c0d51b0bda776c35f6a08e20267f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/skill-loading-protocol.md",
+      "sha256": "0f72a66275b84744d3798105ee49461654fa66ba8c5bdc3d929f15e553e0c4a4",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/stage-execution-contract.md",
+      "sha256": "a55383bafaae861cd71d044022a9c96c014357f073638d0d49680f0af4a16370",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/stage-review-mode-router.md",
+      "sha256": "c764d12eec988fbd15996e74532d30be15863d3153492b197d12f2d8679046bd",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/staged-product-workflow.md",
+      "sha256": "01b0375ef6cb6fa716c705a1cbaf719e79007483181c91d6b3d716e87bd2f277",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/stages/stage-2-interactive-design/SKILL.md",
+      "sha256": "88d38db6708a797162b52d9df83fc6d169552cd3e54cd4b25c6279ec3c24105a",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/stages/stage-2-interactive-design/references/cross-review-trigger.md",
+      "sha256": "fbfa1d94f32d4b6fef3dfd6b22acf78306bfbb488c6994836de279ac5e7f932d",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/stages/stage-2-interactive-design/templates/cross-review-output.template.md",
+      "sha256": "82327517b4955da90dc37799130274d652f0fdc6583882cefb3f36fbb23ce65a",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/stages/stage-3-interactive-demo/SKILL.md",
+      "sha256": "25f094f6a82152a98e6638dfa7fdd1e67db51817a66e32b1b4d42b128355123d",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/stages/stage-3-interactive-demo/references/cross-review-trigger.md",
+      "sha256": "766e4651ae6bbecb7fd34829df8a0995ffc985f703fe07804d08fb491837a03f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/stages/stage-3-interactive-demo/templates/cross-review-output.template.md",
+      "sha256": "d663f130a150b007643276376b0fa366c4641fe750f06e481d2af9798b1a016c",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/state-md-protocol.md",
+      "sha256": "883aa72ebef121c2ff3a65f8803a866f34871db1403ba3f8bd6b0199ff9e2b33",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/stepped-product-workflow.md",
+      "sha256": "32394a388f9365d45e962d988a73a0e4e06f1b96bc1acf80e2d167c6dcfd6207",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/task-entry-state-protocol.md",
+      "sha256": "16587a1717d8c2c436f86ab68680760c167e3d88201b7ae541a659393ae52b3e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/third-party-skill-protocol.md",
+      "sha256": "2069ea416d2bedfd9d012301dfa1e454055e215b7e75e443f17be1f9c6f4a65e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/three-role-collaboration-protocol.md",
+      "sha256": "aee96c7ce9f8d579f0d9da9c9d620b6852e4d7f6709bf175718739463855e445",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/version-block.md",
+      "sha256": "03311540ccea5b060562bed66999322467a38d1e70f9b17370ea655f57fbfdf0",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/browser/README.md",
+      "sha256": "f033772684fd96fd2d25901785ab9ecea147e4237f50028783299aa64bb1c620",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/browser/playwright-browser.cjs",
+      "sha256": "87ee83252ba0ae330da7deecd8f6739c9bba99fc48d345febcb74cfd0221c6a0",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/browser/render-pages.mjs",
+      "sha256": "1d32daaaa3bde5c540750a544bf9b94e3ae1b75d6d6a22f76d90e5e9de010f54",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/browser/render-pages.test.mjs",
+      "sha256": "334593119a4ff0e60b18994bf1b6e99322eee40de4907c23a635e7cc81af63de",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/browser/setup-playwright-browser.cjs",
+      "sha256": "c32886eabe1c84f846eaf1bf3a8864a03d064ed8ac468296736365cb1088b833",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/browser/test-playwright-browser.cjs",
+      "sha256": "9143fc1513a36c52ef668a6b670feb944b9dd9ccb3a07b75d0985e151b7a4b03",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/context-package-core/preflight-core/README.md",
+      "sha256": "7af8d6c2c8d0056ce36b7b45aa3d62677d3d5fc71b822704e34e7d6e9da70587",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/context-package-core/preflight-core/engine.mjs",
+      "sha256": "f10e70d0188486abf9c49a63df9de3b10a7c8f90790507b588d61bed597e3350",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/context-package-core/preflight-core/python_engine.py",
+      "sha256": "02c02d05bc7f7604a28757ead6470a9439a9714118dcdc1d1a87197086b4f500",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/context-package-core/preflight-core/rule-id-registry.md",
+      "sha256": "da6bde9540564072c7dca7ad6544f1bdc8be0e701af03e6fa3652d7a3568d991",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/LICENSES.md",
+      "sha256": "91f63217402da4e22d14d337867a5604d164165b21391262eedbbe28fdf9f072",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/README.md",
+      "sha256": "6b8267d037206e239373fdb80108be897f96ca3f1bde39a32fb207c7df589ed6",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/avatars/person-a.svg",
+      "sha256": "cb3fb603d713d2c0e321738ce99b02524a4e629e835b2179c1c4a5ac4d07be09",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/avatars/person-b.svg",
+      "sha256": "f817ddef535533a0d69f9ddcdb386f855edaa5b2a4c4f716f181fec1f0c518c0",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/avatars/person-c.svg",
+      "sha256": "f6d1da3421c3a3427114e3d849afe041ed7f9e5e872030ec0af8acb897c56d54",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/avatars/person-d.svg",
+      "sha256": "3510a47cb7529c497e2d36c3b9888ba02eed15b28e24c16e84e4b0f634a69273",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/catalog.json",
+      "sha256": "977079d4bc9b8682e64609da9795f58ccbc6b9db31aa42323ed56f775336f89e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/back.svg",
+      "sha256": "f33a14e268959dd85d31b31912b6e377a70544d8e8a8c24137c4123faba41725",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/bell.svg",
+      "sha256": "cb698345612ff6108e655535bacacdaf93c12c32ad8612c51006672350e0fd39",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/cart.svg",
+      "sha256": "5a91482d7030ed5d08e1411f3fc0f28b5f3d1a45f70237a2c4c5d668a9353727",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/check.svg",
+      "sha256": "4847dd1f0afd18a397e5cfc60dc15a567063517e180442f6c3a5c92b051e9cfa",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/chevron-right.svg",
+      "sha256": "b0fdd6c3c9c8d5d25173b0722a19c0ca0bcb4dede0c94627b98acf97895838d7",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/close.svg",
+      "sha256": "9b9da233163e84ec810c73f0401acabd78013fbde2e9e5203ac26e4ad25a6133",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/filter.svg",
+      "sha256": "ce0e04a2d13360bf7bdce331dcbe5d88a3485364b14e59bb9f46b74794925b1a",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/heart.svg",
+      "sha256": "44adb9cb68d93b68c588f86cdba04402eecc5ee1cb4fc664f998a7874cbce1e1",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/home.svg",
+      "sha256": "200e3d5e7337f22004e083e3215d00e0048302d56c1e495a8521e130d5be7876",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/location.svg",
+      "sha256": "178c6a6cd8091c6f06bf6aeb973a0fa5bbdbecd7c79ebde518579c102df84e99",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/menu.svg",
+      "sha256": "7a3ce25fc6de3e0d167912f80bcd44ce81bd04d5fec68a0b093ab49225f9f5ba",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/message.svg",
+      "sha256": "a3d1764be6a8a3c74fc97ec09500d28ebd1e03a3477f2ff782884439557c403f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/minus.svg",
+      "sha256": "4e3eefe2c58f293f5bd3f21cd9eedf02428951d51debf02e55651f304ee59866",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/plus.svg",
+      "sha256": "a4f9a83ae626916641db3a7cca4f658e8ff60794e89f404a4b5db3ef7371cdd7",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/scan.svg",
+      "sha256": "e9d7b02bbb19c76167aa7803860e40fa5e8cd41b19dfafc40e7cca39e29dea33",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/search.svg",
+      "sha256": "370b30e600889a62cb739c1f48aa3d2f5653f3136b4e3a4ba3f020e194be6523",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/share.svg",
+      "sha256": "dccdefd6bb4c49570f5736a7ea4b2efd859fdfcdce463cf850cdaf92f3bc5e8f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/sort.svg",
+      "sha256": "8b9982bf34bf363a986f9d485c54045b0b09e3c39d79496c1eb53b8d26ea9f18",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/star.svg",
+      "sha256": "b3397abf45ed2546415bee9372770722f1daada16c6376e90b2b5219e12e7cd1",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/icons/user.svg",
+      "sha256": "09a5dcf627047da6c2931a1d4066fa371247f5e6ac9bf00344daf4ffec9a212a",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/apparel-hoodie.webp",
+      "sha256": "a0654f030d92c805b30b3c8ef19fb14f0771226ab7ce7ec5c9007398e5bfddff",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/apparel-tee.webp",
+      "sha256": "e7f9355b543de527ba71df37fb086c03bc19449fdcd5399102174b7ea7527d2b",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/bag-backpack.webp",
+      "sha256": "f71b7e98ae8e5f8aa13d7dac24be304bda166eda31251aabae40c08ed6b44a67",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/electronics-headset.webp",
+      "sha256": "dd1e848335776ee0518363db9e0943dd39096a22f677952078e33f9bf4caaf41",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/electronics-laptop.webp",
+      "sha256": "f0ad7b99492083cbb1c5b3625cc0c1b5946326a773c76f977310a9fcefa1671f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/electronics-phone.webp",
+      "sha256": "d2b2d51a721894605122d1020c4d1f683273aa27e03d616a889245bcdcb6c411",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/food-bread.webp",
+      "sha256": "482c06c68e20bcdbcd7a7bbdc430d280fd45df6be91b956cc906180313974ec5",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/food-breakfast.webp",
+      "sha256": "5704380a7406ab7c44f1bce4b0be6992c0dfd2105fc6c17a596c56dde593b753",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/food-cake.webp",
+      "sha256": "106718bda301a202d8a014351be9b4d91f29ffa4706705facddfae4fee69f29e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/food-coffee.webp",
+      "sha256": "7f2d366c7bbfc26fb3b050c24c8941e94fd389109326ae3d937dfab5f0ce47ac",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/food-fruit.webp",
+      "sha256": "cfd759d5992b9fe065b05b542098797a547be3de649ca4ae5f1f12848afcf0c6",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/food-salad.webp",
+      "sha256": "9229d403e469e96bee07d98fb9b5b6f36f0f21595f605e9ba5dd804c6db4a273",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/lifestyle-city.webp",
+      "sha256": "1ea186385612845e927b27c2373ba82ef5f5b5c7dd0c0539367ce742fa506b9e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/lifestyle-room.webp",
+      "sha256": "c827a64a56789989c4750e4c9c20d68e06fed65ad9e9695be7c47ad710330015",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/shoes-leather.webp",
+      "sha256": "23e560bc30d176a1d65cb49d9bfd4ac6b9b2440889b2efb9daa04f4522b58ba6",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/images/shoes-sneakers.webp",
+      "sha256": "6c11015da5f658a8c0b626cf812b155b597970b62cd6dc68cda396662b07afde",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/lib/catalog.mjs",
+      "sha256": "558f166093fdad7e446f3029f642f5f704e63a1855a78c59d136be21a5725ca2",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/demo-assets/sample-data.json",
+      "sha256": "2cf8ed2ff2854c6c8f39d36b385a8c26387feb8ea02e1f939aa9d9296c247d24",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/test-runner/command-runner.cjs",
+      "sha256": "73c5590aec4b88a33ccb2f3b74b8061122da1982a0b3884d06bec88ab147bc99",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/shared/test-runner/test-command-runner.cjs",
+      "sha256": "c7ee68935a8eb7e285f2b271fd2359e04718d42da97c6d03cc81a165ff2666b2",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/skill-routing/routes.json",
+      "sha256": "cdc1b7c7776abda74bb50e50e7c32061b777213db48b4a1492a515858c1e66a5",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/README.md",
+      "sha256": "f3f718ee9fd54868005ab6ed6681a65d591170f120b54da96a52ee6c089db306",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/README.md",
+      "sha256": "39d46097e1646da498835ab85f1dc215a7e3b6011e7499e10d452c5dfd665559",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/artifact-dag.json",
+      "sha256": "e28fda98ee34d2a6ee5a6d7bac9e12af96814a39f5074a6a6c1d215ab13c5604",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/change-request.schema.json",
+      "sha256": "7d5afc1cce25d7d12147ad24bb645b3d67e53cc14f712fdec06e58f544b0c8a5",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/design-model.schema.json",
+      "sha256": "becc2c16d5e42f8e7afb22f8eada9fc4abe30337b8e949bd79e820ff9e555c68",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/eight-stage-change-request-v1.schema.json",
+      "sha256": "ca57b80f9be58e3b13683ba9997f3184b88ae362e10b09ea53f964315ecdd0de",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/gate-record.schema.json",
+      "sha256": "07a9d518fa4e52c60a717ee6d29eb2d4708724ce02e17bdbc1e1fa8ebcdc7565",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/product-design-eight-stage-v1.json",
+      "sha256": "ee2d7e2b38782ebe49321388e7c2f6a380748dddcf8fbccd0e1ec8ab3f824a07",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/product-design-six-stage-v1.json",
+      "sha256": "4590c8692b6708e22617eb870ff9d0a7310f6706f350fa94012fd58acccaddd7",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/recipe.schema.json",
+      "sha256": "34dcc3c359c559fce6bc1577610ded4d723673e4ecc0d3bd340a1616c5b3fa93",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/render-manifest.schema.json",
+      "sha256": "a74bdc04b8e947d026e524f71878198ad01f2efdec1fd9c6f43b8c487c9e32e2",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/validation-report.schema.json",
+      "sha256": "84530af2448194286f18852dc19e65ef1852649635740852ecafbd5ff09ba5ed",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/contracts/workflow-state.schema.json",
+      "sha256": "f9f6030a08d7da2a88c44e3a8432dc4ed81dc34d90ea23763b20c50d565ec19c",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/index.mjs",
+      "sha256": "9cb52263ce771e66c11e450ff0ebc6a2d8727a3c1ffe93812db5b1789242ea06",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/candidate-commands.mjs",
+      "sha256": "bfaf9394b0ac5ef340fe3d2f3ab3be2e0d8eb985e159c9528b162bd95fa9b711",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/candidate-workspace.mjs",
+      "sha256": "69a15b025816e48790192d48557e6cc24d9009c996eae96bf982fd54223a4051",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/change-recovery.mjs",
+      "sha256": "39e769249acf2931dac39b3868918f6ca7c32526711e2934d63879979e2c621f",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/core.mjs",
+      "sha256": "9c66e9aaa2d3534c155309f867a1cbefeaa5dd54788055dc58366bd12686c9e7",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/eight-stage.mjs",
+      "sha256": "22545192a74af759b8f7470006b391fa1a69682da7f541bbf6f5f3c11c49629b",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/errors.mjs",
+      "sha256": "18bae3cc5461067c783a8d567211c2afa71b609be8754c4a167d423a323b4951",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/evidence-verifier.mjs",
+      "sha256": "69e3868af314dc5d73ff7d22d18c145d839d8e3ca9f5b95dd256b71cadc1bef8",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/package-integrity.mjs",
+      "sha256": "11ac4e353f4a21ee888abb99e78307c5736ebefa90f8f2fb77dda875ab0ae0f9",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/project-store.mjs",
+      "sha256": "82535a196c93b54874ab55274e4f0dab79f9c9f8da5385ead269bfb761604f46",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/provenance.mjs",
+      "sha256": "37e2c1d3d61055f8694164ce8df8cc4a1e0953f3cf2ac05d7f5c8bac3961221a",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/schemas.mjs",
+      "sha256": "e7496e12dfd8495575eaaea22b510a4b5761e5c136f484af3854e2fbc7dd5c09",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/step-control.mjs",
+      "sha256": "49dfae1a018db6cbabc68af72422f0a05e04d43d3d8bfa61ebf9d87bc823293e",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/step-workflow.mjs",
+      "sha256": "90f44663e51b087061b7284b7ac0d162e65cf56095509f2945bdbd2fe6719b07",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/workflow-core/lib/validate.mjs",
+      "sha256": "f84f7c59d79de5f0cd18c9dfbe4375a619aea702ec4d83cef8b517cf43404a96",
+      "executable": false,
+      "runtime": true
+    }
+  ]
+}

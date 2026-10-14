@@ -1,0 +1,887 @@
+{
+  "schema_version": "1.1",
+  "startup_char_budget": 12000,
+  "token_estimator_chars_per_token": 4,
+  "default_profile": "pm-zero-agent",
+  "default_content_mode": "compact",
+  "content_modes": {
+    "legacy-full": {
+      "description": "Compatibility mode for one minor release; prompt-load canonical token CSS."
+    },
+    "compact": {
+      "description": "Load the compact semantic index and materialize canonical CSS as an asset.",
+      "replace_required": {
+        "skills/dewu-design-system/tokens.css": "skills/dewu-design-system/references/token-index.md"
+      },
+      "asset_files": [
+        "skills/dewu-design-system/tokens.css"
+      ]
+    }
+  },
+  "optional_file_rules": [
+    {
+      "id": "story-canvas",
+      "predicate": "story_canvas",
+      "workflows": [
+        "design-forge"
+      ],
+      "files": [
+        "skills/design-forge/references/methodology/hifi-story-flow-canvas.md"
+      ],
+      "estimated_tokens": 369,
+      "cap_tokens": 450
+    },
+    {
+      "id": "asset-search",
+      "predicate": "asset_search",
+      "workflows": [
+        "design-forge"
+      ],
+      "files": [
+        "skills/design-forge/references/methodology/asset-search-policy.md"
+      ],
+      "estimated_tokens": 505,
+      "cap_tokens": 550
+    },
+    {
+      "id": "screenshot-absorption",
+      "predicate": "screenshot_absorption",
+      "workflows": [
+        "design-forge"
+      ],
+      "files": [
+        "skills/design-forge/references/methodology/screenshot-absorption.md",
+        "skills/design-forge/references/screenshot-evidence.schema.json"
+      ],
+      "estimated_tokens": 981,
+      "cap_tokens": 1100
+    },
+    {
+      "id": "atom-defaults",
+      "predicate": "component_detail",
+      "workflows": [
+        "design-forge"
+      ],
+      "files": [
+        "skills/design-forge/references/methodology/atom-defaults.md"
+      ],
+      "estimated_tokens": 592,
+      "cap_tokens": 700
+    },
+    {
+      "id": "prd-docx",
+      "predicate": "prd_docx",
+      "workflows": [
+        "prd-forge"
+      ],
+      "files": [
+        "skills/prd-forge/references/format_spec.md"
+      ],
+      "estimated_tokens": 592,
+      "cap_tokens": 700
+    },
+    {
+      "id": "prd-feedback",
+      "predicate": "prd_feedback",
+      "workflows": [
+        "prd-forge"
+      ],
+      "files": [
+        "skills/prd-forge/references/prd-feedback-patterns.md"
+      ],
+      "estimated_tokens": 120,
+      "cap_tokens": 180
+    },
+    {
+      "id": "prd-boundary",
+      "predicate": "prd_boundary",
+      "workflows": [
+        "prd-forge"
+      ],
+      "files": [
+        "skills/prd-forge/references/scope-boundary.md",
+        "skills/prd-forge/references/format-constraints.md"
+      ],
+      "estimated_tokens": 493,
+      "cap_tokens": 600
+    },
+    {
+      "id": "prd-multi-track",
+      "predicate": "prd_multi_track",
+      "workflows": [
+        "prd-forge"
+      ],
+      "files": [
+        "skills/prd-forge/references/prd-direction-layout.md"
+      ],
+      "estimated_tokens": 652,
+      "cap_tokens": 750
+    },
+    {
+      "id": "review-example",
+      "predicate": "review_example",
+      "workflows": [
+        "reviewer-forge"
+      ],
+      "files": [
+        "skills/reviewer-forge/examples/sample-prd-review.md"
+      ],
+      "estimated_tokens": 290,
+      "cap_tokens": 350
+    },
+    {
+      "id": "prd-schema",
+      "predicate": "prd_schema",
+      "workflows": [
+        "prd-forge"
+      ],
+      "files": [
+        "skills/prd-forge/references/prd_schema.md"
+      ],
+      "estimated_tokens": 518,
+      "cap_tokens": 518
+    },
+    {
+      "id": "prd-writing",
+      "predicate": "prd_writing",
+      "workflows": [
+        "prd-forge"
+      ],
+      "files": [
+        "skills/prd-forge/references/writing_templates.md"
+      ],
+      "estimated_tokens": 840,
+      "cap_tokens": 840
+    },
+    {
+      "id": "prd-rationale",
+      "predicate": "prd_rationale",
+      "workflows": [
+        "prd-forge"
+      ],
+      "files": [
+        "skills/prd-forge/references/prd-rationale-vs-implementation.md"
+      ],
+      "estimated_tokens": 247,
+      "cap_tokens": 247
+    },
+    {
+      "id": "design-feedback",
+      "predicate": "design_feedback",
+      "workflows": [
+        "design-forge"
+      ],
+      "files": [
+        "skills/design-forge/references/interaction-feedback-patterns.md"
+      ],
+      "estimated_tokens": 1510,
+      "cap_tokens": 1510
+    },
+    {
+      "id": "visual-craft",
+      "predicate": "visual_craft",
+      "workflows": [
+        "design-forge"
+      ],
+      "files": [
+        "skills/design-forge/references/methodology/visual-quality-bar.md",
+        "skills/design-forge/references/methodology/mobile-craft.md"
+      ],
+      "estimated_tokens": 870,
+      "cap_tokens": 870
+    },
+    {
+      "id": "review-dimensions",
+      "predicate": "review_dimensions",
+      "workflows": [
+        "reviewer-forge"
+      ],
+      "files": [
+        "skills/reviewer-forge/references/review-dimensions.md"
+      ],
+      "estimated_tokens": 158,
+      "cap_tokens": 162
+    },
+    {
+      "id": "legacy-pipeline",
+      "predicate": "legacy_pipeline",
+      "workflows": [
+        "prd-forge",
+        "design-forge"
+      ],
+      "files": [
+        "system/protocols/pipeline-stage-protocol.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "system/protocols/pipeline-format-validator.md"
+      ],
+      "estimated_tokens": 1947,
+      "cap_tokens": 1947
+    },
+    {
+      "id": "design-pipeline",
+      "predicate": "legacy_pipeline",
+      "workflows": [
+        "design-forge"
+      ],
+      "files": [
+        "skills/design-forge/references/scenario-anchoring.md",
+        "skills/design-forge/references/interaction-spec-protocol.md",
+        "skills/design-forge/references/demo-reuse-strategy.md",
+        "skills/design-forge/references/demo-batch-output.md"
+      ],
+      "estimated_tokens": 1258,
+      "cap_tokens": 1258
+    },
+    {
+      "id": "design-forge-do-and-dont",
+      "predicate": "explicit_only",
+      "workflows": [
+        "design-forge"
+      ],
+      "files": [
+        "skills/design-forge/references/methodology/do-and-dont.md"
+      ],
+      "estimated_tokens": 306,
+      "cap_tokens": 306
+    }
+  ],
+  "routes": [
+    {
+      "id": "prd-neutral",
+      "workflow": "prd-forge",
+      "mode": "prd",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/prd-forge/SKILL.md",
+        "skills/prd-forge/references/prd-schema.lock.md",
+        "skills/prd-forge/references/prd-type-routing.md",
+        "skills/prd-forge/references/prd-self-checklist.md"
+      ],
+      "optional_files": [
+        "skills/prd-forge/references/prd_schema.md",
+        "skills/prd-forge/references/writing_templates.md"
+      ],
+      "forbidden_skills": [
+        "design-forge",
+        "reviewer-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "prd-forge"
+      ],
+      "char_budget": 14000,
+      "estimated_token_budget": 1702,
+      "baseline_estimated_tokens": 3298,
+      "weight": 0.2769230769230769
+    },
+    {
+      "id": "flow-neutral",
+      "workflow": "design-forge",
+      "mode": "flow",
+      "artifact": "flow",
+      "fidelity": "standard",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/design-forge/SKILL.md",
+        "skills/design-forge/references/ds-spec.lock.md",
+        "skills/design-forge/references/methodology/flow-canvas-recipe.md"
+      ],
+      "optional_files": [
+        "skills/design-forge/references/interaction-feedback-patterns.md",
+        "skills/design-forge/references/methodology/visual-quality-bar.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "reviewer-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "design-forge"
+      ],
+      "char_budget": 26400,
+      "estimated_token_budget": 3162,
+      "baseline_estimated_tokens": 6518,
+      "weight": 0.15384615384615383
+    },
+    {
+      "id": "demo-neutral",
+      "workflow": "design-forge",
+      "mode": "demo",
+      "artifact": "demo",
+      "fidelity": "standard",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/design-forge/SKILL.md",
+        "skills/design-forge/references/ds-spec.lock.md",
+        "skills/design-forge/references/methodology/interactive-demo-system.md",
+        "skills/design-forge/references/methodology/checklist.md"
+      ],
+      "optional_files": [
+        "skills/design-forge/references/methodology/do-and-dont.md"
+      ],
+      "asset_files": [
+        "skills/design-forge/assets/demo-shell/core.css",
+        "skills/design-forge/assets/demo-shell/core.js"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "reviewer-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "design-forge"
+      ],
+      "char_budget": 26400,
+      "estimated_token_budget": 3546,
+      "baseline_estimated_tokens": 6518,
+      "weight": 0.18461538461538457
+    },
+    {
+      "id": "hifi-neutral",
+      "workflow": "design-forge",
+      "mode": "hifi",
+      "artifact": "flow",
+      "fidelity": "hifi",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/design-forge/SKILL.md",
+        "skills/design-forge/references/ds-spec.lock.md",
+        "skills/design-forge/references/methodology/hifi-surface-authoring.md",
+        "skills/design-forge/references/methodology/visual-quality-bar.md",
+        "skills/design-forge/references/methodology/mobile-craft.md",
+        "skills/design-forge/references/methodology/checklist.md"
+      ],
+      "optional_files": [
+        "skills/design-forge/references/methodology/hifi-story-flow-canvas.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "reviewer-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "design-forge"
+      ],
+      "char_budget": 26400,
+      "estimated_token_budget": 4146,
+      "baseline_estimated_tokens": 6518,
+      "weight": 0.02307692307692307
+    },
+    {
+      "id": "hifi-demo-neutral",
+      "workflow": "design-forge",
+      "mode": "hifi",
+      "artifact": "demo",
+      "fidelity": "hifi",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/design-forge/SKILL.md",
+        "skills/design-forge/references/ds-spec.lock.md",
+        "skills/design-forge/references/methodology/interactive-demo-system.md",
+        "skills/design-forge/references/methodology/hifi-surface-authoring.md",
+        "skills/design-forge/references/methodology/visual-quality-bar.md",
+        "skills/design-forge/references/methodology/mobile-craft.md",
+        "skills/design-forge/references/methodology/checklist.md"
+      ],
+      "optional_files": [
+        "skills/design-forge/references/methodology/asset-search-policy.md"
+      ],
+      "asset_files": [
+        "skills/design-forge/assets/demo-shell/core.css",
+        "skills/design-forge/assets/demo-shell/core.js"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "reviewer-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "design-forge"
+      ],
+      "char_budget": 26400,
+      "estimated_token_budget": 4894,
+      "baseline_estimated_tokens": 6518,
+      "weight": 0.007692307692307691
+    },
+    {
+      "id": "review-brief-neutral",
+      "workflow": "reviewer-forge",
+      "mode": "review",
+      "artifact": "brief",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/templates/phase-1-review.md"
+      ],
+      "optional_files": [
+        "skills/reviewer-forge/references/review-dimensions.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "design-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge"
+      ],
+      "char_budget": 12400,
+      "estimated_token_budget": 1851,
+      "baseline_estimated_tokens": 3300,
+      "weight": 0.030769230769230764
+    },
+    {
+      "id": "review-demo-neutral",
+      "workflow": "reviewer-forge",
+      "mode": "review",
+      "artifact": "demo",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/templates/phase-2-review.md"
+      ],
+      "optional_files": [
+        "skills/reviewer-forge/references/review-dimensions.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "design-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge"
+      ],
+      "char_budget": 12400,
+      "estimated_token_budget": 1915,
+      "baseline_estimated_tokens": 3300,
+      "weight": 0.06153846153846153
+    },
+    {
+      "id": "review-hifi-neutral",
+      "workflow": "reviewer-forge",
+      "mode": "review",
+      "artifact": "hifi",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/references/review-dimensions.md",
+        "skills/reviewer-forge/templates/phase-2-review.md"
+      ],
+      "optional_files": [],
+      "forbidden_skills": [
+        "prd-forge",
+        "design-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge"
+      ],
+      "char_budget": 12400,
+      "estimated_token_budget": 2072,
+      "baseline_estimated_tokens": 3300,
+      "weight": 0.015384615384615382
+    },
+    {
+      "id": "review-prd-neutral",
+      "workflow": "reviewer-forge",
+      "mode": "review",
+      "artifact": "prd",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/templates/phase-3-review.md"
+      ],
+      "optional_files": [
+        "skills/reviewer-forge/references/review-dimensions.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "design-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge"
+      ],
+      "char_budget": 12400,
+      "estimated_token_budget": 1860,
+      "baseline_estimated_tokens": 3300,
+      "weight": 0.09230769230769229
+    },
+    {
+      "id": "review-then-prd-neutral",
+      "workflow": "prd-forge",
+      "mode": "review-and-modify",
+      "variant": "review-then",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/templates/phase-3-review.md",
+        "skills/prd-forge/SKILL.md",
+        "skills/prd-forge/references/prd-schema.lock.md",
+        "skills/prd-forge/references/prd-type-routing.md",
+        "skills/prd-forge/references/prd-self-checklist.md"
+      ],
+      "optional_files": [
+        "skills/reviewer-forge/references/review-dimensions.md",
+        "skills/prd-forge/references/prd_schema.md"
+      ],
+      "forbidden_skills": [
+        "design-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge",
+        "prd-forge"
+      ],
+      "preload_policy": "sequential",
+      "handoff": "compact_findings",
+      "char_budget": 26400,
+      "estimated_token_budget": 3117,
+      "baseline_estimated_tokens": 6298,
+      "weight": 0.07692307692307691
+    },
+    {
+      "id": "review-then-flow-neutral",
+      "workflow": "design-forge",
+      "mode": "review-and-modify",
+      "variant": "review-then",
+      "artifact": "flow",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/templates/phase-2-review.md",
+        "skills/design-forge/SKILL.md",
+        "skills/design-forge/references/ds-spec.lock.md",
+        "skills/design-forge/references/methodology/flow-canvas-recipe.md"
+      ],
+      "optional_files": [
+        "skills/reviewer-forge/references/review-dimensions.md",
+        "skills/design-forge/references/interaction-feedback-patterns.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge",
+        "design-forge"
+      ],
+      "preload_policy": "sequential",
+      "handoff": "compact_findings",
+      "char_budget": 38800,
+      "estimated_token_budget": 4633,
+      "baseline_estimated_tokens": 9700,
+      "weight": 0.02307692307692307
+    },
+    {
+      "id": "review-then-design-neutral",
+      "workflow": "design-forge",
+      "mode": "review-and-modify",
+      "variant": "review-then",
+      "artifact": "demo",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/templates/phase-2-review.md",
+        "skills/design-forge/SKILL.md",
+        "skills/design-forge/references/ds-spec.lock.md",
+        "skills/design-forge/references/methodology/interactive-demo-system.md",
+        "skills/design-forge/references/methodology/checklist.md"
+      ],
+      "optional_files": [
+        "skills/reviewer-forge/references/review-dimensions.md",
+        "skills/design-forge/references/interaction-feedback-patterns.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge",
+        "design-forge"
+      ],
+      "preload_policy": "sequential",
+      "handoff": "compact_findings",
+      "char_budget": 38800,
+      "estimated_token_budget": 5017,
+      "baseline_estimated_tokens": 9700,
+      "weight": 0.03846153846153846
+    },
+    {
+      "id": "review-then-hifi-neutral",
+      "workflow": "design-forge",
+      "mode": "review-and-modify",
+      "variant": "review-then",
+      "artifact": "hifi",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/references/review-dimensions.md",
+        "skills/reviewer-forge/templates/phase-2-review.md",
+        "skills/design-forge/SKILL.md",
+        "skills/design-forge/references/ds-spec.lock.md",
+        "skills/design-forge/references/methodology/hifi-surface-authoring.md",
+        "skills/design-forge/references/methodology/visual-quality-bar.md",
+        "skills/design-forge/references/methodology/mobile-craft.md",
+        "skills/design-forge/references/methodology/checklist.md"
+      ],
+      "optional_files": [
+        "skills/design-forge/references/interaction-feedback-patterns.md",
+        "skills/design-forge/references/methodology/asset-search-policy.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge",
+        "design-forge"
+      ],
+      "preload_policy": "sequential",
+      "handoff": "compact_findings",
+      "char_budget": 60000,
+      "estimated_token_budget": 5773,
+      "baseline_estimated_tokens": 9818,
+      "weight": 0.015384615384615382
+    },
+    {
+      "id": "brief-neutral",
+      "workflow": "pm-zero",
+      "mode": "brief",
+      "artifact": "brief",
+      "fidelity": "standard",
+      "context": null,
+      "required_files": [
+        "skills/pm-zero/SKILL.md",
+        "system/protocols/proactive-product-workflow.md"
+      ],
+      "optional_files": [],
+      "forbidden_skills": [
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "pm-zero"
+      ],
+      "char_budget": 16000,
+      "estimated_token_budget": 1001,
+      "baseline_estimated_tokens": 802,
+      "weight": 0,
+      "produces": [
+        "brief"
+      ],
+      "handoff": "produce_then_review",
+      "experimental": true
+    },
+    {
+      "id": "interaction-spec-neutral",
+      "workflow": "design-forge",
+      "mode": "interaction-spec",
+      "artifact": "interaction_spec",
+      "fidelity": "standard",
+      "context": null,
+      "required_files": [
+        "skills/design-forge/SKILL.md",
+        "skills/design-forge/references/ds-spec.lock.md",
+        "system/protocols/proactive-product-workflow.md",
+        "system/workflow-core/contracts/design-model.schema.json",
+        "system/protocols/skill-loading-protocol.md"
+      ],
+      "optional_files": [],
+      "forbidden_skills": [
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "design-forge"
+      ],
+      "char_budget": 16000,
+      "estimated_token_budget": 3060,
+      "baseline_estimated_tokens": 1823,
+      "weight": 0,
+      "produces": [
+        "interaction_spec",
+        "design_model"
+      ],
+      "handoff": "produce_then_review",
+      "experimental": true
+    },
+    {
+      "id": "review-interaction-spec-neutral",
+      "workflow": "reviewer-forge",
+      "mode": "review",
+      "artifact": "interaction_spec",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/templates/interaction-spec-review.md"
+      ],
+      "optional_files": [
+        "skills/reviewer-forge/references/review-dimensions.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "design-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge"
+      ],
+      "char_budget": 12400,
+      "estimated_token_budget": 1853,
+      "baseline_estimated_tokens": 3300,
+      "weight": 0,
+      "experimental": true,
+      "produces": [
+        "review"
+      ]
+    },
+    {
+      "id": "review-then-hifi-demo-neutral",
+      "workflow": "design-forge",
+      "mode": "review-and-modify",
+      "variant": "review-then",
+      "artifact": "demo",
+      "context": null,
+      "required_files": [
+        "system/protocols/skill-loading-protocol.md",
+        "skills/reviewer-forge/SKILL.md",
+        "skills/reviewer-forge/references/review-modes.md",
+        "skills/reviewer-forge/references/severity-levels.md",
+        "system/protocols/evidence-grading-protocol.md",
+        "skills/reviewer-forge/references/evidence-grading.md",
+        "skills/reviewer-forge/references/review-dimensions.md",
+        "skills/reviewer-forge/templates/phase-2-review.md",
+        "skills/design-forge/SKILL.md",
+        "skills/design-forge/references/ds-spec.lock.md",
+        "skills/design-forge/references/methodology/hifi-surface-authoring.md",
+        "skills/design-forge/references/methodology/visual-quality-bar.md",
+        "skills/design-forge/references/methodology/mobile-craft.md",
+        "skills/design-forge/references/methodology/checklist.md",
+        "skills/design-forge/references/methodology/interactive-demo-system.md"
+      ],
+      "optional_files": [
+        "skills/design-forge/references/interaction-feedback-patterns.md",
+        "skills/design-forge/references/methodology/asset-search-policy.md"
+      ],
+      "forbidden_skills": [
+        "prd-forge",
+        "dewu",
+        "dewu-design-system",
+        "_template",
+        "jd"
+      ],
+      "sequence": [
+        "reviewer-forge",
+        "design-forge"
+      ],
+      "preload_policy": "sequential",
+      "handoff": "compact_findings",
+      "char_budget": 60000,
+      "estimated_token_budget": 6522,
+      "baseline_estimated_tokens": 9818,
+      "weight": 0,
+      "fidelity": "hifi",
+      "experimental": true,
+      "asset_files": [
+        "skills/design-forge/assets/demo-shell/core.css",
+        "skills/design-forge/assets/demo-shell/core.js"
+      ]
+    }
+  ]
+}

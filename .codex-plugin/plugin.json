@@ -1,0 +1,31 @@
+{
+  "name": "pm-zero",
+  "version": "0.2.0",
+  "description": "在本机引导产品逐段澄清、版本确认和设计交付。",
+  "author": {
+    "name": "pm-zero"
+  },
+  "license": "MIT",
+  "keywords": [
+    "product",
+    "workflow",
+    "local"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "pm-zero",
+    "shortDescription": "本机主动产品工作流引导",
+    "longDescription": "围绕需求澄清、逐段确认、项目恢复与设计交付提供本机产品工作流工具；品牌能力以实际安装包为准，不调用 HTTP 或模型 API。",
+    "developerName": "pm-zero",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "带我澄清一个产品想法，记录假设、待确认问题和下一步。"
+    ],
+    "brandColor": "#4B5563"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pm-zero.local/schemas/screenshot-evidence.schema.json",
+  "title": "Screenshot Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_id",
+    "source_size",
+    "css_viewport",
+    "device_scale",
+    "scroll_state",
+    "surface_type",
+    "visible_text",
+    "module_grammar",
+    "typography_footprint",
+    "spacing_anchors",
+    "asset_rules",
+    "non_evidence",
+    "assertions"
+  ],
+  "properties": {
+    "source_id": { "type": "string", "minLength": 1 },
+    "source_size": { "$ref": "#/$defs/size" },
+    "css_viewport": { "$ref": "#/$defs/size" },
+    "device_scale": { "type": "number", "exclusiveMinimum": 0 },
+    "scroll_state": { "type": "string", "minLength": 1 },
+    "surface_type": { "type": "string", "minLength": 1 },
+    "visible_text": { "type": "array", "items": { "type": "string" } },
+    "module_grammar": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "typography_footprint": { "type": "array", "items": { "type": "object" }, "minItems": 1 },
+    "spacing_anchors": { "type": "array", "items": { "type": "object" }, "minItems": 1 },
+    "asset_rules": { "type": "array", "items": { "type": "string" } },
+    "non_evidence": { "type": "array", "items": { "type": "string" } },
+    "assertions": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+  },
+  "$defs": {
+    "size": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "pm-zero",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/release/build.mjs",
+    "test": "node --test scripts/release/smoke.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "parse5": "7.3.0"
+  },
+  "license": "MIT",
+  "description": "Local product workflow with optional public and private brand packs"
+}

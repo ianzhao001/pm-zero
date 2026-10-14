@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "pm-zero-workflow": {
+      "command": "node",
+      "args": ["./mcp/server.mjs"],
+      "cwd": "."
+    }
+  }
+}

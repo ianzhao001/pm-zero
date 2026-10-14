@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- MODE: MODE_DEMO -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neutral Interactive Demo</title>
+<style>
+:root {
+  --accent:#1F6FEB;
+  --accent-soft:#DDEBFF;
+  --n00:#FFFFFF;
+  --n-bg:#F5F7FA;
+  --n10:#F0F3F6;
+  --n20:#E6EAF0;
+  --n40:#C9D1D9;
+  --n70:#8B949E;
+  --n100:#57606A;
+  --n140:#24292F;
+  --paper:#F8F4EA;
+  --ease-ios:cubic-bezier(.32,.72,0,1);
+}
+* { box-sizing:border-box; }
+html, body { margin:0; min-height:100%; }
+body {
+  min-height:100vh;
+  color:var(--n140);
+  background:
+    radial-gradient(rgba(36,41,47,.11) 1px, transparent 1px) 0 0 / 28px 28px,
+    var(--paper);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+}
+.signature { position:fixed; top:16px; left:20px; z-index:5; font-size:11px; color:var(--n100); }
+.workbench {
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:320px 336px;
+  gap:34px;
+  padding:48px;
+  place-content:center;
+  align-items:start;
+}
+.phone-shell {
+  width:320px;
+  height:694px;
+  border:1.5px solid var(--n140);
+  border-radius:44px;
+  padding:7px;
+  position:relative;
+  background:linear-gradient(180deg,var(--n00),var(--n10));
+  box-shadow:0 2px 3px rgba(36,41,47,.08),0 18px 36px rgba(36,41,47,.12);
+}
+.phone-shell::before {
+  content:"";
+  position:absolute;
+  top:12px;
+  left:50%;
+  width:92px;
+  height:24px;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:var(--n140);
+  z-index:40;
+}
+.phone-screen { position:relative; height:100%; overflow:hidden; border:1px solid var(--n40); border-radius:36px; background:var(--n-bg); }
+.body-container, .chrome-layer { position:absolute; inset:0; }
+.body-container { z-index:1; }
+.chrome-layer { z-index:2; pointer-events:none; }
+.chrome { pointer-events:auto; animation:chromeIn 180ms ease both; }
+.body { height:100%; display:flex; flex-direction:column; padding-top:78px; background:var(--n-bg); transition:transform 280ms var(--ease-ios), opacity 220ms ease; }
+.body.is-shifting { transform:translateX(-10px); opacity:.94; }
+.status { height:36px; padding:0 18px 4px; display:flex; align-items:flex-end; justify-content:space-between; color:var(--n100); font-size:10px; font-weight:600; background:var(--n00); }
+.nav { height:42px; padding:0 16px; display:flex; align-items:center; justify-content:space-between; background:var(--n00); border-bottom:1px solid var(--n20); }
+.nav strong { font-size:16px; font-weight:500; }
+.nav button { border:0; background:transparent; color:var(--accent); font-weight:700; font-size:11px; }
+.content { flex:1; min-height:0; overflow-y:auto; overflow-x:hidden; padding:10px; display:grid; gap:8px; align-content:start; }
+.hero { display:grid; gap:8px; min-height:132px; padding:12px; border-radius:10px; background:linear-gradient(135deg,#EAF2FF,var(--n00)); border:1px solid #CFE0FF; }
+.hero h2 { margin:0; font-size:22px; line-height:1.2; letter-spacing:0; }
+.hero p, .card p { min-width:0; margin:0; color:var(--n100); font-size:11px; line-height:1.45; overflow-wrap:anywhere; }
+.card { background:var(--n00); border:1px solid var(--n20); border-radius:8px; padding:9px; display:grid; gap:6px; }
+.card strong { min-width:0; font-size:12px; font-weight:600; line-height:1.35; overflow-wrap:anywhere; }
+.meta { display:flex; justify-content:space-between; gap:8px; color:var(--n100); font-size:10px; }
+.media { min-height:94px; border:1px solid var(--n40); border-radius:8px; background:repeating-linear-gradient(135deg,#EFEFEF 0 6px,#F7F7F7 6px 12px); }
+.chip-row { min-width:0; display:flex; gap:5px; flex-wrap:wrap; overflow:hidden; }
+.chip { min-width:0; height:24px; padding:0 8px; display:inline-flex; align-items:center; overflow:hidden; text-overflow:ellipsis; border-radius:999px; background:var(--accent-soft); color:var(--accent); font-size:10px; font-weight:700; white-space:nowrap; }
+.btn { min-height:32px; display:flex; align-items:center; justify-content:center; gap:6px; white-space:nowrap; border:0; border-radius:6px; background:var(--accent); color:var(--n00); font-weight:800; font-size:12px; cursor:pointer; }
+.btn.secondary { background:var(--n00); color:var(--n140); border:1px solid var(--n40); }
+.btn:active, .tap:active { transform:scale(.98); opacity:.88; }
+.tabbar { height:52px; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--n20); background:var(--n00); color:var(--n70); font-size:10px; }
+.tab { min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; overflow:hidden; text-overflow:ellipsis; }
+.tab svg { width:18px; height:18px; stroke:currentColor; stroke-width:1.7; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.tab.active { color:var(--accent); font-weight:800; }
+.sheet { position:absolute; left:0; right:0; bottom:0; padding:14px; border-radius:18px 18px 0 0; background:rgba(255,255,255,.94); backdrop-filter:blur(18px); box-shadow:0 -18px 42px rgba(36,41,47,.18); pointer-events:auto; animation:sheetIn 240ms var(--ease-ios); }
+.sheet h3 { margin:0 0 8px; font-size:15px; }
+.toast { position:absolute; left:50%; bottom:22px; min-height:36px; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; padding:0 16px; border-radius:999px; background:rgba(36,41,47,.82); backdrop-filter:blur(18px); color:var(--n00); font-size:12px; pointer-events:auto; animation:toastIn 180ms ease; white-space:nowrap; }
+.hud { position:sticky; top:48px; align-self:start; display:grid; gap:12px; max-height:calc(100vh - 96px); overflow-y:auto; padding:16px; border:1px solid var(--n40); border-radius:8px; background:rgba(255,255,255,.78); box-shadow:0 2px 3px rgba(36,41,47,.08); }
+.hud-title h1 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+.hud-title p { margin:0; color:var(--n100); font-size:12px; }
+.hud-current { padding:10px; border:1px solid var(--accent); border-radius:6px; color:var(--accent); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; }
+.hud-kv { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.hud-kv div { padding:9px; border:1px solid var(--n20); border-radius:6px; background:var(--n00); font-size:12px; }
+.hud-jump, .hud-controls { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+.hud button { min-height:34px; border:1px solid var(--n40); border-radius:6px; background:var(--n00); color:var(--n140); font-weight:700; cursor:pointer; }
+.hud button.active { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+.hud-log { min-height:130px; max-height:210px; overflow:auto; padding:10px; border-radius:6px; background:var(--n-bg); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--n100); font-size:12px; white-space:pre-wrap; }
+@keyframes chromeIn { from { opacity:.3; } to { opacity:1; } }
+@keyframes sheetIn { from { transform:translateY(22px); opacity:.4; } to { transform:translateY(0); opacity:1; } }
+@keyframes toastIn { from { transform:translateX(-50%) translateY(8px); opacity:.2; } to { transform:translateX(-50%) translateY(0); opacity:1; } }
+@media (max-width:760px) {
+  .workbench { grid-template-columns:1fr; padding:42px 18px 28px; }
+  .phone-shell { justify-self:center; width:min(320px, 100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration:1ms !important; transition-duration:1ms !important; scroll-behavior:auto !important; }
+}
+</style>
+</head>
+<body>
+<div class="signature">Prototype Lab</div>
+<main class="workbench">
+  <section class="phone-shell">
+    <div class="phone-screen">
+      <div class="body-container" id="body-container"></div>
+      <div class="chrome-layer" id="chrome-layer"></div>
+    </div>
+  </section>
+
+  <aside class="hud">
+    <section class="hud-title"><h1>原型控制台</h1><p>展示当前路由、操作控制和事件日志。</p></section>
+    <section class="hud-current" id="hud-current">当前路由：entry</section>
+    <section class="hud-kv"><div id="hud-depth">层级：0</div><div id="hud-state">状态：就绪</div></section>
+    <section class="hud-jump" id="hud-jump"></section>
+    <section class="hud-controls"><button data-action="back">返回</button><button data-action="toast">提示</button></section>
+    <section class="hud-log" id="hud-log"></section>
+  </aside>
+</main>
+
+<script>
+const routes = {
+  entry: {
+    title: "首页",
+    state: "Type 1",
+    back: false,
+    tabs: true,
+    body: `
+      <section class="hero"><h2>任务简报</h2><p>从一个聚焦决策开始，并保持下一步动作可见。</p></section>
+      <section class="card"><div class="media"></div><strong>主入口</strong><div class="meta"><span>3 条更新</span><span>待处理</span></div><button class="btn" data-go="detail">查看方案</button></section>
+      <section class="card"><strong>近期信号</strong><div class="chip-row"><span class="chip">新增</span><span class="chip">已保存</span><span class="chip">已分享</span></div></section>
+    `
+  },
+  detail: {
+    title: "方案",
+    state: "Type 2",
+    back: true,
+    tabs: false,
+    body: `
+      <section class="card"><div class="media"></div><strong>决策摘要</strong><p>一个聚焦动作、一条辅助说明和清晰的撤销路径。</p></section>
+      <section class="card"><strong>检查项</strong><div class="chip-row"><span class="chip">匹配</span><span class="chip">风险</span><span class="chip">时机</span></div></section>
+      <section class="card"><strong>滚动验证</strong><p>额外内容让手机正文滚动，导航层保持固定。</p></section>
+      <button class="btn" data-sheet="options">打开选项</button>
+      <button class="btn secondary" data-go="confirm">跳到确认</button>
+    `
+  },
+  confirm: {
+    title: "确认",
+    state: "Type 2",
+    back: true,
+    tabs: false,
+    body: `
+      <section class="hero"><h2>准备发布</h2><p>终态同时展示结果、时间和下一步动作。</p></section>
+      <section class="card"><strong>结果</strong><div class="meta"><span>排队中</span><span>2 分钟</span></div></section>
+      <section class="card"><strong>恢复路径</strong><p>撤销和重试留在当前页，不新增页面。</p></section>
+      <button class="btn" data-action="toast">完成</button>
+    `
+  }
+};
+const order = Object.keys(routes);
+const stack = ["entry"];
+const log = [];
+let current = "entry";
+
+function record(message) {
+  log.unshift(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" }) + "  " + message);
+  document.getElementById("hud-log").textContent = log.slice(0, 10).join("\n");
+}
+
+function chromeMarkup(route) {
+  return `<div class="chrome"><div class="status"><span>9:41</span><span>5G</span></div><div class="nav">${route.back ? '<button data-action="back">返回</button>' : '<span></span>'}<strong>${route.title}</strong><button data-action="toast">保存</button></div></div>`;
+}
+
+function tabbar() {
+  const icons = ['<path d="M3 8l7-5 7 5v8H3z"></path>', '<circle cx="9" cy="9" r="5"></circle><path d="M13 13l4 4"></path>', '<path d="M4 5h12v10H4z"></path><path d="M7 9h6"></path>', '<circle cx="10" cy="7" r="3"></circle><path d="M4 17c1-4 11-4 12 0"></path>'];
+  const names = ['首页', '搜索', '活动', '我的'];
+  return `<div class="tabbar">${names.map((name, i) => `<div class="tab ${i === 0 ? "active" : ""}"><svg viewBox="0 0 20 20">${icons[i]}</svg><span>${name}</span></div>`).join("")}</div>`;
+}
+
+function renderLayer(kind) {
+  const route = routes[current];
+  const layer = document.getElementById("chrome-layer");
+  if (kind === "options") {
+    layer.innerHTML = `${chromeMarkup(route)}<section class="sheet"><h3>操作选项</h3><p class="meta">为当前路由选择下一步。</p><div class="chip-row"><button class="btn" data-go="confirm">确认</button><button class="btn secondary" data-close="1">关闭</button></div></section>`;
+    record("打开 sheet");
+    return;
+  }
+  if (kind === "toast") {
+    layer.innerHTML = `${chromeMarkup(route)}<div class="toast">已保存到活动记录</div>`;
+    record("显示提示");
+    setTimeout(() => { if (layer.querySelector(".toast")) layer.innerHTML = chromeMarkup(routes[current]); }, 1200);
+    return;
+  }
+  layer.innerHTML = chromeMarkup(route);
+}
+
+function render() {
+  const route = routes[current];
+  const body = document.getElementById("body-container");
+  body.innerHTML = `<section class="body"><div class="content">${route.body}</div>${route.tabs ? tabbar() : ""}</section>`;
+  renderLayer("");
+  document.getElementById("hud-current").textContent = `当前路由：${current}`;
+  document.getElementById("hud-depth").textContent = `层级：${stack.length - 1}`;
+  document.getElementById("hud-state").textContent = `状态：${route.state}`;
+  document.getElementById("hud-jump").innerHTML = order.map(id => `<button class="${id === current ? "active" : ""}" data-go="${id}">${id}</button>`).join("");
+  record("渲染 " + current);
+}
+
+function go(next) {
+  if (!routes[next]) return;
+  current = next;
+  if (stack[stack.length - 1] !== next) stack.push(next);
+  render();
+}
+
+function back() {
+  if (stack.length > 1) stack.pop();
+  current = stack[stack.length - 1];
+  render();
+}
+
+document.addEventListener("click", event => {
+  const target = event.target.closest("[data-go],[data-action],[data-sheet],[data-close]");
+  if (!target) return;
+  if (target.dataset.close) return renderLayer("");
+  if (target.dataset.go) return go(target.dataset.go);
+  if (target.dataset.sheet) return renderLayer(target.dataset.sheet);
+  if (target.dataset.action === "back") return back();
+  if (target.dataset.action === "toast") return renderLayer("toast");
+});
+
+render();
+</script>
+<!-- VERSION: v1.1.0 -->
+<!-- CHANGES: compact centered phone shell, fixed chrome layer, vertical body scroll, and tighter mobile type scale -->
+<!-- BASED ON: design-forge canonical demo -->
+</body>
+</html>

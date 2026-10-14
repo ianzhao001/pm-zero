@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pm-zero.local/schemas/workflow-core/eight-stage-change-request-v1.schema.json",
+  "title": "Eight-stage workflow change request v1",
+  "description": "An eight-stage change is bound to the exact current deliverable artifact. Runtime validation also checks that the entry reference is current and non-stale.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "change_id", "request", "target_ids", "allowed_changes", "preserve_ids", "impact", "reason", "scope", "entry_artifact"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "change_id": { "type": "string", "pattern": "^chg-[0-9]{4,}$" },
+    "request": { "type": "string", "minLength": 1 },
+    "target_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^(SC|EL)-[A-Z0-9]+(-[A-Z0-9]+)*$" } },
+    "allowed_changes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "enum": ["typography", "color", "spacing-within-target", "image", "copy", "state", "action", "local-path", "layout", "information-architecture", "screen-set"] }
+    },
+    "preserve_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^(SC|EL)-[A-Z0-9]+(-[A-Z0-9]+)*$" } },
+    "impact": { "type": "string", "enum": ["visual", "interaction", "structural"] },
+    "reason": { "type": "string", "minLength": 1 },
+    "baseline_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "exploration": { "type": "boolean" },
+    "scope": { "type": "string", "enum": ["artifact", "elements"] },
+    "entry_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "version", "sha256"],
+      "properties": {
+        "artifact_id": { "type": "string", "minLength": 1 },
+        "version": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "scope": { "const": "artifact" } }, "required": ["scope"] },
+      "then": {
+        "properties": {
+          "target_ids": { "maxItems": 0 },
+          "preserve_ids": { "maxItems": 0 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "scope": { "const": "elements" } }, "required": ["scope"] },
+      "then": { "properties": { "target_ids": { "minItems": 1 } } }
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "workflow_id": "product-design-eight-stage-v1",
+  "version": 1,
+  "default_target_stage": "S8",
+  "description": "Project-registered capabilities compose within fixed user-confirmed stages. Static documents and boards precede the interactive Demo; no PRD in this workflow.",
+  "stages": [
+    {
+      "id": "S1",
+      "name": "目标约定",
+      "artifacts": [
+        "goal_contract"
+      ],
+      "required_capabilities": [
+        "goal-clarification",
+        "delivery-planning"
+      ],
+      "optional_capabilities": [
+        "reference-synthesis"
+      ],
+      "reviewers": 0,
+      "static_only": true,
+      "depends_on_stages": [],
+      "char_budget": 24000,
+      "capability_dependencies": {}
+    },
+    {
+      "id": "S2",
+      "name": "需求与场景",
+      "artifacts": [
+        "requirements_scenarios"
+      ],
+      "required_capabilities": [
+        "needs-discovery",
+        "scenario-analysis"
+      ],
+      "optional_capabilities": [
+        "user-research",
+        "evidence-analysis"
+      ],
+      "reviewers": 0,
+      "static_only": true,
+      "depends_on_stages": [
+        "S1"
+      ],
+      "char_budget": 24000,
+      "capability_dependencies": {}
+    },
+    {
+      "id": "S3",
+      "name": "MRD",
+      "artifacts": [
+        "mrd"
+      ],
+      "required_capabilities": [
+        "business-modeling",
+        "scope-definition",
+        "mrd-writing"
+      ],
+      "optional_capabilities": [
+        "competitor-research",
+        "business-analysis"
+      ],
+      "reviewers": 1,
+      "static_only": true,
+      "depends_on_stages": [
+        "S2"
+      ],
+      "char_budget": 24000,
+      "capability_dependencies": {
+        "mrd-writing": [
+          "business-modeling",
+          "scope-definition"
+        ]
+      }
+    },
+    {
+      "id": "S4",
+      "name": "设计方向",
+      "artifacts": [
+        "visual_direction"
+      ],
+      "required_capabilities": [
+        "visual-direction",
+        "color-typography"
+      ],
+      "optional_capabilities": [
+        "brand-guidance",
+        "visual-assets"
+      ],
+      "reviewers": 0,
+      "static_only": true,
+      "depends_on_stages": [
+        "S3"
+      ],
+      "char_budget": 24000,
+      "capability_dependencies": {
+        "color-typography": [
+          "visual-direction"
+        ],
+        "visual-assets": [
+          "visual-direction",
+          "color-typography"
+        ]
+      }
+    },
+    {
+      "id": "S5",
+      "name": "手绘线框",
+      "artifacts": [
+        "wireframes"
+      ],
+      "required_capabilities": [
+        "information-architecture",
+        "wireframing"
+      ],
+      "optional_capabilities": [
+        "interface-copy",
+        "complex-layout"
+      ],
+      "reviewers": 0,
+      "static_only": true,
+      "depends_on_stages": [
+        "S3"
+      ],
+      "char_budget": 24000,
+      "capability_dependencies": {}
+    },
+    {
+      "id": "S6",
+      "name": "交互稿",
+      "artifacts": [
+        "interaction_spec",
+        "design_model"
+      ],
+      "required_capabilities": [
+        "interaction-design",
+        "state-modeling"
+      ],
+      "optional_capabilities": [
+        "usability-analysis",
+        "accessibility-analysis"
+      ],
+      "reviewers": 1,
+      "static_only": true,
+      "depends_on_stages": [
+        "S5"
+      ],
+      "char_budget": 24000,
+      "capability_dependencies": {}
+    },
+    {
+      "id": "S7",
+      "name": "视觉稿",
+      "artifacts": [
+        "visual_design"
+      ],
+      "required_capabilities": [
+        "interface-visual-design",
+        "design-system-application"
+      ],
+      "optional_capabilities": [
+        "icon-design",
+        "visual-assets",
+        "visual-polish"
+      ],
+      "reviewers": 1,
+      "static_only": true,
+      "depends_on_stages": [
+        "S4",
+        "S5",
+        "S6"
+      ],
+      "char_budget": 24000,
+      "capability_dependencies": {
+        "interface-visual-design": [
+          "visual-assets"
+        ]
+      }
+    },
+    {
+      "id": "S8",
+      "name": "可交互 Demo",
+      "artifacts": [
+        "demo"
+      ],
+      "required_capabilities": [
+        "demo-implementation",
+        "browser-verification"
+      ],
+      "optional_capabilities": [
+        "motion-design",
+        "responsive-design"
+      ],
+      "reviewers": 1,
+      "static_only": false,
+      "depends_on_stages": [
+        "S6",
+        "S7"
+      ],
+      "char_budget": 26400,
+      "capability_dependencies": {
+        "browser-verification": [
+          "demo-implementation",
+          "motion-design",
+          "responsive-design"
+        ]
+      }
+    }
+  ],
+  "artifact_dependencies": {
+    "goal_contract": [],
+    "requirements_scenarios": [
+      "goal_contract"
+    ],
+    "mrd": [
+      "requirements_scenarios"
+    ],
+    "visual_direction": [
+      "mrd"
+    ],
+    "wireframes": [
+      "mrd"
+    ],
+    "interaction_spec": [
+      "wireframes"
+    ],
+    "design_model": [
+      "interaction_spec"
+    ],
+    "visual_design": [
+      "visual_direction",
+      "wireframes",
+      "interaction_spec",
+      "design_model"
+    ],
+    "demo": [
+      "interaction_spec",
+      "design_model",
+      "visual_design"
+    ]
+  },
+  "static_extensions": [
+    ".md",
+    ".txt",
+    ".json",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".webp",
+    ".svg"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "products": [
+    {
+      "id": "demo-phone-01",
+      "title": "轻薄手机展示款",
+      "asset_id": "common:electronics-phone",
+      "price": 2299,
+      "color": "深灰",
+      "category": "electronics"
+    },
+    {
+      "id": "demo-sneaker-01",
+      "title": "日常运动鞋展示款",
+      "asset_id": "common:shoes-sneakers",
+      "price": 369,
+      "color": "蓝色",
+      "category": "shoes"
+    },
+    {
+      "id": "demo-breakfast-01",
+      "title": "早餐组合展示款",
+      "asset_id": "common:food-breakfast",
+      "price": 29,
+      "color": "多色",
+      "category": "food"
+    }
+  ],
+  "messages": [
+    {
+      "id": "demo-msg-welcome",
+      "title": "演示通知",
+      "preview": "欢迎体验演示页面。",
+      "avatar_id": "common:avatar-a"
+    }
+  ],
+  "profile": {
+    "display_name": "演示用户",
+    "avatar_id": "common:avatar-b",
+    "bio": "虚构资料，仅用于界面演示。"
+  },
+  "ui": {
+    "brand_name": "示例商城",
+    "accent": "#2563EB",
+    "bottom_tabs": [
+      {
+        "id": "home",
+        "label": "首页",
+        "icon": "common:icon-home"
+      },
+      {
+        "id": "feed",
+        "label": "发现",
+        "icon": "common:icon-search"
+      },
+      {
+        "id": "messages",
+        "label": "消息",
+        "icon": "common:icon-message"
+      },
+      {
+        "id": "cart",
+        "label": "购物车",
+        "icon": "common:icon-cart"
+      },
+      {
+        "id": "profile",
+        "label": "我的",
+        "icon": "common:icon-user"
+      }
+    ],
+    "screen_titles": {
+      "home": "首页",
+      "feed": "发现",
+      "messages": "消息",
+      "cart": "购物车",
+      "profile": "我的",
+      "assistant": "智能助手"
+    },
+    "primary_title": "精选好物",
+    "subtitle": "本地离线演示 · 内容与账号均为虚构"
+  }
+}

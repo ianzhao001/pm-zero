@@ -1,0 +1,938 @@
+{
+  "brand_pack_api": 1,
+  "manifest_version": "1.6.1",
+  "architecture": "5.3.1",
+  "asset_catalogs": [
+    {
+      "id": "common-demo",
+      "context": null,
+      "publish_scope": "public",
+      "path": "system/shared/demo-assets/catalog.json"
+    }
+  ],
+  "installation_profiles": {
+    "pm-zero-agent": {
+      "description": "Product document, design, and review workflows with an optional private context pack.",
+      "skill_ids": [
+        "pm-zero",
+        "prd-forge",
+        "design-forge",
+        "reviewer-forge",
+        "product-discovery",
+        "business-modeling",
+        "mrd-authoring",
+        "visual-direction",
+        "color-typography",
+        "wireframe-design",
+        "interaction-design",
+        "visual-design",
+        "visual-assets",
+        "demo-authoring",
+        "browser-verification"
+      ],
+      "mutually_exclusive_with": []
+    }
+  },
+  "entries": {
+    "skills": [
+      {
+        "id": "prd-forge",
+        "discovery_name": "prd-forge",
+        "path": "skills/prd-forge/",
+        "version": "1.1.1",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": true,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "dewu",
+          "jd",
+          "reviewer-forge",
+          "pm-zero",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [],
+        "install_profiles": [
+          "pm-zero-agent"
+        ]
+      },
+      {
+        "id": "design-forge",
+        "discovery_name": "design-forge",
+        "path": "skills/design-forge/",
+        "version": "1.0.10",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": true,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "dewu",
+          "jd",
+          "reviewer-forge",
+          "pm-zero",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ]
+      },
+      {
+        "id": "reviewer-forge",
+        "discovery_name": "reviewer-forge",
+        "path": "skills/reviewer-forge/",
+        "version": "1.0.2",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": true,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "dewu",
+          "jd",
+          "prd-forge",
+          "design-forge",
+          "pm-zero",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "namespace": "RV",
+        "trigger": [
+          "审查",
+          "审核",
+          "review",
+          "critique",
+          "找茬",
+          "纠错"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "independent-review"
+          ],
+          "entrypoint": "skills/reviewer-forge/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md",
+            "skills/reviewer-forge/references/severity-levels.md",
+            "skills/reviewer-forge/references/evidence-grading.md",
+            "system/protocols/evidence-grading-protocol.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [
+            "independent-review"
+          ],
+          "priority": 100,
+          "inputs": [
+            "goal_contract",
+            "requirements_scenarios",
+            "mrd",
+            "visual_direction",
+            "wireframes",
+            "interaction_spec",
+            "design_model",
+            "visual_design",
+            "demo"
+          ],
+          "outputs": [
+            "review"
+          ]
+        }
+      },
+      {
+        "id": "pm-zero",
+        "discovery_name": "pm-zero",
+        "path": "skills/pm-zero/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex"
+        ],
+        "composes_with": [
+          "design-forge",
+          "prd-forge",
+          "reviewer-forge",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "runtime_scope": "codex-experimental"
+      },
+      {
+        "id": "product-discovery",
+        "discovery_name": "product-discovery",
+        "path": "skills/product-discovery/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "goal-clarification",
+            "delivery-planning",
+            "needs-discovery",
+            "scenario-analysis",
+            "reference-synthesis",
+            "user-research",
+            "evidence-analysis"
+          ],
+          "entrypoint": "skills/product-discovery/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [],
+          "priority": 100,
+          "inputs": [],
+          "outputs": [
+            "goal_contract",
+            "requirements_scenarios"
+          ]
+        }
+      },
+      {
+        "id": "business-modeling",
+        "discovery_name": "business-modeling",
+        "path": "skills/business-modeling/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "business-modeling",
+            "scope-definition",
+            "business-analysis"
+          ],
+          "entrypoint": "skills/business-modeling/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [],
+          "priority": 100,
+          "inputs": [
+            "requirements_scenarios"
+          ],
+          "outputs": [
+            "mrd"
+          ]
+        }
+      },
+      {
+        "id": "mrd-authoring",
+        "discovery_name": "mrd-authoring",
+        "path": "skills/mrd-authoring/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "business-modeling",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "mrd-writing"
+          ],
+          "entrypoint": "skills/mrd-authoring/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [],
+          "priority": 100,
+          "inputs": [
+            "requirements_scenarios"
+          ],
+          "outputs": [
+            "mrd"
+          ]
+        }
+      },
+      {
+        "id": "visual-direction",
+        "discovery_name": "visual-direction",
+        "path": "skills/visual-direction/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "visual-direction"
+          ],
+          "entrypoint": "skills/visual-direction/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [],
+          "priority": 100,
+          "inputs": [
+            "mrd"
+          ],
+          "outputs": [
+            "visual_direction"
+          ]
+        }
+      },
+      {
+        "id": "color-typography",
+        "discovery_name": "color-typography",
+        "path": "skills/color-typography/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "color-typography"
+          ],
+          "entrypoint": "skills/color-typography/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [],
+          "priority": 100,
+          "inputs": [
+            "mrd"
+          ],
+          "outputs": [
+            "visual_direction"
+          ]
+        }
+      },
+      {
+        "id": "wireframe-design",
+        "discovery_name": "wireframe-design",
+        "path": "skills/wireframe-design/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "information-architecture",
+            "wireframing",
+            "interface-copy",
+            "complex-layout"
+          ],
+          "entrypoint": "skills/wireframe-design/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [],
+          "priority": 100,
+          "inputs": [
+            "mrd"
+          ],
+          "outputs": [
+            "wireframes"
+          ]
+        }
+      },
+      {
+        "id": "interaction-design",
+        "discovery_name": "interaction-design",
+        "path": "skills/interaction-design/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "interaction-design",
+            "state-modeling",
+            "usability-analysis",
+            "accessibility-analysis"
+          ],
+          "entrypoint": "skills/interaction-design/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md",
+            "system/workflow-core/contracts/design-model.schema.json"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [],
+          "priority": 100,
+          "inputs": [
+            "wireframes"
+          ],
+          "outputs": [
+            "interaction_spec",
+            "design_model"
+          ]
+        }
+      },
+      {
+        "id": "visual-design",
+        "discovery_name": "visual-design",
+        "path": "skills/visual-design/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-assets",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "interface-visual-design",
+            "design-system-application",
+            "icon-design",
+            "visual-polish"
+          ],
+          "entrypoint": "skills/visual-design/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md",
+            "skills/design-forge/references/methodology/visual-quality-bar.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [],
+          "priority": 100,
+          "inputs": [
+            "visual_direction",
+            "wireframes",
+            "interaction_spec",
+            "design_model"
+          ],
+          "outputs": [
+            "visual_design"
+          ]
+        }
+      },
+      {
+        "id": "visual-assets",
+        "discovery_name": "visual-assets",
+        "path": "skills/visual-assets/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "demo-authoring",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "visual-assets"
+          ],
+          "entrypoint": "skills/visual-assets/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [
+            "image-generation"
+          ],
+          "priority": 100,
+          "inputs": [
+            "visual_direction"
+          ],
+          "outputs": [
+            "visual_direction",
+            "visual_design"
+          ]
+        }
+      },
+      {
+        "id": "demo-authoring",
+        "discovery_name": "demo-authoring",
+        "path": "skills/demo-authoring/",
+        "version": "0.1.0",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "browser-verification"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "demo-implementation",
+            "motion-design",
+            "responsive-design"
+          ],
+          "entrypoint": "skills/demo-authoring/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md",
+            "skills/design-forge/references/demo-authoring.md",
+            "skills/design-forge/references/methodology/interactive-demo-system.md"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [],
+          "priority": 100,
+          "inputs": [
+            "interaction_spec",
+            "design_model",
+            "visual_design"
+          ],
+          "outputs": [
+            "demo"
+          ]
+        }
+      },
+      {
+        "id": "browser-verification",
+        "discovery_name": "browser-verification",
+        "path": "skills/browser-verification/",
+        "version": "0.1.1",
+        "owner": "pm-zero",
+        "lifecycle": "active",
+        "required": false,
+        "publish_scope": "public",
+        "kind": "workflow",
+        "runtime_targets": [
+          "codex",
+          "claude"
+        ],
+        "composes_with": [
+          "pm-zero",
+          "prd-forge",
+          "design-forge",
+          "reviewer-forge",
+          "dewu",
+          "jd",
+          "product-discovery",
+          "business-modeling",
+          "mrd-authoring",
+          "visual-direction",
+          "color-typography",
+          "wireframe-design",
+          "interaction-design",
+          "visual-design",
+          "visual-assets",
+          "demo-authoring"
+        ],
+        "mutually_exclusive_with": [
+          "dewu-design-system"
+        ],
+        "install_profiles": [
+          "pm-zero-agent"
+        ],
+        "stage_provider": {
+          "capabilities": [
+            "browser-verification"
+          ],
+          "entrypoint": "skills/browser-verification/SKILL.md",
+          "required_files": [
+            "system/protocols/skill-loading-protocol.md",
+            "system/protocols/stage-execution-contract.md",
+            "system/protocols/staged-product-workflow.md",
+            "system/workflow-core/contracts/validation-report.schema.json"
+          ],
+          "optional_files": {},
+          "required_host_capabilities": [
+            "browser"
+          ],
+          "priority": 100,
+          "inputs": [
+            "demo"
+          ],
+          "outputs": [
+            "demo"
+          ]
+        }
+      }
+    ],
+    "system": [
+      {
+        "id": "demo-assets",
+        "path": "system/shared/demo-assets/",
+        "publish_scope": "public",
+        "lifecycle": "active"
+      },
+      {
+        "id": "protocols",
+        "path": "system/protocols/",
+        "publish_scope": "public",
+        "lifecycle": "active"
+      },
+      {
+        "id": "skill-routing",
+        "path": "system/skill-routing/",
+        "publish_scope": "public",
+        "lifecycle": "active"
+      },
+      {
+        "id": "workflow-core",
+        "path": "system/workflow-core/",
+        "publish_scope": "public",
+        "lifecycle": "active"
+      }
+    ]
+  },
+  "public_view": true
+}

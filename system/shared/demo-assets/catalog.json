@@ -1,0 +1,887 @@
+{
+  "schema_version": 1,
+  "id": "common-demo",
+  "context": null,
+  "publish_scope": "public",
+  "version": "1.0.1",
+  "assets": [
+    {
+      "id": "common:electronics-phone",
+      "file": "images/electronics-phone.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 760,
+      "bytes": 21064,
+      "sha256": "d2b2d51a721894605122d1020c4d1f683273aa27e03d616a889245bcdcb6c411",
+      "tags": [
+        "electronics",
+        "phone",
+        "product"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Smartphone_display_screen.jpg",
+        "author": "Skitterphoto",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:electronics-laptop",
+      "file": "images/electronics-laptop.webp",
+      "media_type": "image/webp",
+      "width": 960,
+      "height": 640,
+      "bytes": 79614,
+      "sha256": "f0ad7b99492083cbb1c5b3625cc0c1b5946326a773c76f977310a9fcefa1671f",
+      "tags": [
+        "electronics",
+        "laptop",
+        "product"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Laptop-2411303_960_720.jpg",
+        "author": "Mediamodifier",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:electronics-headset",
+      "file": "images/electronics-headset.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 900,
+      "bytes": 40350,
+      "sha256": "dd1e848335776ee0518363db9e0943dd39096a22f677952078e33f9bf4caaf41",
+      "tags": [
+        "electronics",
+        "headphones",
+        "product"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Black_brown_headphones_wired.jpg",
+        "author": "Marcus-richardson",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:shoes-sneakers",
+      "file": "images/shoes-sneakers.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 901,
+      "bytes": 114306,
+      "sha256": "6c11015da5f658a8c0b626cf812b155b597970b62cd6dc68cda396662b07afde",
+      "tags": [
+        "shoes",
+        "sneakers",
+        "product"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Avia_Shoes.jpg",
+        "author": "Nave do Conhecimento",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:shoes-leather",
+      "file": "images/shoes-leather.webp",
+      "media_type": "image/webp",
+      "width": 904,
+      "height": 1200,
+      "bytes": 67926,
+      "sha256": "23e560bc30d176a1d65cb49d9bfd4ac6b9b2440889b2efb9daa04f4522b58ba6",
+      "tags": [
+        "shoes",
+        "leather",
+        "product"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:A_leather_shoe.jpg",
+        "author": "Ojfootwears",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:apparel-tee",
+      "file": "images/apparel-tee.webp",
+      "media_type": "image/webp",
+      "width": 768,
+      "height": 1024,
+      "bytes": 98548,
+      "sha256": "e7f9355b543de527ba71df37fb086c03bc19449fdcd5399102174b7ea7527d2b",
+      "tags": [
+        "apparel",
+        "t-shirt",
+        "product"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:T-shirt_mocup_gray.jpg",
+        "author": "EdaBojci",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:apparel-hoodie",
+      "file": "images/apparel-hoodie.webp",
+      "media_type": "image/webp",
+      "width": 900,
+      "height": 1200,
+      "bytes": 372704,
+      "sha256": "a0654f030d92c805b30b3c8ef19fb14f0771226ab7ce7ec5c9007398e5bfddff",
+      "tags": [
+        "apparel",
+        "hoodie",
+        "product"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Hoodie_m7agar.jpg",
+        "author": "YoussefTahoun",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:bag-backpack",
+      "file": "images/bag-backpack.webp",
+      "media_type": "image/webp",
+      "width": 675,
+      "height": 1200,
+      "bytes": 34226,
+      "sha256": "f71b7e98ae8e5f8aa13d7dac24be304bda166eda31251aabae40c08ed6b44a67",
+      "tags": [
+        "bag",
+        "backpack",
+        "product"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Red_and_blue_champion_backpack.jpg",
+        "author": "I AM GOING TO DRINK OCEAN WATER",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:food-breakfast",
+      "file": "images/food-breakfast.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 900,
+      "bytes": 90110,
+      "sha256": "5704380a7406ab7c44f1bce4b0be6992c0dfd2105fc6c17a596c56dde593b753",
+      "tags": [
+        "food",
+        "breakfast"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Breakfast_at_Ikea_Vantaa.jpg",
+        "author": "Apinanaivot",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:food-bread",
+      "file": "images/food-bread.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 151608,
+      "sha256": "482c06c68e20bcdbcd7a7bbdc430d280fd45df6be91b956cc906180313974ec5",
+      "tags": [
+        "food",
+        "bread"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Bread-food-healthy-breakfast_(24244213301).jpg",
+        "author": "www.Pixel.la Free Stock Photos",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:food-coffee",
+      "file": "images/food-coffee.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 48606,
+      "sha256": "7f2d366c7bbfc26fb3b050c24c8941e94fd389109326ae3d937dfab5f0ce47ac",
+      "tags": [
+        "food",
+        "coffee"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Cup_of_coffee_in_Caf%C3%A9_Butter_-_Prenzlauer_Berg,_Berlin.jpg",
+        "author": "Edward",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:food-salad",
+      "file": "images/food-salad.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 904,
+      "bytes": 148944,
+      "sha256": "9229d403e469e96bee07d98fb9b5b6f36f0f21595f605e9ba5dd804c6db4a273",
+      "tags": [
+        "food",
+        "salad"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Falafel_Super_Bowl_Salad_-_Leon_2025-10-27.jpg",
+        "author": "Andy Li",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:food-fruit",
+      "file": "images/food-fruit.webp",
+      "media_type": "image/webp",
+      "width": 1110,
+      "height": 1200,
+      "bytes": 329756,
+      "sha256": "cfd759d5992b9fe065b05b542098797a547be3de649ca4ae5f1f12848afcf0c6",
+      "tags": [
+        "food",
+        "fruit"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Fresh_Fruit_Plate.jpg",
+        "author": "روتانا",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:food-cake",
+      "file": "images/food-cake.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 208304,
+      "sha256": "106718bda301a202d8a014351be9b4d91f29ffa4706705facddfae4fee69f29e",
+      "tags": [
+        "food",
+        "cake"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Apple_cake_with_vanilla_ice_cream_2.jpg",
+        "author": "W.carter",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:lifestyle-room",
+      "file": "images/lifestyle-room.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 653,
+      "bytes": 71432,
+      "sha256": "c827a64a56789989c4750e4c9c20d68e06fed65ad9e9695be7c47ad710330015",
+      "tags": [
+        "lifestyle",
+        "interior"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Living_room_in_apartment_of_Condom%C3%ADnio_do_Edif%C3%ADcio_Zaher,_Le_Blond,_Rio_de_Janeiro,_Brazil.jpg",
+        "author": "Wilfredor",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:lifestyle-city",
+      "file": "images/lifestyle-city.webp",
+      "media_type": "image/webp",
+      "width": 1200,
+      "height": 810,
+      "bytes": 130256,
+      "sha256": "1ea186385612845e927b27c2373ba82ef5f5b5c7dd0c0539367ce742fa506b9e",
+      "tags": [
+        "lifestyle",
+        "travel",
+        "city"
+      ],
+      "source": {
+        "kind": "licensed",
+        "url": "https://commons.wikimedia.org/wiki/File:Chateau_Frontenac_at_dusk_in_Quebec_City.jpg",
+        "author": "Wilfredor",
+        "license": "CC0-1.0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-home",
+      "file": "icons/home.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 265,
+      "sha256": "200e3d5e7337f22004e083e3215d00e0048302d56c1e495a8521e130d5be7876",
+      "tags": [
+        "icon",
+        "control",
+        "home"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/home.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-search",
+      "file": "icons/search.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 280,
+      "sha256": "370b30e600889a62cb739c1f48aa3d2f5653f3136b4e3a4ba3f020e194be6523",
+      "tags": [
+        "icon",
+        "control",
+        "search"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/search.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-cart",
+      "file": "icons/cart.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 317,
+      "sha256": "5a91482d7030ed5d08e1411f3fc0f28b5f3d1a45f70237a2c4c5d668a9353727",
+      "tags": [
+        "icon",
+        "control",
+        "cart"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/cart.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-heart",
+      "file": "icons/heart.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 287,
+      "sha256": "44adb9cb68d93b68c588f86cdba04402eecc5ee1cb4fc664f998a7874cbce1e1",
+      "tags": [
+        "icon",
+        "control",
+        "heart"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/heart.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-user",
+      "file": "icons/user.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 302,
+      "sha256": "09a5dcf627047da6c2931a1d4066fa371247f5e6ac9bf00344daf4ffec9a212a",
+      "tags": [
+        "icon",
+        "control",
+        "user"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/user.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-back",
+      "file": "icons/back.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 256,
+      "sha256": "f33a14e268959dd85d31b31912b6e377a70544d8e8a8c24137c4123faba41725",
+      "tags": [
+        "icon",
+        "control",
+        "back"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/back.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-close",
+      "file": "icons/close.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 252,
+      "sha256": "9b9da233163e84ec810c73f0401acabd78013fbde2e9e5203ac26e4ad25a6133",
+      "tags": [
+        "icon",
+        "control",
+        "close"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/close.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-plus",
+      "file": "icons/plus.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 247,
+      "sha256": "a4f9a83ae626916641db3a7cca4f658e8ff60794e89f404a4b5db3ef7371cdd7",
+      "tags": [
+        "icon",
+        "control",
+        "plus"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/plus.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-minus",
+      "file": "icons/minus.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 240,
+      "sha256": "4e3eefe2c58f293f5bd3f21cd9eedf02428951d51debf02e55651f304ee59866",
+      "tags": [
+        "icon",
+        "control",
+        "minus"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/minus.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-check",
+      "file": "icons/check.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 252,
+      "sha256": "4847dd1f0afd18a397e5cfc60dc15a567063517e180442f6c3a5c92b051e9cfa",
+      "tags": [
+        "icon",
+        "control",
+        "check"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/check.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-chevron-right",
+      "file": "icons/chevron-right.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 261,
+      "sha256": "b0fdd6c3c9c8d5d25173b0722a19c0ca0bcb4dede0c94627b98acf97895838d7",
+      "tags": [
+        "icon",
+        "control",
+        "chevron-right"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/chevron-right.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-menu",
+      "file": "icons/menu.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 254,
+      "sha256": "7a3ce25fc6de3e0d167912f80bcd44ce81bd04d5fec68a0b093ab49225f9f5ba",
+      "tags": [
+        "icon",
+        "control",
+        "menu"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/menu.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-filter",
+      "file": "icons/filter.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 256,
+      "sha256": "ce0e04a2d13360bf7bdce331dcbe5d88a3485364b14e59bb9f46b74794925b1a",
+      "tags": [
+        "icon",
+        "control",
+        "filter"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/filter.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-sort",
+      "file": "icons/sort.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 253,
+      "sha256": "8b9982bf34bf363a986f9d485c54045b0b09e3c39d79496c1eb53b8d26ea9f18",
+      "tags": [
+        "icon",
+        "control",
+        "sort"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/sort.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-bell",
+      "file": "icons/bell.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 284,
+      "sha256": "cb698345612ff6108e655535bacacdaf93c12c32ad8612c51006672350e0fd39",
+      "tags": [
+        "icon",
+        "control",
+        "bell"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/bell.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-message",
+      "file": "icons/message.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 277,
+      "sha256": "a3d1764be6a8a3c74fc97ec09500d28ebd1e03a3477f2ff782884439557c403f",
+      "tags": [
+        "icon",
+        "control",
+        "message"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/message.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-location",
+      "file": "icons/location.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 317,
+      "sha256": "178c6a6cd8091c6f06bf6aeb973a0fa5bbdbecd7c79ebde518579c102df84e99",
+      "tags": [
+        "icon",
+        "control",
+        "location"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/location.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-share",
+      "file": "icons/share.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 341,
+      "sha256": "dccdefd6bb4c49570f5736a7ea4b2efd859fdfcdce463cf850cdaf92f3bc5e8f",
+      "tags": [
+        "icon",
+        "control",
+        "share"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/share.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-star",
+      "file": "icons/star.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 307,
+      "sha256": "b3397abf45ed2546415bee9372770722f1daada16c6376e90b2b5219e12e7cd1",
+      "tags": [
+        "icon",
+        "control",
+        "star"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/star.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:icon-scan",
+      "file": "icons/scan.svg",
+      "media_type": "image/svg+xml",
+      "width": 24,
+      "height": 24,
+      "bytes": 276,
+      "sha256": "e9d7b02bbb19c76167aa7803860e40fa5e8cd41b19dfafc40e7cca39e29dea33",
+      "tags": [
+        "icon",
+        "control",
+        "scan"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "icons/scan.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:avatar-a",
+      "file": "avatars/person-a.svg",
+      "media_type": "image/svg+xml",
+      "width": 96,
+      "height": 96,
+      "bytes": 629,
+      "sha256": "cb3fb603d713d2c0e321738ce99b02524a4e629e835b2179c1c4a5ac4d07be09",
+      "tags": [
+        "avatar",
+        "fictional",
+        "a"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "avatars/person-a.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:avatar-b",
+      "file": "avatars/person-b.svg",
+      "media_type": "image/svg+xml",
+      "width": 96,
+      "height": 96,
+      "bytes": 629,
+      "sha256": "f817ddef535533a0d69f9ddcdb386f855edaa5b2a4c4f716f181fec1f0c518c0",
+      "tags": [
+        "avatar",
+        "fictional",
+        "b"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "avatars/person-b.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:avatar-c",
+      "file": "avatars/person-c.svg",
+      "media_type": "image/svg+xml",
+      "width": 96,
+      "height": 96,
+      "bytes": 629,
+      "sha256": "f6d1da3421c3a3427114e3d849afe041ed7f9e5e872030ec0af8acb897c56d54",
+      "tags": [
+        "avatar",
+        "fictional",
+        "c"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "avatars/person-c.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    },
+    {
+      "id": "common:avatar-d",
+      "file": "avatars/person-d.svg",
+      "media_type": "image/svg+xml",
+      "width": 96,
+      "height": 96,
+      "bytes": 629,
+      "sha256": "3510a47cb7529c497e2d36c3b9888ba02eed15b28e24c16e84e4b0f634a69273",
+      "tags": [
+        "avatar",
+        "fictional",
+        "d"
+      ],
+      "source": {
+        "kind": "original-vector",
+        "url": "avatars/person-d.svg",
+        "author": "pm-zero project",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "redistribution": "approved"
+    }
+  ],
+  "sample_data": {
+    "file": "sample-data.json",
+    "bytes": 1874,
+    "sha256": "2cf8ed2ff2854c6c8f39d36b385a8c26387feb8ea02e1f939aa9d9296c247d24"
+  }
+}

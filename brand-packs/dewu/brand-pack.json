@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "core_api": 1,
+  "id": "dewu",
+  "version": "1.0.0",
+  "files": [
+    "SKILL.md",
+    "rules/business.md",
+    "rules/visual.md",
+    "assets/tokens.css"
+  ],
+  "context": {
+    "entrypoint": "SKILL.md",
+    "artifacts": {
+      "goal_contract": {
+        "required_files": [
+          "rules/business.md"
+        ],
+        "asset_files": []
+      },
+      "requirements_scenarios": {
+        "required_files": [
+          "rules/business.md"
+        ],
+        "asset_files": []
+      },
+      "mrd": {
+        "required_files": [
+          "rules/business.md"
+        ],
+        "asset_files": []
+      },
+      "visual_direction": {
+        "required_files": [
+          "rules/visual.md"
+        ],
+        "asset_files": []
+      },
+      "wireframes": {
+        "required_files": [
+          "rules/visual.md"
+        ],
+        "asset_files": [
+          "assets/tokens.css"
+        ]
+      },
+      "interaction_spec": {
+        "required_files": [
+          "rules/visual.md"
+        ],
+        "asset_files": [
+          "assets/tokens.css"
+        ]
+      },
+      "design_model": {
+        "required_files": [
+          "rules/visual.md"
+        ],
+        "asset_files": [
+          "assets/tokens.css"
+        ]
+      },
+      "visual_design": {
+        "required_files": [
+          "rules/visual.md"
+        ],
+        "asset_files": [
+          "assets/tokens.css"
+        ]
+      },
+      "demo": {
+        "required_files": [
+          "rules/visual.md"
+        ],
+        "asset_files": [
+          "assets/tokens.css"
+        ]
+      }
+    }
+  },
+  "providers": []
+}

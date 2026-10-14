@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pm-zero.local/schemas/design-workflow-v2/gate-record.schema.json",
+  "title": "Design workflow v2 gate confirmation record",
+  "description": "The frontmatter of gates/<gate-id>.md. This validates an EXISTING contract - pipeline-stage-protocol.md User Confirmation Gates - rather than introducing a new concept, so it spends none of the four-concept design budget. The Markdown body stays canonical and human-readable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "gate",
+    "status",
+    "artifact",
+    "artifact_version",
+    "confirmed_by",
+    "confirmed_at",
+    "unlocks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "gate": {
+      "type": "string",
+      "enum": [
+        "G1",
+        "G2",
+        "G3",
+        "G4"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "invalidated"
+      ]
+    },
+    "artifact": {
+      "type": "string",
+      "enum": [
+        "brief",
+        "interaction_spec",
+        "design_model",
+        "demo",
+        "review",
+        "prd"
+      ]
+    },
+    "artifact_version": {
+      "type": "integer"
+    },
+    "artifact_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "confirmed_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confirmed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unlocks": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Which next step becomes eligible. Required by pipeline-stage-protocol.md: a confirmation must state which next stage becomes eligible."
+    },
+    "caveats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cross_review_records": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "invalidated_by": {
+      "type": "string",
+      "pattern": "^chg-[0-9]{4,}$"
+    }
+  },
+  "if": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "const": "invalidated"
+      }
+    }
+  },
+  "then": {
+    "type": "object",
+    "required": [
+      "invalidated_by"
+    ]
+  }
+}

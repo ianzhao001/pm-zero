@@ -1,0 +1,147 @@
+:where(:root[data-brand="jd"], .jd-theme) {
+  font-family: var(--jd-font-ui);
+  line-height: var(--jd-line-body);
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+:where(:root[data-brand="jd"], .jd-theme) :is(.jd-text, .jd-heading, .jd-price, .jd-label) {
+  margin: var(--jd-space-none);
+  font-family: var(--jd-font-ui);
+  font-weight: var(--jd-weight-regular);
+  font-size: var(--jd-font-body);
+  line-height: var(--jd-line-body);
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+:where(:root[data-brand="jd"], .jd-theme) :is(.jd-text.jd-compact, .jd-label) {
+  font-size: var(--jd-font-sm);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-heading {
+  font-size: var(--jd-font-title);
+  font-weight: var(--jd-weight-bold);
+  line-height: var(--jd-line-tight);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-heading.jd-compact {
+  font-size: var(--jd-font-body);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-price {
+  font-size: var(--jd-font-price);
+  font-weight: var(--jd-weight-bold);
+  line-height: var(--jd-line-tight);
+  color: var(--jd-text-price);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-price.jd-compact {
+  font-size: var(--jd-font-title);
+}
+:where(:root[data-brand="jd"], .jd-theme) :is(.jd-text, .jd-heading, .jd-price, .jd-label).jd-emphasis {
+  font-weight: var(--jd-weight-bold);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-text--secondary { color: var(--text-secondary); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-text--subsidy { color: var(--jd-text-subsidy); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-text--benefit { color: var(--jd-text-benefit); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-text--inverse { color: var(--jd-video-text); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--jd-space-sm);
+  min-block-size: var(--jd-target-min);
+  min-inline-size: var(--jd-target-min);
+  padding: var(--jd-space-sm) var(--jd-space-lg);
+  border: var(--jd-space-none);
+  border-radius: var(--jd-radius-pill);
+  font-family: var(--jd-font-ui);
+  font-size: var(--jd-font-body);
+  font-weight: var(--jd-weight-medium);
+  line-height: var(--jd-line-body);
+  color: var(--jd-action-text);
+  background-color: var(--jd-action-bg);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-button.jd-compact {
+  padding-inline: var(--jd-space-md);
+  font-size: var(--jd-font-sm);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-button.jd-emphasis {
+  font-weight: var(--jd-weight-bold);
+  padding-inline: var(--jd-space-xl);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-button:active { background-color: var(--jd-action-pressed); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-button--secondary {
+  color: var(--jd-text-action);
+  background-color: var(--accent-soft);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-button--secondary:active { background-color: var(--bg-primary); }
+:where(:root[data-brand="jd"], .jd-theme) :is(.jd-button, .jd-target):focus-visible {
+  outline: var(--jd-focus-width) solid var(--jd-focus);
+  outline-offset: var(--jd-focus-offset);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--jd-space-xs) var(--jd-space-sm);
+  border-radius: var(--jd-radius-pill);
+  font-family: var(--jd-font-ui);
+  font-size: var(--jd-font-sm);
+  font-weight: var(--jd-weight-medium);
+  line-height: var(--jd-line-tight);
+  color: var(--jd-text-action);
+  background-color: var(--accent-soft);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-tag--subsidy {
+  color: var(--jd-text-subsidy);
+  background-color: var(--bg-primary);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-tag--benefit {
+  color: var(--jd-text-benefit);
+  background-color: var(--bg-primary);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-tag.jd-compact { padding-inline: var(--jd-space-xs); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-tag.jd-emphasis { font-weight: var(--jd-weight-bold); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-card {
+  box-sizing: border-box;
+  padding: var(--jd-space-lg);
+  border-radius: var(--jd-radius-card);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-card.jd-compact { padding: var(--jd-space-md); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-card.jd-emphasis { border: var(--jd-border-width) solid var(--jd-text-action); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--jd-space-md);
+  padding-block: var(--jd-space-md);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-row.jd-compact {
+  gap: var(--jd-space-sm);
+  padding-block: var(--jd-space-sm);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-row.jd-emphasis { padding-block: var(--jd-space-lg); }
+:where(:root[data-brand="jd"], .jd-theme) .jd-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--jd-icon-md);
+  block-size: var(--jd-icon-md);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-icon.jd-compact {
+  inline-size: var(--jd-icon-sm);
+  block-size: var(--jd-icon-sm);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-target {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: var(--jd-target-min);
+  min-block-size: var(--jd-target-min);
+}
+:where(:root[data-brand="jd"], .jd-theme) .jd-video-surface {
+  background-color: var(--jd-video-bg);
+  color: var(--jd-video-text);
+}

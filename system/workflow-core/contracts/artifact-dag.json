@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "contract_id": "design-workflow-v2-artifact-dag",
+  "status": "proposed",
+  "description": "Artifact dependency DAG and stale-propagation closure for design workflow v2. This file is the single machine-readable source of truth for invalidation; stale-propagation.md is generated prose over the same data.",
+  "impact_levels": [
+    "visual",
+    "interaction",
+    "structural"
+  ],
+  "impact_order": {
+    "visual": 1,
+    "interaction": 2,
+    "structural": 3
+  },
+  "artifact_states": {
+    "draft": {
+      "downstream_input": false,
+      "meaning": "not yet confirmed or validated"
+    },
+    "confirmed": {
+      "downstream_input": true,
+      "meaning": "confirmed and all dependencies still valid"
+    },
+    "stale": {
+      "downstream_input": false,
+      "meaning": "was valid, upstream or baseline changed",
+      "requires": [
+        "stale_reason",
+        "stale_change_id"
+      ]
+    }
+  },
+  "legal_transitions": [
+    {
+      "from": "draft",
+      "to": "confirmed",
+      "via": "gate_confirmation"
+    },
+    {
+      "from": "confirmed",
+      "to": "stale",
+      "via": "stale_propagation"
+    },
+    {
+      "from": "draft",
+      "to": "stale",
+      "via": "stale_propagation"
+    },
+    {
+      "from": "stale",
+      "to": "draft",
+      "via": "regeneration"
+    }
+  ],
+  "illegal_transitions": [
+    {
+      "from": "stale",
+      "to": "confirmed",
+      "reason": "stale must be regenerated and re-confirmed; it may not be hand-edited back to confirmed"
+    }
+  ],
+  "nodes": {
+    "brief": {
+      "dir": "brief/",
+      "gate": "G1",
+      "canonical": "markdown"
+    },
+    "interaction_spec": {
+      "dir": "interaction-spec/",
+      "gate": "G2",
+      "canonical": "markdown"
+    },
+    "design_model": {
+      "dir": "design-model/",
+      "gate": "G2",
+      "canonical": "json"
+    },
+    "demo": {
+      "dir": "renders/",
+      "gate": "G3",
+      "canonical": "artifact",
+      "render_manifest_required": true
+    },
+    "review": {
+      "dir": "reviews/",
+      "gate": null,
+      "canonical": "markdown"
+    },
+    "prd": {
+      "dir": "prd/",
+      "gate": "G4",
+      "canonical": "markdown"
+    }
+  },
+  "append_only_records": {
+    "decisions": {
+      "dir": "decisions/",
+      "reason": "decision records are audit trail; they are never invalidated, only superseded by a new record"
+    },
+    "gates": {
+      "dir": "gates/",
+      "reason": "gate confirmation records are audit trail; a rollback writes a new record, it does not rewrite the old one"
+    },
+    "changes": {
+      "dir": "changes/",
+      "reason": "change requests are audit trail"
+    }
+  },
+  "edges": [
+    {
+      "from": "brief",
+      "to": "interaction_spec",
+      "min_impact": "interaction"
+    },
+    {
+      "from": "brief",
+      "to": "prd",
+      "min_impact": "interaction"
+    },
+    {
+      "from": "interaction_spec",
+      "to": "design_model",
+      "min_impact": "interaction"
+    },
+    {
+      "from": "interaction_spec",
+      "to": "prd",
+      "min_impact": "interaction"
+    },
+    {
+      "from": "design_model",
+      "to": "demo",
+      "min_impact": "visual"
+    },
+    {
+      "from": "design_model",
+      "to": "prd",
+      "min_impact": "interaction"
+    },
+    {
+      "from": "demo",
+      "to": "review",
+      "min_impact": "visual"
+    },
+    {
+      "from": "demo",
+      "to": "prd",
+      "min_impact": "interaction"
+    }
+  ],
+  "edge_semantics": "An edge is traversed during stale propagation only when impact_order[change.impact] >= impact_order[edge.min_impact]. The entry artifact is always invalidated. This is why a pure visual change reaches review but not prd: the prd consumes element identity and interaction semantics from the demo, not its visuals.",
+  "impact_entry_points": {
+    "visual": {
+      "default_entry": "demo",
+      "examples": [
+        "color",
+        "type scale",
+        "spacing inside target",
+        "image swap"
+      ]
+    },
+    "interaction": {
+      "default_entry": "interaction_spec",
+      "examples": [
+        "state",
+        "action",
+        "copy semantics",
+        "local path"
+      ]
+    },
+    "structural": {
+      "default_entry": "brief",
+      "examples": [
+        "user problem",
+        "scope",
+        "main flow",
+        "information architecture",
+        "screen added or removed"
+      ]
+    }
+  },
+  "expected_closures": {
+    "visual@demo": [
+      "demo",
+      "review"
+    ],
+    "visual@design_model": [
+      "design_model",
+      "demo",
+      "review"
+    ],
+    "interaction@interaction_spec": [
+      "interaction_spec",
+      "design_model",
+      "demo",
+      "prd",
+      "review"
+    ],
+    "interaction@design_model": [
+      "design_model",
+      "demo",
+      "prd",
+      "review"
+    ],
+    "structural@brief": [
+      "brief",
+      "demo",
+      "design_model",
+      "interaction_spec",
+      "prd",
+      "review"
+    ]
+  },
+  "gates": {
+    "G1": {
+      "confirms": "brief",
+      "name": "问题确认",
+      "rollback_from": {
+        "structural": "G1"
+      }
+    },
+    "G2": {
+      "confirms": "design_model",
+      "name": "方向与结构确认",
+      "also_confirms": [
+        "interaction_spec"
+      ],
+      "rollback_from": {
+        "interaction": "G2",
+        "structural": "G1"
+      }
+    },
+    "G3": {
+      "confirms": "demo",
+      "name": "Demo 确认",
+      "rollback_from": {
+        "visual": null,
+        "interaction": "G2",
+        "structural": "G1"
+      }
+    },
+    "G4": {
+      "confirms": "prd",
+      "name": "PRD 确认",
+      "rollback_from": {
+        "visual": null,
+        "interaction": "G2",
+        "structural": "G1"
+      }
+    }
+  },
+  "gate_rollback_semantics": "rollback_from maps a change impact to the gate the workflow must return to. null means the gate is not rolled back; a confirmed downstream gate whose artifact entered the closure becomes invalidated and must be re-confirmed, but earlier gates stay confirmed."
+}

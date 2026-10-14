@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pm-zero.local/schemas/design-workflow-v2/recipe.schema.json",
+  "title": "Design workflow v2 recipe",
+  "description": "A recipe is the routes.json `sequence` array widened from a hard-coded two-step list into a declarable N-step list. Every axis below is an existing routes.json axis; the recipe introduces no new routing vocabulary.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "recipe_id", "steps"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "recipe_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "description": { "type": "string" },
+    "preset": { "type": "boolean" },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": { "$ref": "#/$defs/step" }
+    }
+  },
+  "$defs": {
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "produces", "workflow"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^s[0-9]+$" },
+        "produces": {
+          "type": "string",
+          "enum": ["brief", "interaction_spec", "design_model", "demo", "review", "prd"],
+          "description": "Artifact type entering the state machine; must be a node in artifact-dag.json."
+        },
+        "workflow": {
+          "type": "string",
+          "enum": ["prd-forge", "design-forge", "reviewer-forge", "dewu-design-system"],
+          "description": "routes.json workflow axis. Fed to the existing resolver unchanged."
+        },
+        "artifact": {
+          "type": "string",
+          "enum": ["flow", "demo", "brief", "hifi", "prd", "component", "page", "visual-qa"],
+          "description": "routes.json artifact axis. Omitted means the route must also omit it."
+        },
+        "fidelity": {
+          "type": "string",
+          "enum": ["standard", "hifi"],
+          "description": "routes.json fidelity axis. Omitted means the route must also omit it."
+        },
+        "context": {
+          "enum": [null, "dewu"],
+          "description": "routes.json context axis. Omitted defaults to null (neutral)."
+        },
+        "review": {
+          "type": "string",
+          "enum": ["reviewer-forge"],
+          "description": "Independent review triggered AFTER this step produces its artifact. See findings-p0.md R3: the produce-then-review handoff direction is not defined by skill-loading-protocol.md."
+        },
+        "gate": {
+          "type": "string",
+          "enum": ["G1", "G2", "G3", "G4"],
+          "description": "Confirmation gate after this step. Omitted means no gate."
+        },
+        "exploration": {
+          "type": "boolean",
+          "description": "Marks a throwaway probe output. Exploration artifacts may not become a baseline and may not be cited as a PRD fact source."
+        }
+      }
+    }
+  }
+}

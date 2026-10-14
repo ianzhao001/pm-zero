@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pm-zero local brand pack API v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "core_api",
+    "id",
+    "version",
+    "files",
+    "context",
+    "providers"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "core_api": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "files": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 1000,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "entrypoint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifacts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "goal_contract": {
+              "$ref": "#/$defs/resources"
+            },
+            "requirements_scenarios": {
+              "$ref": "#/$defs/resources"
+            },
+            "mrd": {
+              "$ref": "#/$defs/resources"
+            },
+            "visual_direction": {
+              "$ref": "#/$defs/resources"
+            },
+            "wireframes": {
+              "$ref": "#/$defs/resources"
+            },
+            "interaction_spec": {
+              "$ref": "#/$defs/resources"
+            },
+            "design_model": {
+              "$ref": "#/$defs/resources"
+            },
+            "visual_design": {
+              "$ref": "#/$defs/resources"
+            },
+            "demo": {
+              "$ref": "#/$defs/resources"
+            }
+          },
+          "default": {}
+        }
+      }
+    },
+    "providers": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "replaces",
+          "entrypoint",
+          "required_files"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "replaces": {
+            "type": "string",
+            "minLength": 1
+          },
+          "entrypoint": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_files": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_files",
+        "asset_files"
+      ],
+      "properties": {
+        "required_files": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "asset_files": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

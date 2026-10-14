@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pm-zero.local/schemas/design-workflow-v2/design-model.schema.json",
+  "title": "Design workflow v2 design model",
+  "description": "Carries the stable identity of screens and elements. A stable ID is not a DOM selector: HTML renderers express it as data-screen-id / data-element-id, other renderers only owe a verifiable mapping.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "version", "screens", "elements"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "version": { "type": "integer" },
+    "source_refs": { "type": "array", "items": { "type": "string" } },
+    "device_matrix": { "type": "array", "items": { "type": "string" } },
+    "themes": { "type": "array", "items": { "type": "string", "enum": ["light", "dark"] } },
+    "screens": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/screen" } },
+    "elements": { "type": "array", "items": { "$ref": "#/$defs/element" } }
+  },
+  "$defs": {
+    "state": { "type": "string", "enum": ["default", "loading", "empty", "error", "disabled"] },
+    "preservePolicy": { "type": "string", "enum": ["locked", "negotiable", "free"] },
+    "screen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["screen_id", "name", "role", "states", "source_refs", "preserve_policy"],
+      "properties": {
+        "screen_id": { "type": "string", "pattern": "^SC-[A-Z0-9]+(-[A-Z0-9]+)*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "route": { "type": "string" },
+        "states": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/state" } },
+        "source_refs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "preserve_policy": { "$ref": "#/$defs/preservePolicy" }
+      }
+    },
+    "element": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["element_id", "screen_id", "type", "states", "source_refs", "preserve_policy"],
+      "properties": {
+        "element_id": { "type": "string", "pattern": "^EL-[A-Z0-9]+(-[A-Z0-9]+)*$" },
+        "screen_id": { "type": "string", "pattern": "^SC-[A-Z0-9]+(-[A-Z0-9]+)*$" },
+        "type": { "type": "string", "enum": ["button", "input", "card", "nav", "sheet", "list", "text", "image", "tab", "other"] },
+        "copy": { "type": "string" },
+        "action": { "type": "string" },
+        "states": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/state" } },
+        "source_refs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "preserve_policy": { "$ref": "#/$defs/preservePolicy" },
+        "supersedes_element_id": { "type": "string", "description": "Required when an ID is regenerated: keeps the mapping and the reason auditable." }
+      }
+    }
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pm-zero.local/schemas/design-workflow-v2/workflow-state.schema.json",
+  "title": "Design workflow v2 derived state index",
+  "description": "DERIVED INDEX, NOT A SOURCE OF TRUTH. Markdown under the project directory is canonical. This file may be deleted and rebuilt; the records it points at may not. Inherits state-md-protocol.md v1.2.0 Derived State Mirror Rule.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "recipe_id",
+    "gates",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "recipe_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "current_step": {
+      "type": "string",
+      "pattern": "^s[0-9]+$"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "generator": {
+      "type": "string"
+    },
+    "active_change": {
+      "type": "string",
+      "pattern": "^chg-[0-9]{4,}$"
+    },
+    "gates": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/gateEntry"
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/artifactEntry"
+      }
+    }
+  },
+  "$defs": {
+    "gateEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "confirmed",
+            "invalidated"
+          ]
+        },
+        "record": {
+          "type": "string",
+          "pattern": "^gates/.+\\.md$"
+        },
+        "artifact_ref": {
+          "type": "string"
+        },
+        "artifact_version": {
+          "type": "integer"
+        },
+        "invalidated_by": {
+          "type": "string",
+          "pattern": "^chg-[0-9]{4,}$"
+        }
+      },
+      "if": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "const": "confirmed"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "required": [
+          "record",
+          "artifact_ref",
+          "artifact_version"
+        ],
+        "properties": {
+          "record": {
+            "type": "string"
+          },
+          "artifact_ref": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "artifactEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "status",
+        "hash"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "confirmed",
+            "stale"
+          ]
+        },
+        "hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stale_reason": {
+          "type": "string"
+        },
+        "stale_change_id": {
+          "type": "string",
+          "pattern": "^chg-[0-9]{4,}$"
+        }
+      },
+      "if": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "const": "stale"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "required": [
+          "stale_reason",
+          "stale_change_id"
+        ],
+        "properties": {
+          "stale_reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
