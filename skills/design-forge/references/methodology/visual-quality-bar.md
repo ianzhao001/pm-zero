@@ -1,6 +1,6 @@
 ## §16 视觉品质（Visual Quality Bar）
 
-范围见[协议](../../../../system/protocols/six-stage-product-workflow.md)；旧项目按确认范围。
+范围遵循当前计划已加载的冻结流程协议与用户确认材料，不通过本参考切换流程。
 
 ### §16.1 信息密度上限
 

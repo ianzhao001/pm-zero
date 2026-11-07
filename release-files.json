@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "files": [
     {
       "path": ".codex-plugin/plugin.json",
-      "sha256": "8b883c6c52f666203f8f5c33f115b7cf66ea9d31fe5158768adf51fb8fe1fbdd",
+      "sha256": "8b207742791b9751a0ac141fa15ed8475452291b20bfbf446107a939ab6bc186",
       "executable": false,
       "runtime": true
     },
@@ -34,7 +34,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "8bb395d23a9b9009110649b290b6991ade754ed5136ca0435d30b2935f752627",
+      "sha256": "e0fb1e8acaf436a943892d97916e6b8be6ffd831f69ce308a7d74c30d21f489f",
       "executable": false,
       "runtime": true
     },
@@ -46,7 +46,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "764415e1465712d86791d008b8aba660612eae5488c457ca56892145726fab72",
+      "sha256": "b5c6c72b25857ea6a829970d5c3cfcb501a9b949100b6bfb04fe2fea2fb0ea1f",
       "executable": false,
       "runtime": true
     },
@@ -118,19 +118,19 @@
     },
     {
       "path": "docs/brands.md",
-      "sha256": "09b98fab7dc27afc4366ac449005e4b12b77e520c943df182f20c66363f3f55b",
+      "sha256": "f33dd60599ba562afaa3d8667a7b40b6fa5d5e1dc0f7be1f6616c2899bf828ed",
       "executable": false,
       "runtime": true
     },
     {
       "path": "docs/installation.md",
-      "sha256": "7f148319d12ad42b7e0c2101e444c40aaf5a15268affc29b60db5eff59992a32",
+      "sha256": "fbd57570e3342f2b7695df0faf6ffcc7d5b823d44ead7816ffe2259bc032cf92",
       "executable": false,
       "runtime": true
     },
     {
       "path": "docs/migration.md",
-      "sha256": "c33c0b6ebaee0e03b2d5fd05ef794b8d41520869d5cfc87bf0bd644ab54c8c5f",
+      "sha256": "d7adaf27f5fef2fd2fe03eb1927f0f3745d3d29bf3dabe36c4741c907dcbb288",
       "executable": false,
       "runtime": true
     },
@@ -142,7 +142,7 @@
     },
     {
       "path": "mcp/diagnose.mjs",
-      "sha256": "74561057699c23c8029823950d381d0275f9d18e94de8e07b14885006bb4906b",
+      "sha256": "92a0349229716d3435e6a61d372127b90be16536c4f2491c6ff7ba6786f17a92",
       "executable": false,
       "runtime": true
     },
@@ -160,25 +160,25 @@
     },
     {
       "path": "mcp/tool-descriptions.mjs",
-      "sha256": "64de8f65a4f17fde980ec8a96375b7a6c065fbc80ce86cb0dba2d35a6eb6c409",
+      "sha256": "ba619f6a58f4023ca0aa1809cf8567fccc33f6a7ead74ac9b7b5971667cbba3c",
       "executable": false,
       "runtime": true
     },
     {
       "path": "package-lock.json",
-      "sha256": "0b8c6d6eb55da1ba8c24d51c15975763988bf23c223bc1e404cc709c55c4de70",
+      "sha256": "fd9a3c54f13c32160b821ec525bcd20bbfa891e07ad5a6687040edbabb67b8da",
       "executable": false,
       "runtime": true
     },
     {
       "path": "package.json",
-      "sha256": "e641d523e5299c252e584be3aee901f204aaf0ac247459315e45299dab5fafab",
+      "sha256": "2a84f921b4447f1301cb14d5c80b744d47f9fb5d55b91e8665783c6a4f33bfd8",
       "executable": false,
       "runtime": true
     },
     {
       "path": "pm-zero.manifest.json",
-      "sha256": "41c117d878f9f7a7e81a46a871d973c9a633854f6fd4954c8e478eba39c78db3",
+      "sha256": "822dc6f047dabe6b99477f149c0ef5338eebce22eb970db9f2761ce7bfe0eceb",
       "executable": false,
       "runtime": true
     },
@@ -190,7 +190,7 @@
     },
     {
       "path": "scripts/brand-pack/core.mjs",
-      "sha256": "9c3c00ba1175db78e931935d279c93b60c5f9291847deadd5ff7a3a9bf0b34db",
+      "sha256": "2d973cb69aebe3b8cfb3da72b916b2b0ceca9451977bc688142ad85869e262ea",
       "executable": false,
       "runtime": true
     },
@@ -208,13 +208,13 @@
     },
     {
       "path": "scripts/release/smoke.test.mjs",
-      "sha256": "5f7ecfa3996a1000f316fc496435095160281fb2c5cfed6f663fdfb9c1a21273",
+      "sha256": "c7d12af0515e0bb1a222750a9bb088b0b989372975d341d6cd9e6db54d84a650",
       "executable": false,
       "runtime": false
     },
     {
       "path": "skills/browser-verification/SKILL.md",
-      "sha256": "8bd9ddff59a480c6130db182bf03a10ae366f1cebbed2c8b44b360e33e7cb411",
+      "sha256": "d05484c5a80144d1140f2fc277833b8654ec6b1be9cd46e19baf389ea746de24",
       "executable": false,
       "runtime": true
     },
@@ -232,7 +232,7 @@
     },
     {
       "path": "skills/demo-authoring/SKILL.md",
-      "sha256": "86637081578b544ee25f01a4ca4f90a3a26498c2528d7800bb0670ac2380c157",
+      "sha256": "6316be2dfb3379c8928e2be6ce8a42e8d1201b6608555730c3ab314733764baa",
       "executable": false,
       "runtime": true
     },
@@ -292,7 +292,7 @@
     },
     {
       "path": "skills/design-forge/references/demo-authoring.md",
-      "sha256": "3d274d860ef7ac22634f625a5a1e09fde47f00376de54b4f00bf137aa951346e",
+      "sha256": "d9488765d79d860c0a3eb79f33391b00816f805e9881e9922324038ad9e0561c",
       "executable": false,
       "runtime": true
     },
@@ -388,7 +388,7 @@
     },
     {
       "path": "skills/design-forge/references/methodology/visual-quality-bar.md",
-      "sha256": "6495e940fbee0e697d8ebc1cea6870c11bbfe02c347eeba9c1bc6441ef2bbddd",
+      "sha256": "f6df98ccf910cbf558a34495a418a230256b72edb952de8ea3535678fe2eebbb",
       "executable": false,
       "runtime": true
     },
@@ -490,7 +490,7 @@
     },
     {
       "path": "skills/interaction-design/SKILL.md",
-      "sha256": "a0c605b1dd7d327f1aedab85cf23f1cd654d950df510ed42fcaa8fb7a7fb8144",
+      "sha256": "4052f54e7ddcfcf5a43c01f83a9fe32a3c73e3ebb1f7f33a8476d56a5aa6c97c",
       "executable": false,
       "runtime": true
     },
@@ -502,7 +502,7 @@
     },
     {
       "path": "skills/pm-zero/SKILL.md",
-      "sha256": "c35b9b49df7fe9f456a6cae98cf0dfbd82238cc0437eebcd33e46047e047f4d7",
+      "sha256": "3cb38bc36d17af626358a34ea15bb87ca28f8b6acae891ef5b7af95bdf565d44",
       "executable": false,
       "runtime": true
     },
@@ -628,13 +628,13 @@
     },
     {
       "path": "skills/product-discovery/SKILL.md",
-      "sha256": "e92dabafe0cd601d8c34c8dd2f64a32ae97421e7c5a9efdecf26493dbdddc582",
+      "sha256": "37309bbb1e5e14fb60a3a1f8cfb4dcd647f936bc219de7f01aa06b361e4dcce2",
       "executable": false,
       "runtime": true
     },
     {
       "path": "skills/reviewer-forge/SKILL.md",
-      "sha256": "ab077e615dd7cd122e9dd16600a843203c32743ef10ec08e098f583ee77ac60c",
+      "sha256": "fb2d3bb1a9bdabc029e40d7f00666457b0993d3eec9890c41c3937a9d0bf4b88",
       "executable": false,
       "runtime": true
     },
@@ -694,13 +694,13 @@
     },
     {
       "path": "skills/visual-assets/SKILL.md",
-      "sha256": "680fd653fe7bd3339a8ea81e7e7c2e1487a09b1d4052511d01a218ffea5a7260",
+      "sha256": "37eef63d65fe2f1b192022eb801a5b23d745f4951e9435eeb48bc65c238b3135",
       "executable": false,
       "runtime": true
     },
     {
       "path": "skills/visual-design/SKILL.md",
-      "sha256": "74b60939c350d85fef25266ed7fc52cad769cde6ea8f02086582430d08cbbdbf",
+      "sha256": "0e7f03b1a95894a8492a9ea60ccbf3df5eff9f274ee8d6eb52417e3b0f14ff1f",
       "executable": false,
       "runtime": true
     },
@@ -754,7 +754,7 @@
     },
     {
       "path": "system/brand-registry/scripts/stage-planner.mjs",
-      "sha256": "9be5b7c7d1cd8a4ee4b3aa331c2ff051b824802a8b61ad375045cdde98b576d9",
+      "sha256": "adcf466dd88a321e9cbd1c6a47ec2d51af72287393fb766251e6518df34b8d0f",
       "executable": false,
       "runtime": true
     },
@@ -947,6 +947,12 @@
     {
       "path": "system/protocols/public-scope-selection-protocol.md",
       "sha256": "f2e475dc86231e388fe5556e0ee2276e880dc97732a859ef46cb34beb210f128",
+      "executable": false,
+      "runtime": true
+    },
+    {
+      "path": "system/protocols/quick-product-workflow.md",
+      "sha256": "e873bf616221d4e06403322a594752bfccf72eba79a6997901df8e44adb50480",
       "executable": false,
       "runtime": true
     },
@@ -1504,13 +1510,13 @@
     },
     {
       "path": "system/skill-routing/routes.json",
-      "sha256": "cdc1b7c7776abda74bb50e50e7c32061b777213db48b4a1492a515858c1e66a5",
+      "sha256": "8ef1c37644e4cbc2689340e319fc07d284adedbb6ce6cb8b8e7e0b60df7c3829",
       "executable": false,
       "runtime": true
     },
     {
       "path": "system/workflow-core/README.md",
-      "sha256": "f3f718ee9fd54868005ab6ed6681a65d591170f120b54da96a52ee6c089db306",
+      "sha256": "16006e6098e1d65324c8946c9a29def560657cfb19e30d01d551f81b428c63da",
       "executable": false,
       "runtime": true
     },
@@ -1557,6 +1563,12 @@
       "runtime": true
     },
     {
+      "path": "system/workflow-core/contracts/product-design-quick-v1.json",
+      "sha256": "f2cb73cc1200bf24e4210bf86bfaf52341a704c191469a83c239d2d72b0b39fd",
+      "executable": false,
+      "runtime": true
+    },
+    {
       "path": "system/workflow-core/contracts/product-design-six-stage-v1.json",
       "sha256": "4590c8692b6708e22617eb870ff9d0a7310f6706f350fa94012fd58acccaddd7",
       "executable": false,
@@ -1588,7 +1600,7 @@
     },
     {
       "path": "system/workflow-core/index.mjs",
-      "sha256": "9cb52263ce771e66c11e450ff0ebc6a2d8727a3c1ffe93812db5b1789242ea06",
+      "sha256": "105cf4bf86ed7d36035ecebf377b04ecf7afe35a7e04b8b8a6c7a7a0d4f8c94c",
       "executable": false,
       "runtime": true
     },
@@ -1612,13 +1624,13 @@
     },
     {
       "path": "system/workflow-core/lib/core.mjs",
-      "sha256": "9c66e9aaa2d3534c155309f867a1cbefeaa5dd54788055dc58366bd12686c9e7",
+      "sha256": "f85c749c92a5cf1bde2dfdf668ac88b904f5c74242a86b5ef17f4c521c3be39c",
       "executable": false,
       "runtime": true
     },
     {
       "path": "system/workflow-core/lib/eight-stage.mjs",
-      "sha256": "22545192a74af759b8f7470006b391fa1a69682da7f541bbf6f5f3c11c49629b",
+      "sha256": "09b99b480ecd4bf8eaf9d43e1a22202818502c93d285c0638bb048b517c95d64",
       "executable": false,
       "runtime": true
     },
@@ -1654,7 +1666,7 @@
     },
     {
       "path": "system/workflow-core/lib/schemas.mjs",
-      "sha256": "e7496e12dfd8495575eaaea22b510a4b5761e5c136f484af3854e2fbc7dd5c09",
+      "sha256": "dd4549cc1624242baf264e1c926fa6dbf1523f7b2cbd4e9a1d069abe384d5306",
       "executable": false,
       "runtime": true
     },

@@ -2,9 +2,10 @@
 
 Experimental, private, host-neutral project workflow state machine for conversational product work. It persists product decisions, versioned artifacts, frozen change scopes, independent reviews, and explicit step/stage confirmations without HTTP calls or model APIs.
 
-The core supports five immutable project workflows:
+The core supports six immutable project workflows:
 
 - `product-design-six-stage-v1` is the default for new projects: S1 goals/scenarios, S2 MRD, S3 visual direction, S4 wireframes/interaction/model, S5 visual design, S6 Demo. S1 and S4 require all their artifacts before joint confirmation; normal product flows are the default scope.
+- `product-design-quick-v1` is an explicit new-project opt-in: S1 clarification and scope, S2 design model and high-fidelity visuals, S3 Demo. It uses one clarification round with at most five questions and three joint stage confirmations. It does not require MRD, style-board, wireframe or standalone interaction-spec artifacts. Existing projects cannot switch into it.
 - `product-design-six-stage-stepped-v1` is an explicit opt-in with `step_template: { project_type, depth }`; it compiles finer steps against the six-stage snapshot.
 - `legacy-four-gate-v1` remains available explicitly. Existing projects without a `workflow_id` keep the original G1–G4 behavior and response shapes.
 - `product-design-eight-stage-v1` is selected only at `project_open(create: true)`. The project snapshots the complete workflow definition under `.pm-zero/workflow/definition.json`, records both byte and semantic hashes, and then drives S1–S8 artifacts, dependencies, review counts, stale closure, target-stage completion, and next actions from that snapshot.
@@ -18,14 +19,15 @@ The public module is `index.mjs`:
 import { callTool, toolSchemas, WorkflowError } from './index.mjs';
 ```
 
-`toolSchemas` is a plain map from the twenty names below to strict JSON Schemas. `callTool(name, args)` returns a direct result object and throws `WorkflowError` for controlled failures.
+`toolSchemas` is a plain map from the twenty-one names below to strict JSON Schemas. `callTool(name, args)` returns a direct result object and throws `WorkflowError` for controlled failures.
 
 `runtime_info.package.build` is additive metadata: a packaged build reports its source commit (or null), dirty state (or null), context and deterministic content digest. Source checkouts and legacy packages without build metadata report null. `package.integrity` is `not_checked`: reading runtime metadata does not certify installed bytes. The portable `mcp/diagnose.mjs` entry verifies the complete v2 package inventory and composes physically read-only `project_diagnose` with `stage_prepare` at the returned revision when planning is available. It reports readability, planning availability and writability separately; a locked project can remain readable and plannable while mutation is blocked. It never rebuilds caches, repairs files, creates a project, infers host capabilities or confirms a stage. See the plugin README for invocation and exit codes.
 
 | Tool | Purpose |
 |---|---|
 | `runtime_info` | Read the actual package version, supported workflow definition hashes, available `step_templates`, validated stage contexts, and deterministic capability-catalog digest. It accepts no `project_path`. |
-| `stage_prepare` | Read-only routing for the current eight-stage or stepped project revision. It returns `produce`, `review`, `await_confirmation`, `blocked`, or `completed`; stepped projects also return `await_selection` and `await_step_confirmation`. Only a selected product step receives an executable plan. |
+| `stage_prepare` | Read-only routing for the current staged project revision. It returns `produce`, `review`, `await_confirmation`, `blocked`, or `completed`; quick projects also return `await_clarification`, and stepped projects return `await_selection` and `await_step_confirmation`. Only an eligible current stage or selected product step receives an executable plan. |
+| `clarification_record` | Persist a quick project's single clarification round as `pending` or `resolved`, including original questions, actual response and adopted assumptions. Requires `expected_revision` and `request_id`; does not confirm S1. Preparation and recovery expose the saved checkpoint. |
 | `project_open` | Initialize or reopen an absolute, user-selected project directory. `create: true` requires `project_id`; the stepped workflow also requires `step_template`. Existing product files are retained; initialization refuses an existing `.pm-zero` collision. |
 | `project_read` | Without `view`, return the original compact state unchanged. `view: "resume"` returns current brief facts, compact decision/rejection summaries, effective artifact versions, blockers, and direct material/detail references. `view: "detail"` returns one requested record or on-demand history index. Rebuilds disposable derived files; use `project_diagnose` for physically read-only inspection. |
 | `project_diagnose` | Inspect locks, interrupted transactions, canonical integrity and confirmed-source drift without writing files. Return `readable`, `plannable`, `writable`, issues, store diagnostics and a resume summary when readable. These are point-in-time conditions, not a reservation for a later write. |
@@ -89,6 +91,14 @@ S1–S7 reject executable formats. Markdown may contain ordinary document links 
 Eight-stage changes require `scope` plus an exact current `entry_artifact`. Artifact scope uses empty `target_ids` and `preserve_ids`; element scope validates target and preserve IDs against the current design model and rejects overlap. The preview hash freezes the entry reference, its actual recorded dependency closure, exact expected artifacts, and the definition-derived downstream invalidation closure. For example, an S4 `visual_direction` change invalidates S4/S7/S8, while an S2 `requirements_scenarios` change invalidates S2–S8. Unchanged bytes may be registered as a new version after invalidation and then reconfirmed.
 
 Every mutation except initial creation requires a non-empty `request_id` and integer `expected_revision`. Repeating the same request ID with byte-equivalent arguments returns the original result with `idempotent_replay: true`. Reusing it for different content throws `E_IDEMPOTENCY_CONFLICT`. Revision mismatches throw `E_REVISION_CONFLICT` without publishing a new revision.
+
+## Quick projects
+
+Create with `workflow_id: "product-design-quick-v1"` and the installed package's `context`. The default endpoint is S3; S1 or S2 may be selected in the goal contract. Standard projects still default to six stages. The frozen project workflow cannot be changed by reopening it.
+
+Before asking, call `clarification_record` with `status: "pending"` and one to five `questions`. Record the answer using `status: "resolved"`, the actual `user_response`, a `resolution_reason` and any `assumptions`. Sufficient existing material may resolve directly without questions, with a reason. A resolved round cannot be reopened; subsequent user feedback uses the existing decision and change mechanisms. Both `stage_prepare` and recovery summaries expose the checkpoint, so a pending round resumes its saved questions. S1 production and confirmation wait until the round is resolved. Missing noncritical information becomes an explicit assumption; unresolved blocking contradictions remain blockers in the stage artifacts.
+
+S1's `requirements_scenarios` is the scope source, including the core path, non-goals, rules and acceptance criteria. S2 registers `design_model` first and then `visual_design`, reviews both exact versions and confirms them together. Necessary actions and states live in the model and scenario text. S3 binds the Demo to those confirmed inputs and requires independent browser evidence. No intermediate MRD, style or wireframe documents are required. The [quick workflow protocol](../protocols/quick-product-workflow.md) defines concise presentation, optional illustrations and the three user confirmations.
 
 ## Product steps and templates
 

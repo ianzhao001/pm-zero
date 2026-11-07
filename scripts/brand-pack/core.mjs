@@ -247,6 +247,15 @@ export async function validateBrandDeployment(root, context) {
       }
     }
   }
+  // Quick has three stage gates, not a stepped-template variant. Its combined
+  // design/model stage must resolve against the same composed brand resources.
+  const quick = JSON.parse(await readFile(path.join(root, 'system/workflow-core/contracts/product-design-quick-v1.json'), 'utf8'));
+  for (const stage of quick.stages) {
+    for (const purpose of ['production', ...(stage.reviewers ? ['review'] : [])]) {
+      verify(quick, stage, purpose);
+      stagePlans++;
+    }
+  }
   return { stage_plans: stagePlans, step_plans: stepPlans, status: 'passed', boundary: 'Static planning, budgets and byte receipts with declared host capabilities; no plugin code or real host task executed.' };
 }
 

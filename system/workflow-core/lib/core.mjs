@@ -14,6 +14,7 @@ import { readBuildInfo } from './package-integrity.mjs';
 import { verifyRender, effectiveVerification } from './evidence-verifier.mjs';
 import {
   EIGHT_STAGE_DEFINITION, EIGHT_STAGE_WORKFLOW_ID, SIX_STAGE_DEFINITION, SIX_STAGE_WORKFLOW_ID, artifactRef,
+  QUICK_WORKFLOW_DEFINITION, QUICK_WORKFLOW_ID, isQuickWorkflow,
   currentStage, definitionFor, dependencyClosure, downstreamTypes, expectedDependencies,
   isEightStage, sameRefs, stageForType, targetStage, validateElementTargets,
   validateStaticCaptured,
@@ -116,6 +117,23 @@ async function verifyCanonicalState(project, state) {
     }
   }
   for (const record of state.step_control?.history ?? []) await verifyCanonicalFile(project, record.canonical, `step ${record.workflow_step_id}`);
+  const clarifications = state.clarification_records ?? [];
+  for (const [index, record] of clarifications.entries()) {
+    await verifyCanonicalFile(project, record.canonical, `clarification ${record.round_id} ${record.status}`);
+    const { canonical, recorded_at: _recordedAt, ...payload } = record;
+    if (digest(Buffer.from(markdownRecord('clarification', payload))) !== canonical.sha256) {
+      fail('E_CANONICAL_DRIFT', 'Clarification state does not match its canonical record');
+    }
+    if (!isQuickWorkflow(state) || clarifications.length > 2 || record.round_id !== 's1-clarification-1'
+      || record.stage_id !== 'S1' || !['pending', 'resolved'].includes(record.status)
+      || !Array.isArray(record.questions) || record.questions.length > 5
+      || (record.status === 'pending' && (index !== 0 || !record.questions.length))
+      || (index > 0 && (record.status !== 'resolved' || clarifications[index - 1].status !== 'pending'
+        || stable(record.questions) !== stable(clarifications[index - 1].questions)))
+      || (index === 0 && record.status === 'resolved' && record.questions.length !== 0)) {
+      fail('E_PROJECT_CORRUPT', 'Invalid single-round clarification history');
+    }
+  }
   for (const decision of state.decisions) await verifyCanonicalFile(project, decision.canonical, `decision ${decision.decision_id}`);
   for (const candidate of state.candidates ?? []) {
     await verifyCanonicalFile(project, candidate.canonical, `candidate ${candidate.candidate_id}`);
@@ -168,7 +186,7 @@ function briefMarkdown(state, artifact) {
 }
 
 function markdownRecord(kind, record) {
-  return `${frontmatter({ schema_version: 1, record_type: kind, id: record.decision_id ?? record.change_id ?? record.gate, revision: record.revision })}\n# ${kind}\n\n\`\`\`json\n${JSON.stringify(record, null, 2)}\n\`\`\`\n`;
+  return `${frontmatter({ schema_version: 1, record_type: kind, id: record.decision_id ?? record.change_id ?? record.gate ?? record.round_id, revision: record.revision })}\n# ${kind}\n\n\`\`\`json\n${JSON.stringify(record, null, 2)}\n\`\`\`\n`;
 }
 
 async function writeDerivedState(project, state) {
@@ -273,12 +291,13 @@ export async function runtimeInfo() {
     gates: Object.entries(GATE_TYPES).map(([gate, artifacts]) => ({ gate, artifacts })),
     artifact_dag: DAG,
   };
-  const workflows = [legacyDefinition, EIGHT_STAGE_DEFINITION, SIX_STAGE_DEFINITION].map((definition) => ({
+  const workflows = [legacyDefinition, EIGHT_STAGE_DEFINITION, SIX_STAGE_DEFINITION, QUICK_WORKFLOW_DEFINITION].map((definition) => ({
     workflow_id: definition.workflow_id,
     version: definition.version,
     definition_hash: digest(stable(definition)),
     ...(definition.default_target_stage ? { default_target_stage: definition.default_target_stage } : {}),
     ...(definition.scope ? { scope: definition.scope } : {}),
+    ...(definition.clarification_policy ? { clarification_policy: clone(definition.clarification_policy) } : {}),
     stages: definition.stages?.map((stage) => ({
       id: stage.id,
       artifacts: clone(stage.artifacts),
@@ -321,9 +340,34 @@ function publicArtifact(artifact) {
   };
 }
 
+function clarificationSummary(state) {
+  if (!isQuickWorkflow(state)) return null;
+  const record = state.clarification_records?.at(-1);
+  const { canonical, ...details } = record ?? {};
+  return {
+    round_id: 's1-clarification-1', stage_id: 'S1', max_rounds: 1, max_questions: 5,
+    status: 'not_started', questions: [], assumptions: [],
+    ...clone(details),
+    ...(canonical ? { material_ref: materialRef('clarification', record.round_id, canonical) } : {}),
+  };
+}
+
+function clarificationBlocker(state) {
+  const clarification = clarificationSummary(state);
+  if (!clarification || clarification.status === 'resolved' || currentStage(state)?.id !== 'S1') return null;
+  return {
+    code: clarification.status === 'pending' ? 'CLARIFICATION_PENDING' : 'CLARIFICATION_REQUIRED',
+    stage_id: 'S1',
+    message: clarification.status === 'pending'
+      ? 'Resume the saved questions and record the user response before producing S1; do not open another round.'
+      : 'Record one consolidated clarification round, or resolve from sufficient existing material before producing S1.',
+  };
+}
+
 function blockersFromState(state, modified = []) {
   if (isEightStage(state)) {
-    const blockers = [];
+    const clarification = clarificationBlocker(state);
+    const blockers = clarification ? [clarification] : [];
     for (const artifact of Object.values(state.artifacts)) {
       if (artifact.status === 'stale' || artifact.type === 'review') continue;
       for (const item of artifact.metadata?.blockers ?? []) {
@@ -378,6 +422,8 @@ function nextActions(state, blockers) {
   if (isEightStage(state)) {
     const stage = currentStage(state);
     if (!stage) return blockers.length ? ['Resolve project blockers before accepting completion'] : [`Workflow target ${targetStage(state)} is confirmed`];
+    const clarification = clarificationBlocker(state);
+    if (clarification) return [clarification.message];
     const stageBlockers = blockers.filter((item) => item.stage_id === stage.id || ['CONFIRMED_ARTIFACT_MODIFIED', 'CHANGE_VERIFICATION_PENDING'].includes(item.code));
     if (stageBlockers.length) return [`Resolve blockers for ${stage.id}`];
     const missing = stage.artifacts.filter((type) => !Object.values(state.artifacts).some((artifact) => artifact.type === type && artifact.status !== 'stale'));
@@ -419,6 +465,7 @@ function deriveState(state, modified = []) {
   return {
     ...base,
     workflow_id: state.workflow.workflow_id,
+    ...(isQuickWorkflow(state) ? { clarification: clarificationSummary(state) } : {}),
     current_stage: stage?.id ?? null,
     target_stage: target,
     completed_to_target: stage === null && blockers.length === 0,
@@ -579,12 +626,14 @@ export async function projectOpen(args) {
   const requestedWorkflow = args.workflow_id ?? SIX_STAGE_WORKFLOW_ID;
   const steppedCreation = [STEPPED_WORKFLOW_ID, SIX_STAGE_STEPPED_WORKFLOW_ID].includes(requestedWorkflow);
   if (args.create && steppedCreation && !args.step_template) fail('E_STEP_TEMPLATE_REQUIRED', 'New stepped projects require an explicit template');
-  if (args.context !== undefined && ![STEPPED_WORKFLOW_ID, SIX_STAGE_WORKFLOW_ID, SIX_STAGE_STEPPED_WORKFLOW_ID].includes(requestedWorkflow)) fail('E_STEP_CONTEXT_INVALID', 'Project creation context requires a six-stage or historical stepped workflow');
+  if (args.context !== undefined && ![STEPPED_WORKFLOW_ID, SIX_STAGE_WORKFLOW_ID, SIX_STAGE_STEPPED_WORKFLOW_ID, QUICK_WORKFLOW_ID].includes(requestedWorkflow)) fail('E_STEP_CONTEXT_INVALID', 'Project creation context requires a six-stage, quick, or historical stepped workflow');
   if (args.step_template && !steppedCreation) fail('E_STEP_TEMPLATE_INVALID', 'Step templates are only valid for new stepped projects');
   if (!args.create && (args.step_template || args.context !== undefined)) fail('E_STEP_TEMPLATE_IMMUTABLE', 'Opening a project cannot change its template or context');
   if (!args.create) {
     const project = await resolveProject(args.project_path);
     const state = await loadState(project);
+    const actualWorkflow = state.workflow?.workflow_id ?? 'legacy-four-gate-v1';
+    if (args.workflow_id && args.workflow_id !== actualWorkflow) fail('E_WORKFLOW_ID_MISMATCH', 'Existing project has a different immutable workflow_id', { expected: args.workflow_id, actual: actualWorkflow });
     await writeDerivedState(project, state);
     return publicRead(state, await detectModifiedConfirmed(project, state));
   }
@@ -649,8 +698,9 @@ export async function projectOpen(args) {
     request_log: {},
     audit: [{ at: created, action: 'project_created', request_id: args.request_id ?? null, initialized_existing_directory: initializeExisting }],
   };
-  if ([EIGHT_STAGE_WORKFLOW_ID, STEPPED_WORKFLOW_ID, SIX_STAGE_WORKFLOW_ID, SIX_STAGE_STEPPED_WORKFLOW_ID].includes(workflowId)) {
-    const base = [SIX_STAGE_WORKFLOW_ID, SIX_STAGE_STEPPED_WORKFLOW_ID].includes(workflowId) ? SIX_STAGE_DEFINITION : EIGHT_STAGE_DEFINITION;
+  if ([EIGHT_STAGE_WORKFLOW_ID, STEPPED_WORKFLOW_ID, SIX_STAGE_WORKFLOW_ID, SIX_STAGE_STEPPED_WORKFLOW_ID, QUICK_WORKFLOW_ID].includes(workflowId)) {
+    const base = workflowId === QUICK_WORKFLOW_ID ? QUICK_WORKFLOW_DEFINITION
+      : [SIX_STAGE_WORKFLOW_ID, SIX_STAGE_STEPPED_WORKFLOW_ID].includes(workflowId) ? SIX_STAGE_DEFINITION : EIGHT_STAGE_DEFINITION;
     const definition = steppedCreation ? { ...(workflowId === STEPPED_WORKFLOW_ID ? compileStepDefinition(base, args.step_template) : compileSixStageStepDefinition(base, args.step_template)), step_context: args.context ?? 'none' }
       : args.context === undefined ? base : { ...base, initial_context: args.context };
     const definitionBytes = Buffer.from(`${JSON.stringify(definition, null, 2)}\n`);
@@ -665,9 +715,10 @@ export async function projectOpen(args) {
     };
     state.audit[0].workflow_id = workflowId;
     if (steppedCreation) state.step_control = { active: null, confirmations: {}, history: [] };
+    if (isQuickWorkflow(state)) state.clarification_records = [];
   }
   await writeInitialCommit(project, state);
-  return { project_id: state.project_id, revision: 0, status: state.status, ...(state.workflow ? { workflow_id: state.workflow.workflow_id } : {}) };
+  return { project_id: state.project_id, revision: 0, status: state.status, ...(state.workflow ? { workflow_id: state.workflow.workflow_id } : {}), ...(isQuickWorkflow(state) ? { clarification: clarificationSummary(state) } : {}) };
 }
 
 function publicRead(state, modified = []) {
@@ -686,6 +737,7 @@ function publicRead(state, modified = []) {
     Object.assign(result, {
       ...(isStepped(state) ? { step_progress: stepProgress(state) } : {}),
       workflow_id: derived.workflow_id,
+      ...(isQuickWorkflow(state) ? { clarification: derived.clarification } : {}),
       current_stage: derived.current_stage,
       target_stage: derived.target_stage,
       completed_to_target: derived.completed_to_target,
@@ -802,6 +854,7 @@ function resumeRead(state, modified) {
     Object.assign(result, {
       ...(isStepped(state) ? { step_progress: stepProgress(state) } : {}),
       workflow_id: derived.workflow_id,
+      ...(isQuickWorkflow(state) ? { clarification: derived.clarification } : {}),
       current_stage: derived.current_stage,
       target_stage: derived.target_stage,
       completed_to_target: derived.completed_to_target,
@@ -1003,6 +1056,7 @@ function prepareBase(state, stage, modified = []) {
     revision: state.revision,
     current_stage: stage?.id ?? null,
     target_stage: isEightStage(state) ? targetStage(state) : null,
+    ...(isQuickWorkflow(state) ? { workflow_id: state.workflow.workflow_id, clarification: clarificationSummary(state) } : {}),
     ...(isEightStage(state) ? { change_context: stageChangeContext(state, stage, modified) } : {}),
   };
 }
@@ -1044,6 +1098,9 @@ export async function stagePrepare(args) {
   }
   const context = stageContext(state, stage, args.context, args.intent ?? 'advance');
   const base = { ...prepareBase(state, stage), context };
+
+  const clarification = clarificationBlocker(state);
+  if (clarification) return { ...base, status: 'await_clarification', input_artifacts: [], reasons: [clarification], plans: [] };
 
   if (isStepped(state)) return prepareStep(project, state, stage, args, context, base);
 
@@ -1282,6 +1339,45 @@ export async function briefSave(args) {
   });
 }
 
+export async function clarificationRecord(args) {
+  return mutate(args.project_path, 'clarification_record', args, async (project, state, next) => {
+    if (!isQuickWorkflow(state)) fail('E_TOOL_NOT_SUPPORTED', 'Clarification checkpoints are only supported by the quick workflow');
+    if (currentStage(state)?.id !== 'S1') fail('E_STAGE_ORDER', 'The initial clarification belongs to S1; record later feedback through decisions or changes');
+    const previous = state.clarification_records?.at(-1);
+    if (previous?.status === 'resolved') fail('E_CLARIFICATION_RESOLVED', 'The single clarification round is resolved; later feedback uses decisions or changes');
+    if (args.status === 'pending') {
+      if (previous) fail('E_CLARIFICATION_ROUND_EXISTS', 'Resume the saved questions instead of opening a second clarification round');
+      if (args.user_response !== undefined || args.resolution_reason !== undefined || args.assumptions !== undefined) {
+        fail('E_CLARIFICATION_INVALID', 'A pending question set cannot include a response, resolution reason, or resolved assumptions');
+      }
+    } else {
+      if (previous && (args.questions !== undefined || !args.user_response?.source?.trim() || !args.user_response?.text?.trim())) {
+        fail('E_CLARIFICATION_INVALID', 'Resolve the original questions with the actual user response; do not replace the saved question set');
+      }
+      if (!previous && (args.questions?.length ?? 0) !== 0) {
+        fail('E_CLARIFICATION_INVALID', 'Direct resolution uses existing material and zero questions; record questions as pending before asking them');
+      }
+      if (args.user_response && (!args.user_response.source.trim() || !args.user_response.text.trim())) {
+        fail('E_CLARIFICATION_INVALID', 'The supplied user response and source must not be blank');
+      }
+    }
+    const record = {
+      round_id: 's1-clarification-1', stage_id: 'S1', status: args.status,
+      questions: clone(previous?.questions ?? args.questions ?? []),
+      assumptions: clone(args.assumptions ?? []),
+      ...(args.user_response ? { user_response: clone(args.user_response) } : {}),
+      ...(args.resolution_reason ? { resolution_reason: args.resolution_reason } : {}),
+      revision: next.revision + 1, recorded_at: now(),
+    };
+    await writeCanonicalRecord(project, 'clarifications', `${record.round_id}-${record.status}-r${record.revision}.md`, 'clarification', record);
+    next.clarification_records ??= [];
+    next.clarification_records.push(record);
+    next.audit.push({ at: record.recorded_at, action: 'clarification_recorded', round_id: record.round_id,
+      status: record.status, ...(record.user_response ? { user_response: clone(record.user_response) } : {}) });
+    return { clarification: clarificationSummary(next) };
+  });
+}
+
 export async function decisionRecord(args) {
   return mutate(args.project_path, 'decision_record', args, async (project, _state, next) => {
     if (next.decisions.some((item) => item.decision_id === args.decision.decision_id)) fail('E_DECISION_EXISTS', 'decision_id already exists; supersede with a new decision record');
@@ -1351,6 +1447,8 @@ function aggregateArtifactHash(files) {
 
 export async function artifactRegister(args) {
   return mutate(args.project_path, 'artifact_register', args, async (project, state, next) => {
+    const clarification = clarificationBlocker(state);
+    if (clarification) fail('E_CLARIFICATION_REQUIRED', 'Resolve the single S1 clarification before producing workflow artifacts', { reasons: [clarification] });
     const eightStage = isEightStage(state);
     const selectedStep = isStepped(state) ? assertSelectedStep(state, args.workflow_step_id) : null;
     if (!selectedStep && STEP_OUTPUT_TYPES.includes(args.type)) fail('E_STEP_UNSUPPORTED', 'Intermediate step output types require a new stepped project');

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "workflow_id": "product-design-quick-v1",
+  "version": 1,
+  "default_target_stage": "S3",
+  "description": "Three user-confirmed stages: one consolidated clarification and scope, high-fidelity design with its internal stable-ID model, and an independently verified clickable Demo.",
+  "clarification_policy": {
+    "stage_id": "S1",
+    "max_rounds": 1,
+    "max_questions": 5
+  },
+  "stages": [
+    {
+      "id": "S1",
+      "name": "澄清与范围",
+      "artifacts": ["goal_contract", "requirements_scenarios"],
+      "required_capabilities": ["goal-clarification", "delivery-planning", "needs-discovery", "scenario-analysis"],
+      "optional_capabilities": ["reference-synthesis", "user-research", "evidence-analysis"],
+      "reviewers": 0,
+      "static_only": true,
+      "depends_on_stages": [],
+      "char_budget": 24000,
+      "capability_dependencies": {}
+    },
+    {
+      "id": "S2",
+      "name": "高保真设计",
+      "artifacts": ["design_model", "visual_design"],
+      "required_capabilities": ["interaction-design", "state-modeling", "interface-visual-design", "design-system-application"],
+      "optional_capabilities": ["icon-design", "visual-assets", "visual-polish", "usability-analysis", "accessibility-analysis"],
+      "reviewers": 1,
+      "static_only": true,
+      "depends_on_stages": ["S1"],
+      "char_budget": 24000,
+      "capability_dependencies": {
+        "interface-visual-design": ["state-modeling", "visual-assets"]
+      }
+    },
+    {
+      "id": "S3",
+      "name": "可交互 Demo",
+      "artifacts": ["demo"],
+      "required_capabilities": ["demo-implementation", "browser-verification"],
+      "optional_capabilities": ["motion-design", "responsive-design"],
+      "reviewers": 1,
+      "static_only": false,
+      "depends_on_stages": ["S2"],
+      "char_budget": 26400,
+      "capability_dependencies": {
+        "browser-verification": ["demo-implementation", "motion-design", "responsive-design"]
+      }
+    }
+  ],
+  "artifact_dependencies": {
+    "goal_contract": [],
+    "requirements_scenarios": ["goal_contract"],
+    "design_model": ["requirements_scenarios"],
+    "visual_design": ["requirements_scenarios", "design_model"],
+    "demo": ["requirements_scenarios", "design_model", "visual_design"]
+  },
+  "static_extensions": [".md", ".txt", ".json", ".png", ".jpg", ".jpeg", ".webp", ".svg"],
+  "scope": "normal-product-flow"
+}

@@ -1,12 +1,12 @@
 ---
 name: visual-assets
 description: >-
-  Create or edit raster visual assets for an assigned slot and confirmed art direction using an available image-generation tool; not a full-page design workflow.
+  Create or edit raster visual assets for an assigned slot and current visual constraints using an available image-generation tool; not a full-page design workflow.
 ---
 
 # 视觉素材制作
 
-只执行当前阶段计划分配的能力；加载与版本交接遵循[阶段协议](../../system/protocols/staged-product-workflow.md)。
+只执行当前阶段计划分配的能力；加载与版本交接遵循计划已加载的阶段协议。
 
 ## 素材任务
 每次明确使用位置、主题、宽高比、裁切、安全留白、背景和输出格式；输入参考须有清楚来源。
@@ -16,4 +16,4 @@ description: >-
 - 图片只承载适合位图的视觉内容，关键界面文字和控件由设计能力处理。
 - 不把生成图称为真实摄影、真实用户或实测结果；示意性质影响评审时注明。
 ## 交付
-返回实际素材、尺寸、用途、来源/生成记录及已知限制。检查裁切、内容和与风格板一致性，交给视觉负责人整合；不改变布局、需求或交互。
+返回实际素材、尺寸、用途、来源/生成记录及已知限制。检查裁切、内容与当前视觉约束；快速模式依据 S1 需求及品牌规范，素材随高保真统一确认，不补风格板。交给视觉负责人整合，不改变范围。

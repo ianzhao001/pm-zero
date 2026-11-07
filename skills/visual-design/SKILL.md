@@ -1,17 +1,17 @@
 ---
 name: visual-design
 description: >-
-  Produce high-fidelity static UI boards using confirmed visual direction, wireframes and interaction states; preserve product scope and stable design identities.
+  Produce high-fidelity static UI boards from current workflow inputs; preserve confirmed scope and stable design identities.
 ---
 
 # 界面视觉设计
 
-只执行当前阶段计划分配的能力；新项目加载与版本交接遵循[六阶段协议](../../system/protocols/six-stage-product-workflow.md)；旧项目按冻结流程恢复。
+只执行当前阶段计划分配的能力；流程、加载与版本交接遵循计划已加载的阶段协议，按项目冻结流程恢复。
 
 ## 继承
-读取确认的视觉方向、线框、交互与模型。沿用页面结构、操作语义和状态，不因美化重构流程。
+标准流程读取确认的视觉方向、线框、交互与模型。快速 S2 读取已确认 S1 需求和本阶段模型，直接制作高保真，与模型联合确认；不补做 MRD、风格板或线框。保持范围、操作语义和稳定标识。
 ## 绘制
-- 用确认的颜色与字体规则建立层级、密度、间距和组件状态；已有设计系统优先。
+- 已有品牌规范优先；快速模式无指定风格时采用简洁通用方案，配色字体随高保真统一确认。用层级、密度、间距和状态支持任务。
 - 输出核心页面和重要状态，保证文字、图标、图片、按钮和留白可读；缺失素材标注，不用无关图填充。
 - 以稳定页面/元素标识关联设计模型；图稿可用旁注映射，不把内部标识塞进产品文案。
 - 图标按同一形态、线宽与尺寸规则制作；局部视觉精修不能顺手修改已确认内容。

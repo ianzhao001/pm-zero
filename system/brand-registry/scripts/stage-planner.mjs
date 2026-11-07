@@ -359,9 +359,12 @@ export function resolveStagePlan(options = {}) {
     if (!reasons.length) {
       try {
         files = providerFiles(workspaceRoot, skill);
-        if (contract.scope === 'normal-product-flow') {
+        const workflowProtocol = contract.workflow_id === 'product-design-quick-v1'
+          ? 'system/protocols/quick-product-workflow.md'
+          : contract.scope === 'normal-product-flow' ? 'system/protocols/six-stage-product-workflow.md' : null;
+        if (workflowProtocol) {
           files.requiredFiles = unique(files.requiredFiles.map(file => file === 'system/protocols/staged-product-workflow.md'
-            ? resolveFile(workspaceRoot, skill, 'system/protocols/six-stage-product-workflow.md') : file));
+            ? resolveFile(workspaceRoot, skill, workflowProtocol) : file));
         }
       } catch (error) { reasons.push(error.message); }
     }

@@ -2,7 +2,7 @@ import { WorkflowError, fail } from './lib/errors.mjs';
 import { toolSchemas } from './lib/schemas.mjs';
 import { validateArgs } from './lib/validate.mjs';
 import {
-  artifactRegister, briefSave, changeApply, changePrepare, decisionRecord,
+  artifactRegister, briefSave, changeApply, changePrepare, decisionRecord, clarificationRecord,
   gateConfirm, stepSelect, stepConfirm, projectOpen, projectRead, runtimeInfo, stagePrepare,
   projectDiagnose, projectRecoveryPrepare, projectRecoveryApply,
   candidateCreate, candidateRead, candidatePreview, candidateAccept, candidateDiscard,
@@ -25,6 +25,7 @@ const handlers = Object.freeze({
   candidate_discard: candidateDiscard,
   brief_save: briefSave,
   decision_record: decisionRecord,
+  clarification_record: clarificationRecord,
   artifact_register: artifactRegister,
   change_prepare: changePrepare,
   change_apply: changeApply,

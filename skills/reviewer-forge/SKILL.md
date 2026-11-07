@@ -11,7 +11,7 @@ description: >-
 ## 路由与加载
 
 - 遵循 `../../system/protocols/skill-loading-protocol.md`；context pack 可与本 workflow 组合，不构成 workflow 冲突。
-- 六阶段用 `--stage S2|S4|S5|S6 --purpose review`，旧八阶段仍用 `S3|S6|S7|S8`，检查该阶段全部必需产物；新项目遵循[六阶段协议](../../system/protocols/six-stage-product-workflow.md)，旧项目按冻结协议，不加载生产 Skill，不把 MRD 当 PRD 强加开发章节。
+- 按已加载的冻结阶段协议审查全部必需产物：快速 S2/S3、六阶段 S2/S4/S5/S6、旧八阶段 S3/S6/S7/S8，均用 `--purpose review`。不加载生产 Skill，不把 MRD 当 PRD 强加开发章节。
 - `MODE_BRIEF_REVIEW`、`MODE_DEMO_REVIEW`、`MODE_PRD_REVIEW` 分别审查方案概要、Demo/交互稿、PRD；不确定对象类型时先确认范围。
 - 当前审查步骤的 required、selected optional 和模板由 resolver 唯一决定；不预读后续生产规则。
 - 深入评分可请求 `--optional-rule review-dimensions`，格式样例用 `review-example`；补充条件后重新解析，不自行追加未计量正文。
@@ -33,4 +33,4 @@ description: >-
 - 每条 finding 必须有严重度与材料位置；重大决策若只由 E 级证据支撑，至少给出 🟠 finding。
 - 最终报告 mode、context、finding 总数及分布、整体建议、加载文件；shared-core 仅从 `system/shared/context-package-core/preflight-core/` 使用。
 
-范围源优先采用已确认 MRD；S4 联合检查线框、交互规格和模型的一致性。六阶段默认正常主流程，不因缺少未请求的空态或异常态提出阻断 finding，也不自动追加对应测试；旧项目按原已确认范围。先给短结论与关键证据，多图和多个要点按需展示，完整 finding/JSON 报告作为附件。
+快速模式以已确认 S1 场景为范围源，S2 联合检查模型与高保真，不因缺少 MRD、风格板或线框提出缺陷；标准流程沿用 MRD，六阶段 S4 联合检查线框、规格与模型。默认正常主流程，不因缺少未请求的空态或异常态提出阻断 finding，也不自动追加对应测试；旧项目按原已确认范围。先给短结论与关键证据，多图和多个要点按需展示，完整 finding/JSON 报告作为附件。

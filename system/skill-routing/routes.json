@@ -187,7 +187,7 @@
         "skills/design-forge/references/methodology/visual-quality-bar.md",
         "skills/design-forge/references/methodology/mobile-craft.md"
       ],
-      "estimated_tokens": 870,
+      "estimated_tokens": 860,
       "cap_tokens": 870
     },
     {
@@ -379,7 +379,7 @@
         "design-forge"
       ],
       "char_budget": 26400,
-      "estimated_token_budget": 4146,
+      "estimated_token_budget": 4136,
       "baseline_estimated_tokens": 6518,
       "weight": 0.02307692307692307
     },
@@ -419,7 +419,7 @@
         "design-forge"
       ],
       "char_budget": 26400,
-      "estimated_token_budget": 4894,
+      "estimated_token_budget": 4884,
       "baseline_estimated_tokens": 6518,
       "weight": 0.007692307692307691
     },
@@ -453,7 +453,7 @@
         "reviewer-forge"
       ],
       "char_budget": 12400,
-      "estimated_token_budget": 1851,
+      "estimated_token_budget": 1845,
       "baseline_estimated_tokens": 3300,
       "weight": 0.030769230769230764
     },
@@ -487,7 +487,7 @@
         "reviewer-forge"
       ],
       "char_budget": 12400,
-      "estimated_token_budget": 1915,
+      "estimated_token_budget": 1909,
       "baseline_estimated_tokens": 3300,
       "weight": 0.06153846153846153
     },
@@ -520,7 +520,7 @@
         "reviewer-forge"
       ],
       "char_budget": 12400,
-      "estimated_token_budget": 2072,
+      "estimated_token_budget": 2066,
       "baseline_estimated_tokens": 3300,
       "weight": 0.015384615384615382
     },
@@ -554,7 +554,7 @@
         "reviewer-forge"
       ],
       "char_budget": 12400,
-      "estimated_token_budget": 1860,
+      "estimated_token_budget": 1854,
       "baseline_estimated_tokens": 3300,
       "weight": 0.09230769230769229
     },
@@ -595,7 +595,7 @@
       "preload_policy": "sequential",
       "handoff": "compact_findings",
       "char_budget": 26400,
-      "estimated_token_budget": 3117,
+      "estimated_token_budget": 3111,
       "baseline_estimated_tokens": 6298,
       "weight": 0.07692307692307691
     },
@@ -636,7 +636,7 @@
       "preload_policy": "sequential",
       "handoff": "compact_findings",
       "char_budget": 38800,
-      "estimated_token_budget": 4633,
+      "estimated_token_budget": 4626,
       "baseline_estimated_tokens": 9700,
       "weight": 0.02307692307692307
     },
@@ -678,7 +678,7 @@
       "preload_policy": "sequential",
       "handoff": "compact_findings",
       "char_budget": 38800,
-      "estimated_token_budget": 5017,
+      "estimated_token_budget": 5010,
       "baseline_estimated_tokens": 9700,
       "weight": 0.03846153846153846
     },
@@ -723,7 +723,7 @@
       "preload_policy": "sequential",
       "handoff": "compact_findings",
       "char_budget": 60000,
-      "estimated_token_budget": 5773,
+      "estimated_token_budget": 5757,
       "baseline_estimated_tokens": 9818,
       "weight": 0.015384615384615382
     },
@@ -749,7 +749,7 @@
         "pm-zero"
       ],
       "char_budget": 16000,
-      "estimated_token_budget": 1001,
+      "estimated_token_budget": 976,
       "baseline_estimated_tokens": 802,
       "weight": 0,
       "produces": [
@@ -823,7 +823,7 @@
         "reviewer-forge"
       ],
       "char_budget": 12400,
-      "estimated_token_budget": 1853,
+      "estimated_token_budget": 1847,
       "baseline_estimated_tokens": 3300,
       "weight": 0,
       "experimental": true,
@@ -873,7 +873,7 @@
       "preload_policy": "sequential",
       "handoff": "compact_findings",
       "char_budget": 60000,
-      "estimated_token_budget": 6522,
+      "estimated_token_budget": 6506,
       "baseline_estimated_tokens": 9818,
       "weight": 0,
       "fidelity": "hifi",

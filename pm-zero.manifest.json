@@ -643,7 +643,8 @@
           "required_host_capabilities": [],
           "priority": 100,
           "inputs": [
-            "wireframes"
+            "wireframes",
+            "requirements_scenarios"
           ],
           "outputs": [
             "interaction_spec",
@@ -771,7 +772,8 @@
           ],
           "priority": 100,
           "inputs": [
-            "visual_direction"
+            "visual_direction",
+            "requirements_scenarios"
           ],
           "outputs": [
             "visual_direction",

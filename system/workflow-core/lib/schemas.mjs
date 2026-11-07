@@ -243,7 +243,7 @@ export const toolSchemas = Object.freeze({
         project_type: { type: 'string', enum: ['new_product', 'iteration', 'feature'] },
         depth: { type: 'string', enum: ['lean', 'standard', 'full'] },
       } },
-      workflow_id: { type: 'string', enum: ['legacy-four-gate-v1', 'product-design-eight-stage-v1', STEPPED_WORKFLOW_ID, 'product-design-six-stage-v1', SIX_STAGE_STEPPED_WORKFLOW_ID] },
+      workflow_id: { type: 'string', enum: ['legacy-four-gate-v1', 'product-design-eight-stage-v1', STEPPED_WORKFLOW_ID, 'product-design-six-stage-v1', SIX_STAGE_STEPPED_WORKFLOW_ID, 'product-design-quick-v1'] },
     },
     allOf: [{ if: { properties: { create: { const: true } }, required: ['create'] }, then: { required: ['project_id'] } }],
   },
@@ -270,6 +270,22 @@ export const toolSchemas = Object.freeze({
     type: 'object', additionalProperties: false,
     required: ['project_path', 'expected_revision', 'request_id', 'brief'],
     properties: { ...mutationProperties, brief },
+  },
+  clarification_record: {
+    type: 'object', additionalProperties: false,
+    required: ['project_path', 'expected_revision', 'request_id', 'status'],
+    properties: {
+      ...mutationProperties,
+      status: { type: 'string', enum: ['pending', 'resolved'] },
+      questions: { type: 'array', maxItems: 5, uniqueItems: true, items: { type: 'string', pattern: '\\S' } },
+      user_response: userResponse,
+      resolution_reason: { type: 'string', pattern: '\\S' },
+      assumptions: { type: 'array', uniqueItems: true, items: { type: 'string', pattern: '\\S' } },
+    },
+    allOf: [
+      { if: { properties: { status: { const: 'pending' } }, required: ['status'] }, then: { required: ['questions'], properties: { questions: { minItems: 1 } } } },
+      { if: { properties: { status: { const: 'resolved' } }, required: ['status'] }, then: { required: ['resolution_reason'] } },
+    ],
   },
   decision_record: {
     type: 'object', additionalProperties: false,

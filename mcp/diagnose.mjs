@@ -36,7 +36,7 @@ try {
     report.project = { path: project_path, readable, plannable, writable, diagnostics,
       ...(resume ? { resume } : {}), preparation };
     if (!readable || !plannable || !writable || preparation?.status === 'blocked') report.status = 'blocked';
-    else if (['await_selection', 'await_step_confirmation'].includes(preparation?.status)) report.status = 'waiting';
+    else if (['await_selection', 'await_step_confirmation', 'await_clarification'].includes(preparation?.status)) report.status = 'waiting';
   }
   console.log(JSON.stringify(report, null, 2));
   if (report.status === 'blocked') process.exitCode = 2;

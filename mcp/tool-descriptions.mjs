@@ -10,7 +10,7 @@ export const toolMetadata = Object.freeze({
     annotations: { readOnlyHint: true, openWorldHint: false },
   },
   project_open: {
-    description: 'Create or reopen an absolute user-selected project directory. New projects default to the six-stage standard workflow; explicitly select six-stage-stepped and a template only when the user requests finer steps. Creation freezes workflow/template/context; existing projects keep their snapshot. Opening never selects a step or confirms a stage.',
+    description: 'Create or reopen an absolute user-selected project directory. New projects default to six-stage standard; explicitly select product-design-quick-v1 for clarification, high-fidelity design and Demo, or six-stage-stepped with a template for finer steps. Creation freezes workflow/template/context; existing projects keep their snapshot. Opening never selects a step or confirms a stage.',
     annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
   },
   project_read: {
@@ -55,6 +55,10 @@ export const toolMetadata = Object.freeze({
   },
   decision_record: {
     description: 'Append a product decision, alternatives, rationale and the actual user-response source/text. Requires current expected_revision and request_id. Writes an audit record; a recorded decision does not confirm artifact versions, invalidate dependent work or authorize the next step by itself.',
+    annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
+  },
+  clarification_record: {
+    description: 'Record the quick workflow\'s single clarification round at current expected_revision with request_id. Save pending with one to five questions before asking, then resolved with the actual response, resolution reason and assumptions. Existing evidence may resolve without questions with a reason. Resume the recorded round; never start another or treat resolution as stage confirmation.',
     annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
   },
   step_select: {

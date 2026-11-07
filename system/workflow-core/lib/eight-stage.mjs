@@ -13,10 +13,19 @@ export const SIX_STAGE_DEFINITION = Object.freeze(JSON.parse(
   readFileSync(new URL('../contracts/product-design-six-stage-v1.json', import.meta.url), 'utf8'),
 ));
 
+export const QUICK_WORKFLOW_ID = 'product-design-quick-v1';
+export const QUICK_WORKFLOW_DEFINITION = Object.freeze(JSON.parse(
+  readFileSync(new URL('../contracts/product-design-quick-v1.json', import.meta.url), 'utf8'),
+));
+
+export function isQuickWorkflow(state) {
+  return state.workflow?.workflow_id === QUICK_WORKFLOW_ID;
+}
+
 // Historical export name retained for consumers; all product-stage workflows use
 // their immutable definition rather than stage-number semantics.
 export function isEightStage(state) {
-  return [EIGHT_STAGE_WORKFLOW_ID, STEPPED_WORKFLOW_ID, SIX_STAGE_WORKFLOW_ID, SIX_STAGE_STEPPED_WORKFLOW_ID].includes(state.workflow?.workflow_id);
+  return [EIGHT_STAGE_WORKFLOW_ID, STEPPED_WORKFLOW_ID, SIX_STAGE_WORKFLOW_ID, SIX_STAGE_STEPPED_WORKFLOW_ID, QUICK_WORKFLOW_ID].includes(state.workflow?.workflow_id);
 }
 
 export function definitionFor(state) {
